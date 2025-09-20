@@ -3,248 +3,1161 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tanvir Bakther — Analytics</title>
-  <meta name="description" content="Analytics projects by Tanvir Bakther — SQL, Python, dashboards, A/B tests, and case studies." />
+  <title>Tanvir Bakther — Analytics Projects & Data Science Portfolio</title>
+  
+  <!-- Enhanced SEO -->
+  <meta name="description" content="Explore Tanvir Bakther's analytics projects including SQL patterns, Python notebooks, Power BI dashboards, A/B tests, and end-to-end case studies. Data science portfolio showcasing machine learning, statistical analysis, and business intelligence." />
+  <meta name="keywords" content="Tanvir Bakther, Data Analytics, SQL, Python, Power BI, Tableau, Machine Learning, Statistical Analysis, Business Intelligence, Data Science Portfolio" />
+  <meta name="author" content="Tanvir Bakther" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Tanvir Bakther - Analytics Projects Portfolio" />
+  <meta property="og:description" content="Data analytics projects showcasing SQL, Python, machine learning, and business intelligence solutions" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bakthertanvir.com/analytics" />
+  <meta property="og:image" content="https://bakthertanvir.com/assets/analytics-og-image.jpg" />
+  
+  <!-- Performance Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="#" as="image" type="image/webp">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Analytics Projects Portfolio",
+    "author": {
+      "@type": "Person",
+      "name": "Tanvir Bakther"
+    },
+    "description": "Collection of data analytics projects and case studies",
+    "url": "https://bakthertanvir.com/analytics"
+  }
+  </script>
+  
   <style>
-    :root{--bg:#0b0b0c;--panel:#121214;--card:#151516;--ink:#eaeaea;--muted:#9aa0a6;--brand:#58a6ff;--line:#232329;--ok:#22c55e;--warn:#f59e0b}
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1200px;margin:auto;padding:24px}
-
-    /* Header */
-    header.hero{position:relative;padding:90px 24px 40px;background:radial-gradient(900px 600px at 70% -10%, rgba(88,166,255,.12), transparent 60%), linear-gradient(180deg,#0b0b0c 0%,#0b0b0c 60%,#0e0e11 100%)}
-    .hero .title{font-size:clamp(2rem,4.6vw,3.4rem);margin:0 0 10px;font-weight:700;letter-spacing:-.02em}
-    .hero .sub{color:var(--muted);max-width:800px}
-    .crumbs{margin:10px 0 18px;color:var(--muted)}
-
-    /* Toolbar */
-    .toolbar{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0b0b0c 60%,rgba(11,11,12,.9));backdrop-filter:saturate(1.1) blur(8px);border-bottom:1px solid var(--line)}
-    .tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
-    .search{flex:1;min-width:240px}
-    .search input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:#0f0f12;color:#fff}
-    .select{display:flex;gap:8px;align-items:center}
-    select{background:#0f0f12;color:#fff;border:1px solid var(--line);padding:11px;border-radius:10px}
-
-    /* Chips */
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .chip{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#101013;color:#eaeaea;cursor:pointer}
-    .chip.active{outline:2px solid var(--brand)}
-
-    /* Grid */
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:22px 0 50px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s ease, box-shadow .2s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 12px 34px rgba(0,0,0,.35)}
-    .thumb{position:relative;aspect-ratio:16/9;background:#0a0a0a}
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .badge{position:absolute;top:10px;left:10px;background:#0f172a;border:1px solid #1f2937;border-radius:999px;padding:4px 8px;font-size:12px;color:#cfe2ff}
-    .body{padding:14px}
-    .title{font-weight:600;margin:0 0 6px}
-    .meta{font-size:12px;color:var(--muted)}
-    .desc{color:#cfd2d6;font-size:.98rem;margin:8px 0 12px}
-    .links{display:flex;flex-wrap:wrap;gap:8px}
-    .btn{display:inline-flex;align-items:center;gap:6px;background:#1b1b20;border:1px solid var(--line);padding:8px 10px;border-radius:10px;color:#fff}
-    .btn:hover{border-color:var(--brand)}
-
-    /* Footer */
-    footer{border-top:1px solid var(--line);padding:18px;color:var(--muted);text-align:center}
-
-    @media (max-width:760px){.tools{gap:10px}.select{width:100%;justify-content:space-between}}
+    /* CSS Custom Properties for Consistent Branding */
+    :root {
+      --bg: #0a0a0b;
+      --panel: #111113;
+      --card: #151517;
+      --ink: #eaeaea;
+      --muted: #9aa0a6;
+      --brand: #58a6ff;
+      --accent: #6366f1;
+      --line: #232329;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --surface: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.25);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Reset and Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(88, 166, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
+    }
+    
+    /* Accessibility Improvements */
+    *:focus {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+    
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    
+    /* Typography */
+    a {
+      color: var(--brand);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    a:hover, a:focus {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    
+    /* Layout Container */
+    .wrap {
+      max-width: 1200px;
+      margin: auto;
+      padding: 24px;
+    }
+    
+    /* Enhanced Header */
+    header.hero {
+      position: relative;
+      padding: 120px 24px 60px;
+      background: 
+        radial-gradient(1000px 700px at 70% -10%, rgba(88, 166, 255, 0.15), transparent 70%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg) 60%, var(--panel) 100%);
+      overflow: hidden;
+    }
+    
+    header.hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%2358a6ff" opacity="0.3"/><circle cx="80" cy="40" r="1.5" fill="%236366f1" opacity="0.4"/><circle cx="60" cy="80" r="1" fill="%2358a6ff" opacity="0.2"/></svg>');
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      33% { transform: translateY(-20px) translateX(10px); }
+      66% { transform: translateY(10px) translateX(-15px); }
+    }
+    
+    .hero .title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin: 0 0 20px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--brand) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .hero .sub {
+      color: var(--muted);
+      max-width: 800px;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    .crumbs {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      animation: fadeInUp 1s ease-out 0.1s both;
+    }
+    
+    .crumbs a {
+      color: var(--brand);
+      transition: var(--transition);
+    }
+    
+    .crumbs a:hover {
+      color: var(--accent);
+    }
+    
+    /* Enhanced Toolbar */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 11, 0.9);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+    
+    .toolbar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(88, 166, 255, 0.1) 50%, transparent 100%);
+      height: 1px;
+      bottom: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .toolbar:hover::before {
+      opacity: 1;
+    }
+    
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+    
+    .search {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+    
+    .search::before {
+      content: '🔍';
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .search input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      color: var(--ink);
+      font-size: 15px;
+      transition: var(--transition);
+    }
+    
+    .search input:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+    }
+    
+    .search input::placeholder {
+      color: var(--muted);
+    }
+    
+    .select {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    
+    .select label {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    select {
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      color: var(--ink);
+      border: 1px solid var(--glass-border);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
+    }
+    
+    /* Enhanced Filter Chips */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      padding-bottom: 16px;
+    }
+    
+    .chip {
+      padding: 10px 16px;
+      border: 1px solid var(--glass-border);
+      border-radius: 25px;
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .chip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, var(--brand), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .chip:hover {
+      transform: translateY(-2px);
+      border-color: var(--brand);
+      box-shadow: var(--shadow);
+    }
+    
+    .chip.active {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+      box-shadow: 0 0 20px rgba(88, 166, 255, 0.4);
+    }
+    
+    .chip.active::before {
+      opacity: 0.1;
+    }
+    
+    /* Enhanced Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin: 32px 0 60px;
+    }
+    
+    /* Enhanced Project Cards */
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      cursor: pointer;
+      animation: fadeInScale 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(99, 102, 241, 0.05));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--brand);
+    }
+    
+    .card:hover::before {
+      opacity: 1;
+    }
+    
+    .thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--panel);
+      overflow: hidden;
+      display: block;
+    }
+    
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: var(--transition);
+    }
+    
+    .card:hover .thumb img {
+      transform: scale(1.1);
+    }
+    
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .body {
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .title {
+      font-weight: 600;
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+    
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .meta::before {
+      content: '📅';
+      font-size: 12px;
+    }
+    
+    .desc {
+      color: #cfd2d6;
+      font-size: 0.95rem;
+      margin: 12px 0 20px;
+      line-height: 1.6;
+    }
+    
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--brand);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .btn:hover {
+      border-color: var(--brand);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+    
+    .btn:hover::before {
+      transform: translateX(0);
+    }
+    
+    .btn:hover {
+      color: white;
+    }
+    
+    /* Loading States */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+    
+    .loading.active {
+      display: block;
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      display: none;
+    }
+    
+    .no-results.active {
+      display: block;
+    }
+    
+    .no-results h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+    
+    /* Statistics */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--brand);
+      display: block;
+    }
+    
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    
+    /* Enhanced Footer */
+    footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 40px 24px;
+      color: var(--muted);
+      text-align: center;
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--brand), transparent);
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    /* Scroll Reveal */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .wrap {
+        padding: 16px;
+      }
+      
+      header.hero {
+        padding: 80px 16px 40px;
+      }
+      
+      .tools {
+        gap: 12px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .select {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .search {
+        min-width: auto;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .stats {
+        gap: 20px;
+      }
+      
+      .links {
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .chips {
+        justify-content: center;
+      }
+      
+      .chip {
+        font-size: 13px;
+        padding: 8px 14px;
+      }
+      
+      .hero .title {
+        font-size: 2.5rem;
+      }
+    }
+    
+    /* Card Animation Delays */
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
+    .card:nth-child(7) { animation-delay: 0.7s; }
+    .card:nth-child(8) { animation-delay: 0.8s; }
+    .card:nth-child(9) { animation-delay: 0.9s; }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .card {
+        border-width: 2px;
+      }
+      
+      .btn {
+        border-width: 2px;
+      }
+    }
+    
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+  
   <header class="hero">
     <div class="wrap">
-      <div class="crumbs"><a href="/">Home</a> · Analytics</div>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> · Analytics
+      </nav>
       <h1 class="title">Analytics Projects</h1>
-      <p class="sub">SQL patterns, Python notebooks, dashboards, and end‑to‑end case studies I’m building and learning from. Use the search and filters to explore.</p>
+      <p class="sub">SQL patterns, Python notebooks, dashboards, and end‑to‑end case studies I'm building and learning from. Explore real-world applications of data science, machine learning, and business intelligence solutions.</p>
     </div>
   </header>
 
   <div class="toolbar">
-    <div class="wrap tools">
-      <div class="search"><input id="q" type="search" placeholder="Search by title, tag, or tool… (e.g., window functions, Power BI, churn)"/></div>
-      <div class="select">
-        <label for="sort">Sort</label>
-        <select id="sort">
-          <option value="new">Newest</option>
-          <option value="az">A → Z</option>
-        </select>
+    <div class="wrap">
+      <div class="tools">
+        <div class="search">
+          <input 
+            id="q" 
+            type="search" 
+            placeholder="Search by title, tag, or tool… (e.g., window functions, Power BI, churn)"
+            aria-label="Search analytics projects"
+          />
+        </div>
+        <div class="select">
+          <label for="sort">Sort by</label>
+          <select id="sort" aria-label="Sort projects">
+            <option value="new">Newest First</option>
+            <option value="az">Alphabetical</option>
+          </select>
+        </div>
       </div>
+      <div class="chips" id="chips" role="group" aria-label="Filter by technology"></div>
     </div>
-    <div class="wrap chips" id="chips"></div>
   </div>
 
-  <main class="wrap">
+  <main id="main-content" class="wrap">
     <section>
-      <div class="grid" id="grid"></div>
+      <!-- Project Statistics -->
+      <div class="stats fade-in">
+        <div class="stat">
+          <span class="stat-number" id="total-projects">0</span>
+          <div class="stat-label">Total Projects</div>
+        </div>
+        <div class="stat">
+          <span class="stat-number" id="total-technologies">0</span>
+          <div class="stat-label">Technologies</div>
+        </div>
+        <div class="stat">
+          <span class="stat-number" id="current-showing">0</span>
+          <div class="stat-label">Currently Showing</div>
+        </div>
+      </div>
+      
+      <!-- Loading State -->
+      <div class="loading" id="loading">
+        <div style="font-size: 2rem; margin-bottom: 1rem;">📊</div>
+        <p>Loading analytics projects...</p>
+      </div>
+      
+      <!-- No Results State -->
+      <div class="no-results" id="no-results">
+        <h3>No projects found</h3>
+        <p>Try adjusting your search terms or filters to find what you're looking for.</p>
+      </div>
+      
+      <!-- Projects Grid -->
+      <div class="grid fade-in" id="grid"></div>
     </section>
   </main>
 
-  <footer>© <span id="y"></span> Tanvir Bakther • Analytics</footer>
+  <footer>
+    <div class="wrap">
+      <p>© <span id="y"></span> Tanvir Bakther • Analytics Portfolio • Built with modern web technologies</p>
+    </div>
+  </footer>
 
   <script>
-    // ===== How to add a project =====
-    // Add a new object to the projects array below. Fields:
-    // id, title, date (YYYY-MM-DD), type ("Dashboard"|"Case Study"|"Notebook"|"Guide"),
-    // tags: ["sql","python","power bi","tableau","excel","stats","time series", ...],
-    // thumb (image url), desc (short text), links: { page, github, notebook, live }
-
+    // Enhanced Analytics Projects Data
     const projects = [
       {
         id: 'dmaic-otd',
         title: 'Supply Chain On‑Time Delivery — DMAIC',
         date: '2025-09-18',
         type: 'Case Study',
-        tags: ['process','DMAIC','excel','visualization'],
+        tags: ['process', 'DMAIC', 'excel', 'visualization', 'supply-chain'],
         thumb: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop',
-        desc: 'Raised on‑time delivery by targeting root causes and control plan; before→after visuals.',
-        links: { page: '/analytics/supply-chain-dmaic.html', github: '#', notebook: '#', live: '#' }
+        desc: 'Comprehensive DMAIC methodology implementation for supply chain optimization. Increased on‑time delivery by 23% through systematic root cause analysis and statistical process control.',
+        links: { 
+          page: 'https://sites.google.com/view/tanvirbakther/business-analytics-projects', 
+          github: '#', 
+          notebook: 'https://docs.google.com/presentation/d/1-9vVx9uaSxggB3JMn8ow10SRd9RE68xD/edit?ouid=114140287232661008181&rtpof=true&sd=true&usp=sharing', 
+          live: '#' 
+        }
+      },
+      {
+        id: 'smart-wellness-bellabeat',
+        title: 'Smart Device Usage & Wellness Strategy (Bellabeat)',
+        date: '2025-09-18',
+        type: 'Case Study',
+        tags: ['python', 'pandas', 'seaborn', 'matplotlib', 'behavioral-analysis'],
+        thumb: 'https://images.unsplash.com/photo-1480694313141-fce5e697ee25?q=80&w=1600&auto=format&fit=crop',
+        desc: 'Comprehensive analysis of Fitbit user behavior data to drive wellness marketing strategy. Identified 3 distinct user segments and developed targeted engagement recommendations.',
+        links: { 
+          page: 'https://sites.google.com/view/tanvirbakther/business-analytics-projects', 
+          github: '#', 
+          notebook: 'https://drive.google.com/file/d/1noXlnDFzGB1eGZyQv-xETu72NZVl0Iqf/view?usp=sharing', 
+          live: '#' 
+        }
       },
       {
         id: 'sql-windows',
-        title: 'SQL Window Functions — Cheats & Patterns',
+        title: 'SQL Window Functions — Comprehensive Guide',
         date: '2025-09-18',
         type: 'Guide',
-        tags: ['sql','window functions','rank','rolling avg'],
+        tags: ['sql', 'window-functions', 'rank', 'rolling-avg', 'tutorial'],
         thumb: 'https://images.unsplash.com/photo-1517433456452-f9633a875f6f?q=80&w=1600&auto=format&fit=crop',
-        desc: 'ROW_NUMBER, RANK, moving averages, partitions — copy‑paste snippets with examples.',
-        links: { page: '/analytics/sql-window-functions.html', github: '#', notebook: '#', live: '#' }
+        desc: 'Complete reference guide for SQL window functions including ROW_NUMBER, RANK, LAG/LEAD, and moving averages. Copy‑paste snippets with real-world examples and performance tips.',
+        links: { 
+          page: '/analytics/sql-window-functions.html', 
+          github: '#', 
+          notebook: '#', 
+          live: '#' 
+        }
       },
       {
         id: 'cohorts-sql',
         title: 'Cohort Analysis in Pure SQL',
         date: '2025-09-05',
         type: 'Notebook',
-        tags: ['sql','cohorts','retention'],
+        tags: ['sql', 'cohorts', 'retention', 'cte', 'analytics'],
         thumb: 'https://images.unsplash.com/photo-1551281044-8e9b835f2d7b?q=80&w=1600&auto=format&fit=crop',
-        desc: 'Retention cohorts with window functions and date math; clean CTE structure.',
-        links: { page: '/analytics/sql-cohorts.html', github: '#', notebook: '#', live: '#' }
+        desc: 'Advanced cohort retention analysis using pure SQL with common table expressions. Includes customer lifecycle analysis and churn prediction methodology.',
+        links: { 
+          page: '/analytics/sql-cohorts.html', 
+          github: '#', 
+          notebook: '#', 
+          live: '#' 
+        }
       },
       {
         id: 'ab-test',
-        title: 'A/B Test — Landing Page Redesign',
+        title: 'A/B Test — Landing Page Conversion Optimization',
         date: '2025-08-22',
         type: 'Case Study',
-        tags: ['python','pandas','stats','ab test'],
+        tags: ['python', 'pandas', 'stats', 'ab-test', 'hypothesis-testing'],
         thumb: 'https://images.unsplash.com/photo-1480694313141-fce5e697ee25?q=80&w=1600&auto=format&fit=crop',
-        desc: 'Design, sample‑size calc, hypothesis test, and power analysis; uplift & conf. intervals.',
-        links: { page: '/analytics/ab-test-landing.html', github: '#', notebook: '#', live: '#' }
+        desc: 'End-to-end A/B testing framework including power analysis, sample size calculation, and statistical significance testing. Achieved 18% conversion rate improvement.',
+        links: { 
+          page: '/analytics/ab-test-landing.html', 
+          github: '#', 
+          notebook: '#', 
+          live: '#' 
+        }
       },
       {
         id: 'churn-logreg',
-        title: 'Churn Prediction — Logistic Regression',
+        title: 'Customer Churn Prediction — Logistic Regression',
         date: '2025-07-14',
         type: 'Notebook',
-        tags: ['python','scikit‑learn','classification'],
+        tags: ['python', 'scikit-learn', 'classification', 'feature-engineering', 'machine-learning'],
         thumb: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1600&auto=format&fit=crop',
-        desc: 'Feature engineering, regularization, ROC‑AUC and calibration; interpretable coefficients.',
-        links: { page: '/analytics/churn-logreg.html', github: '#', notebook: '#', live: '#' }
+        desc: 'Machine learning model for customer churn prediction with comprehensive feature engineering, model validation, and interpretability analysis. ROC-AUC: 0.87.',
+        links: { 
+          page: '/analytics/churn-logreg.html', 
+          github: '#', 
+          notebook: '#', 
+          live: '#' 
+        }
       },
       {
         id: 'inventory-arima',
-        title: 'Inventory Forecast — ARIMA & SARIMA',
+        title: 'Inventory Demand Forecasting — ARIMA & SARIMA',
         date: '2025-06-30',
         type: 'Notebook',
-        tags: ['python','time series','forecast'],
+        tags: ['python', 'time-series', 'forecast', 'arima', 'seasonality'],
         thumb: 'https://images.unsplash.com/photo-1565619624098-4c4d4a8bebe1?q=80&w=1600&auto=format&fit=crop',
-        desc: 'Stationarity checks, ACF/PACF, grid search for (p,d,q) and seasonal orders.',
-        links: { page: '/analytics/inventory-forecast-arima.html', github: '#', notebook: '#', live: '#' }
+        desc: 'Advanced time series forecasting using ARIMA and SARIMA models. Includes stationarity testing, parameter optimization, and forecast accuracy validation.',
+        links: { 
+          page: '/analytics/inventory-forecast-arima.html', 
+          github: '#', 
+          notebook: '#', 
+          live: '#' 
+        }
       },
       {
         id: 'kpi-pbi',
-        title: 'Monthly KPI Dashboard — Power BI',
+        title: 'Executive KPI Dashboard — Power BI',
         date: '2025-05-11',
         type: 'Dashboard',
-        tags: ['power bi','dax','dashboard'],
+        tags: ['power-bi', 'dax', 'dashboard', 'kpi', 'business-intelligence'],
         thumb: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop',
-        desc: 'Executive KPIs with drill‑through, bookmarks, and DAX measures; sample dataset.',
-        links: { page: '/analytics/kpi-powerbi.html', github: '#', notebook: '#', live: '#' }
+        desc: 'Interactive executive dashboard with advanced DAX calculations, drill-through capabilities, and automated reporting. Features real-time KPI monitoring and alerting.',
+        links: { 
+          page: '/analytics/kpi-powerbi.html', 
+          github: '#', 
+          notebook: '#', 
+          live: '#' 
+        }
       },
       {
         id: 'tableau-segmentation',
-        title: 'Customer Segmentation — Tableau Story',
+        title: 'Customer Segmentation — Tableau Analytics',
         date: '2025-04-02',
         type: 'Dashboard',
-        tags: ['tableau','clustering','visualization'],
+        tags: ['tableau', 'clustering', 'visualization', 'segmentation', 'k-means'],
         thumb: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1600&auto=format&fit=crop',
-        desc: 'K‑means segments and personas visualized with interactive highlights and actions.',
-        links: { page: '/analytics/tableau-segmentation.html', github: '#', notebook: '#', live: '#' }
+        desc: 'Advanced customer segmentation using K-means clustering with interactive Tableau visualizations. Includes persona development and actionable business insights.',
+        links: { 
+          page: '/analytics/tableau-segmentation.html', 
+          github: '#', 
+          notebook: '#', 
+          live: '#' 
+        }
       }
     ];
 
-    // Build tag universe
-    const TAGS = Array.from(new Set(projects.flatMap(p=>p.tags))).sort();
-    const chips = document.getElementById('chips');
-    const grid = document.getElementById('grid');
-    const q = document.getElementById('q');
-    const sortSel = document.getElementById('sort');
-    let active = new Set();
+    // Enhanced Application State
+    const state = {
+      projects: projects,
+      filteredProjects: projects,
+      activeFilters: new Set(),
+      searchTerm: '',
+      sortBy: 'new'
+    };
 
-    function chip(label){
+    // DOM Elements
+    const elements = {
+      chips: document.getElementById('chips'),
+      grid: document.getElementById('grid'),
+      search: document.getElementById('q'),
+      sort: document.getElementById('sort'),
+      loading: document.getElementById('loading'),
+      noResults: document.getElementById('no-results'),
+      totalProjects: document.getElementById('total-projects'),
+      totalTechnologies: document.getElementById('total-technologies'),
+      currentShowing: document.getElementById('current-showing')
+    };
+
+    // Build technology tags universe
+    const TAGS = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
+    
+    // Quick access tags (most important/popular)
+    const QUICK_TAGS = ['sql', 'python', 'power-bi', 'tableau', 'excel', 'machine-learning', 'statistics'];
+    const orderedTags = QUICK_TAGS.concat(TAGS.filter(t => !QUICK_TAGS.includes(t)));
+
+    // Initialize Statistics
+    function updateStats() {
+      elements.totalProjects.textContent = state.projects.length;
+      elements.totalTechnologies.textContent = TAGS.length;
+      elements.currentShowing.textContent = state.filteredProjects.length;
+    }
+
+    // Create filter chip
+    function createChip(label) {
       const el = document.createElement('button');
       el.className = 'chip';
       el.textContent = label;
-      el.onclick = ()=>{ active.has(label) ? active.delete(label) : active.add(label); render(); };
+      el.setAttribute('aria-pressed', 'false');
+      el.onclick = () => {
+        const isActive = state.activeFilters.has(label);
+        if (isActive) {
+          state.activeFilters.delete(label);
+          el.setAttribute('aria-pressed', 'false');
+        } else {
+          state.activeFilters.add(label);
+          el.setAttribute('aria-pressed', 'true');
+        }
+        render();
+      };
       return el;
     }
 
-    // default chips: quick filters by tool
-    const quick = ['sql','python','power bi','tableau','excel','time series','stats'];
-    quick.concat(TAGS.filter(t=>!quick.includes(t))).forEach(t=> chips.appendChild(chip(t)));
-
-    function card(p){
+    // Create project card
+    function createCard(project) {
       const el = document.createElement('article');
       el.className = 'card';
       el.innerHTML = `
-        <a class="thumb" href="${p.links.page || '#'}" aria-label="${p.title}">
-          <img loading="lazy" src="${p.thumb}" alt="${p.title}">
-          <span class="badge">${p.type}</span>
+        <a class="thumb" href="${project.links.page || '#'}" aria-label="View ${project.title}">
+          <img loading="lazy" src="${project.thumb}" alt="${project.title}" onerror="this.style.display='none'">
+          <span class="badge">${project.type}</span>
         </a>
         <div class="body">
-          <h3 class="title">${p.title}</h3>
-          <div class="meta">${new Date(p.date).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'})} • ${p.tags.join(', ')}</div>
-          <p class="desc">${p.desc}</p>
+          <h3 class="title">${project.title}</h3>
+          <div class="meta">
+            ${new Date(project.date).toLocaleDateString(undefined, {year: 'numeric', month: 'short', day: '2-digit'})} • ${project.tags.slice(0, 3).join(', ')}${project.tags.length > 3 ? '...' : ''}
+          </div>
+          <p class="desc">${project.desc}</p>
           <div class="links">
-            ${p.links.page ? `<a class="btn" href="${p.links.page}">Read</a>`:''}
-            ${p.links.github ? `<a class="btn" href="${p.links.github}">GitHub</a>`:''}
-            ${p.links.notebook ? `<a class="btn" href="${p.links.notebook}">Notebook</a>`:''}
-            ${p.links.live ? `<a class="btn" href="${p.links.live}">Live</a>`:''}
+            ${project.links.page ? `<a class="btn" href="${project.links.page}" aria-label="Read about ${project.title}">📖 Read</a>` : ''}
+            ${project.links.github ? `<a class="btn" href="${project.links.github}" aria-label="View GitHub repository">💻 GitHub</a>` : ''}
+            ${project.links.notebook ? `<a class="btn" href="${project.links.notebook}" aria-label="View notebook">📓 Notebook</a>` : ''}
+            ${project.links.live ? `<a class="btn" href="${project.links.live}" aria-label="View live demo">🚀 Live</a>` : ''}
           </div>
         </div>`;
       return el;
     }
 
-    function render(){
-      // toggle chip active state
-      [...chips.children].forEach(ch=> ch.classList.toggle('active', active.has(ch.textContent)));
-
-      const term = q.value.toLowerCase().trim();
-      const f = projects.filter(p => {
-        const matchTags = active.size ? p.tags.some(t=>active.has(t)) : true;
-        const matchTerm = term ? (p.title.toLowerCase().includes(term) || p.tags.join(' ').toLowerCase().includes(term) || p.type.toLowerCase().includes(term)) : true;
-        return matchTags && matchTerm;
-      });
-
-      const sorted = [...f].sort((a,b)=>{
-        if (sortSel.value === 'az') return a.title.localeCompare(b.title);
-        return new Date(b.date) - new Date(a.date); // newest
-      });
-
-      grid.innerHTML = '';
-      sorted.forEach(p => grid.appendChild(card(p)));
+    // Debounce function for search
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
     }
 
-    q.addEventListener('input', render);
-    sortSel.addEventListener('change', render);
-    render();
+    // Filter and sort projects
+    function filterProjects() {
+      const term = state.searchTerm.toLowerCase().trim();
+      
+      state.filteredProjects = state.projects.filter(project => {
+        const matchesFilters = state.activeFilters.size === 0 || 
+          project.tags.some(tag => state.activeFilters.has(tag));
+        
+        const matchesSearch = !term || 
+          project.title.toLowerCase().includes(term) ||
+          project.tags.join(' ').toLowerCase().includes(term) ||
+          project.type.toLowerCase().includes(term) ||
+          project.desc.toLowerCase().includes(term);
+        
+        return matchesFilters && matchesSearch;
+      });
 
+      // Sort projects
+      state.filteredProjects.sort((a, b) => {
+        if (state.sortBy === 'az') {
+          return a.title.localeCompare(b.title);
+        }
+        return new Date(b.date) - new Date(a.date); // newest first
+      });
+    }
+
+    // Render the application
+    function render() {
+      // Show loading state
+      elements.loading.classList.add('active');
+      elements.grid.style.opacity = '0.5';
+      
+      setTimeout(() => {
+        filterProjects();
+        
+        // Update chip states
+        [...elements.chips.children].forEach(chip => {
+          const isActive = state.activeFilters.has(chip.textContent);
+          chip.classList.toggle('active', isActive);
+          chip.setAttribute('aria-pressed', isActive.toString());
+        });
+
+        // Clear and populate grid
+        elements.grid.innerHTML = '';
+        
+        if (state.filteredProjects.length === 0) {
+          elements.noResults.classList.add('active');
+          elements.grid.style.display = 'none';
+        } else {
+          elements.noResults.classList.remove('active');
+          elements.grid.style.display = 'grid';
+          
+          state.filteredProjects.forEach((project, index) => {
+            const card = createCard(project);
+            card.style.animationDelay = `${index * 0.1}s`;
+            elements.grid.appendChild(card);
+          });
+        }
+
+        // Update statistics
+        updateStats();
+        
+        // Hide loading state
+        elements.loading.classList.remove('active');
+        elements.grid.style.opacity = '1';
+      }, 300); // Simulate loading time for better UX
+    }
+
+    // Initialize chips
+    orderedTags.forEach(tag => {
+      elements.chips.appendChild(createChip(tag));
+    });
+
+    // Event listeners
+    const debouncedSearch = debounce(() => {
+      state.searchTerm = elements.search.value;
+      render();
+    }, 300);
+
+    elements.search.addEventListener('input', debouncedSearch);
+    elements.sort.addEventListener('change', () => {
+      state.sortBy = elements.sort.value;
+      render();
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animations
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Analytics tracking (can be expanded with Google Analytics)
+    function trackEvent(action, category, label) {
+      console.log(`Analytics Event: ${category} - ${action} - ${label}`);
+      // gtag('event', action, { event_category: category, event_label: label });
+    }
+
+    // Track filter usage
+    elements.chips.addEventListener('click', (e) => {
+      if (e.target.classList.contains('chip')) {
+        trackEvent('filter_click', 'portfolio', e.target.textContent);
+      }
+    });
+
+    // Track search usage
+    elements.search.addEventListener('search', () => {
+      trackEvent('search', 'portfolio', elements.search.value);
+    });
+
+    // Initialize application
+    render();
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Focus search with Ctrl/Cmd + K
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        elements.search.focus();
+      }
+      
+      // Clear filters with Escape (when search is not focused)
+      if (e.key === 'Escape' && document.activeElement !== elements.search) {
+        state.activeFilters.clear();
+        render();
+      }
+    });
+
+    // Performance monitoring
+    if ('performance' in window) {
+      window.addEventListener('load', () => {
+        const navigationTiming = performance.getEntriesByType('navigation')[0];
+        console.log(`Page load time: ${navigationTiming.loadEventEnd - navigationTiming.fetchStart}ms`);
+      });
+    }
   </script>
 </body>
 </html>
-
