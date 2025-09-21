@@ -43,13 +43,114 @@
     .wrap{max-width:1200px;margin:auto}
     .section h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:10px}
     .muted{color:#666}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:26px}
-    .card{background:#111;border:1px solid #222;border-radius:14px;overflow:hidden;color:#f2f2f2}
-    .card .thumb{aspect-ratio:16/9;background:#0a0a0a}
-    .card img{width:100%;height:100%;object-fit:cover;display:block}
-    .card .body{padding:14px}
-    .card .title{font-weight:600;margin-bottom:4px}
-    .card .desc{color:#aaa;font-size:.95rem}
+    
+    /* Updated Cards - Mobile Friendly & Fully Clickable */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:20px;
+      margin-top:30px
+    }
+    
+    .card{
+      background:#111;
+      border:1px solid #222;
+      border-radius:16px;
+      overflow:hidden;
+      color:#f2f2f2;
+      text-decoration:none;
+      display:block;
+      transition:all 0.3s ease;
+      position:relative;
+      cursor:pointer
+    }
+    
+    .card:hover{
+      transform:translateY(-8px);
+      border-color:var(--accent);
+      box-shadow:0 20px 40px rgba(0,0,0,0.3);
+      text-decoration:none;
+      color:#f2f2f2
+    }
+    
+    .card:active{
+      transform:translateY(-4px);
+      transition:all 0.1s ease
+    }
+    
+    .card .thumb{
+      aspect-ratio:16/9;
+      background:linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      position:relative;
+      overflow:hidden
+    }
+    
+    .card .thumb::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, var(--accent) 0%, #d4af37 100%);
+      opacity:0.1;
+      transition:opacity 0.3s ease
+    }
+    
+    .card:hover .thumb::before{
+      opacity:0.2
+    }
+    
+    .card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform 0.3s ease
+    }
+    
+    .card:hover img{
+      transform:scale(1.05)
+    }
+    
+    .card .body{
+      padding:20px
+    }
+    
+    .card .title{
+      font-weight:600;
+      margin-bottom:8px;
+      font-size:1.1rem;
+      color:#fff
+    }
+    
+    .card .desc{
+      color:#aaa;
+      font-size:.95rem;
+      line-height:1.5
+    }
+    
+    /* Add icon overlay for visual feedback */
+    .card::after{
+      content:'→';
+      position:absolute;
+      top:16px;
+      right:16px;
+      background:rgba(212,175,55,0.2);
+      color:var(--accent);
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:600;
+      opacity:0;
+      transform:translateX(10px);
+      transition:all 0.3s ease
+    }
+    
+    .card:hover::after{
+      opacity:1;
+      transform:translateX(0)
+    }
 
     /* Latest (repurposed gallery) */
     .latest{padding:90px 20px;background:#f7f7f9;color:#111}
@@ -79,7 +180,63 @@
 
     footer{padding:28px 20px;border-top:1px solid #111;background:#000;color:#8c8c8c;text-align:center}
 
-    @media (max-width:900px){.about-grid{grid-template-columns:1fr}.navbar{padding:16px 18px}.nav-menu{display:none}}
+    /* Mobile Optimizations */
+    @media (max-width:900px){
+      .about-grid{grid-template-columns:1fr}
+      .navbar{padding:16px 18px}
+      .nav-menu{display:none}
+      
+      /* Improve cards for mobile */
+      .cards{
+        grid-template-columns:1fr;
+        gap:16px;
+        margin-top:24px
+      }
+      
+      .card .body{
+        padding:16px
+      }
+      
+      .section{
+        padding:60px 16px
+      }
+      
+      .latest{
+        padding:60px 16px
+      }
+      
+      .about{
+        padding:60px 16px
+      }
+      
+      .contact{
+        padding:60px 16px
+      }
+    }
+    
+    @media (max-width:640px){
+      .cards{
+        grid-template-columns:1fr;
+        gap:12px
+      }
+      
+      .card .title{
+        font-size:1rem
+      }
+      
+      .card .desc{
+        font-size:0.9rem
+      }
+      
+      .filters{
+        gap:8px
+      }
+      
+      .chip{
+        padding:6px 10px;
+        font-size:0.9rem
+      }
+    }
   </style>
 </head>
 <body>
@@ -104,10 +261,9 @@
     <div class="hero-inner">
       <div class="kicker">Photography • Analytics • Travel • Everyday Learning</div>
       <h1 class="hero-title">A Living Notebook by Tanvir Bakther</h1>
-      <p class="hero-sub">I add something new every day , photos, Analytics  projects, travel videos, and short learning notes. Explore by section below or scroll to the latest.</p>
+      <p class="hero-sub">I add something new every day , photos, Analytics projects, travel videos, and short learning notes. Explore by section below or scroll to the latest.</p>
       <div class="cta-row">
-        <a class="btn" href="sections">Explore Sections</a>
-       
+        <a class="btn" href="#sections">Explore Sections</a>
       </div>
     </div>
   </header>
@@ -118,29 +274,46 @@
       <h2>Everything in One Place</h2>
       <p class="muted">Jump straight into a category. Each page links to all related posts and projects.</p>
       <div class="cards" role="list">
-        <article class="card" role="listitem">
-          <a class="thumb" href="photography.html" aria-label="Photography"></a>
+        
+        <a class="card" href="photography.html" role="listitem" aria-label="Go to Photography section">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?q=80&w=400&auto=format&fit=crop" alt="Photography" loading="lazy">
+          </div>
           <div class="body">
             <div class="title">Photography</div>
-            <p class="desc">Wildlife, street, travel frames, Galleries and  behind-the-scenes.</p>
+            <p class="desc">Wildlife, street, travel frames, Galleries and behind-the-scenes.</p>
           </div>
-        </article>
-        <article class="card" role="listitem">
-          <a class="thumb" href="analytics.html" aria-label="Analytics"></a>
+        </a>
+        
+        <a class="card" href="analytics.html" role="listitem" aria-label="Go to Analytics section">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400&auto=format&fit=crop" alt="Analytics" loading="lazy">
+          </div>
           <div class="body">
             <div class="title">Analytics</div>
             <p class="desc">Data stories, dashboards, and Python/SQL notebooks.</p>
           </div>
-        </article>
+        </a>
         
-        <article class="card" role="listitem">
-          <a class="thumb" href="blog.html" aria-label="Everyday Learning"></a>
+        <a class="card" href="travel.html" role="listitem" aria-label="Go to Travel section">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=400&auto=format&fit=crop" alt="Travel" loading="lazy">
+          </div>
           <div class="body">
-            <div class="title">EveryDay Leaning</div>
+            <div class="title">Travel</div>
+            <p class="desc">Short logs and video clips from Bangladesh, Istanbul, Florida, and more.</p>
+          </div>
+        </a>
+        
+        <a class="card" href="blog.html" role="listitem" aria-label="Go to Everyday Learning section">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?q=80&w=400&auto=format&fit=crop" alt="Everyday Learning" loading="lazy">
+          </div>
+          <div class="body">
+            <div class="title">Everyday Learning</div>
             <p class="desc">Daily notes on learning, tools, and creative process.</p>
           </div>
-        </article>
-        
+        </a>
         
       </div>
     </div>
@@ -165,25 +338,22 @@
       </div>
       <div>
         <h2>About Me</h2>
-        <p>&nbsp;Hi, I'm Tanvir Bakther, an  analyst with   experience in machine learning, financial   modeling, and business analysis. I turn data  into strategic insights.&nbsp;I’m a lifelong learner, constantly experimenting, building, and growing. From learning new modeling techniques to exploring creative storytelling through visuals, I believe growth lies at the intersection of curiosity, humility, and bold exploration..</p>
+        <p> Hi, I'm Tanvir Bakther, an analyst with experience in machine learning, financial modeling, and business analysis. I turn data into strategic insights. I'm a lifelong learner, constantly experimenting, building, and growing. From learning new modeling techniques to exploring creative storytelling through visuals, I believe growth lies at the intersection of curiosity, humility, and bold exploration.</p>
         <div class="list">
           <span class="pill">Photography</span>
           <span class="pill">Analytics</span>
-          
-
+          <span class="pill">Travel</span>
           <span class="pill">Everyday Learning</span>
-
         </div>
       </div>
     </div>
   </section>
-  <div></div>
 
   <!-- ======= CONTACT ======= -->
   <section class="contact" id="contact">
     <div class="wrap">
       <h2>Say Hello</h2>
-      <p class="muted">Questions, collaborations, or feedback — drop a note and I’ll get back.</p>
+      <p class="muted">Questions, collaborations, or feedback — drop a note and I'll get back.</p>
       <form id="contactForm">
         <input aria-label="Your name" required placeholder="Your name" type="text"/>
         <input aria-label="Your email" required placeholder="Your email" type="email"/>
@@ -216,6 +386,15 @@
     // Year
     document.getElementById('y').textContent = new Date().getFullYear();
 
+    // Mock data for latest updates
+    const items = [
+      { title: 'Wildlife Photography Tips', cat: 'photography', img: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=400&auto=format&fit=crop', href: 'photography.html' },
+      { title: 'Data Analysis Dashboard', cat: 'analytics', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&auto=format&fit=crop', href: 'analytics.html' },
+      { title: 'Istanbul Travel Log', cat: 'travel', img: 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=400&auto=format&fit=crop', href: 'travel.html' },
+      { title: 'Machine Learning Notes', cat: 'blog', img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&auto=format&fit=crop', href: 'blog.html' },
+      { title: 'Street Photography Series', cat: 'photography', img: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&auto=format&fit=crop', href: 'photography.html' },
+      { title: 'Python Data Processing', cat: 'analytics', img: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&auto=format&fit=crop', href: 'analytics.html' }
+    ];
    
     const tags = [
       { id:'all', label:'All' },
@@ -223,7 +402,6 @@
       { id:'analytics', label:'Analytics' },
       { id:'travel', label:'Travel' },
       { id:'blog', label:'Everyday Learning' },
-      
     ];
 
     const chips = document.getElementById('chips');
@@ -243,7 +421,7 @@
 
     function card(it){
       const el = document.createElement('article');
-      el.className = 'title';
+      el.className = 'tile';
       el.innerHTML = `<a href="${it.href}" aria-label="${it.title}"><img loading="lazy" src="${it.img}" alt="${it.title}"></a><div class="pad"><h3>${it.title}</h3><div class="muted">${it.cat}</div></div>`;
       return el;
     }
