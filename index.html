@@ -235,17 +235,66 @@
 
     // ===== Latest grid data (swap with your real items when ready) =====
     const items = [
-  { title: "Cox's Bazar, Bangladesh", cat: "travel", href: "/coxs-bazar-bangladesh", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/9f46056d-3c53-4422-9041-0eeaa2681229_rwc_0x192x3840x2164x32.jpg?h=be9edad25eb94d7f0c276a5c12ba25a1" },
-  { title: "Bosphorus Strait, Istanbul, Turkey", cat: "travel", href: "/bosphorus-straitistanbulturkey", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/443159bf-c1dd-4f41-9aa3-e8995b901a0c_rwc_0x187x3744x2110x32.jpg?h=e7f067bcdbc0fc77b1908b4d0d0c5dbf" },
-  { title: "City of Istanbul, Turkey", cat: "travel", href: "/citi-of-istanbulturkey", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/3c24590b-59ec-40a3-975d-740f5304ecd5_rwc_0x349x3840x2164x32.jpg?h=0cb0c2545a38169e42178cc5cd4f75c0" },
-  { title: "Hagia Sophia & Blue Mosque", cat: "travel", href: "/hagia-sophia-and-blue-mosque", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f00c47af-7e2c-4735-9c3a-959050eb296a_rwc_0x96x1920x1082x32.jpg?h=e8b66fdf92c60b37a1d582ed10435345" },
-  { title: "Big Talbot Island, Jacksonville, Florida", cat: "travel", href: "/big-talbot-island-jacksonville-florida", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/dbae7270-1848-476e-a72a-daf3d0ff686b_rwc_0x43x1920x1082x32.jpg?h=f7ddf737f79649df59d3252a07b2cea1" },
-  { title: "Crescent Beach, Florida", cat: "travel", href: "/crescent-beach-florida", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/33210824-97b0-4191-a710-25f1c3e038d4_rwc_0x96x1920x1082x32.jpg?h=4e7a38eb5d4bad1d09a5caf1dca2e288" },
-  { title: "A Snowy Day (Atlanta)", cat: "blog", href: "/snow-storm-in-atlanta", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/33ec188d-208f-46ba-ad25-f35128306b72_rwc_0x192x3840x2164x32.jpg?h=f9fcdf5b3a59a89d0f373e5183c106e4" },
-  { title: "Western Lowland Gorilla", cat: "photography", href: "/western-lowland-gorilla", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/2b3b0674-5ee0-4dad-8c54-13aa7a030947_rwc_0x160x1536x864x32.jpg?h=5d5df287343b5bb401e939c78dbf2a67" },
-  { title: "Meerkat", cat: "photography", href: "/meerkat", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/6a4b37d4-c965-4f6c-a6f2-326a6b0a7de8_rwc_0x89x1536x864x32.jpg?h=edfe19bfb08fb717c2b8ac7466629927" },
-  { title: "Hyacinth Macaw", cat: "photography", href: "/hyacinith-macaw", img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/99c7aeb7-7d5b-4b93-8ba8-49b2dc99c608_rwc_0x79x1536x864x32.jpg?h=6402b4b89e25dc0a4eddc0d190c5735a" }
-];
+      {
+        title: "Cox's Bazar, Bangladesh",
+        year: 2025,
+        tags: ["beach", "Bangladesh", "travel", "landscape"],
+        location: "Bangladesh",
+        category: "Travel",
+        href: "/coxs-bazar-bangladesh",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1e02822a-d410-43b7-b1dd-3791309ff49f_rw_1920.jpg?h=25bc70e64cf71013e06f1ce5f64c36b6"
+      },
+      {
+        title: "Bosphorus Strait, Istanbul, Turkey",
+        year: 2025,
+        tags: ["Istanbul", "water", "bridge", "travel", "architecture"],
+        location: "Turkey",
+        category: "Travel",
+        href: "/bosphorus-straitistanbulturkey",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/479add1a-32a1-4a03-aca7-9cac5f58d18a_rw_1920.jpg?h=8efad2c6e1cf469dee81b97c8078975f"
+      },
+      {
+        title: "City of Istanbul, Turkey",
+        year: 2025,
+        tags: ["Istanbul", "city", "travel", "urban"],
+        location: "Turkey",
+        category: "Urban",
+        href: "/citi-of-istanbulturkey",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/a8200412-67eb-40ce-b0e0-7d95585abd5e_rw_1920.jpg?h=a5783aec77e82c0e1e2006ad72176100"
+      },
+      {
+        title: "Hagia Sophia & Blue Mosque",
+        year: 2025,
+        tags: ["Istanbul", "architecture", "travel", "heritage"],
+        location: "Turkey",
+        category: "Architecture",
+        href: "/hagia-sophia-and-blue-mosque",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/35fce0f9-231e-4a06-9f09-a725ea881f86_rw_1920.jpg?h=b1e68a3aa0ab7e43fa356881a5a58922"},
+      {
+        title: "Big Talbot Island, Jacksonville, Florida",
+        year: 2024,
+        tags: ["Florida", "beach", "USA", "travel", "nature"],
+        location: "USA",
+        category: "Nature",
+        href: "/big-talbot-island-jacksonville-florida",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e5ab94fa-0f24-4afa-b6d0-90f80e7069a4_rw_1920.jpg?h=b97ee49a46634766a30c9aaa871b1bce"},
+      {
+        title: "Crescent Beach, Florida",
+        year: 2024,
+        tags: ["Florida", "beach", "USA", "sunset"],
+        location: "USA",
+        category: "Landscape",
+        href: "/crescent-beach-florida",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/c8e6c1d9-5bbc-4f46-8896-1a06fccf2005_rw_1920.jpg?h=f8b2b9091c38c26956b7ec38965a9cb4"},
+      {
+        title: "A Snowy Day (Atlanta)",
+        year: 2024,
+        tags: ["Atlanta", "weather", "USA", "winter"],
+        location: "USA",
+        category: "Weather",
+        href: "/snow-storm-in-atlanta",
+        img: "https://cdn.myportfolio.com/0230b},
+      ];
 
     const tags = [
       { id:'all', label:'All' },
@@ -253,8 +302,7 @@
       { id:'analytics', label:'Analytics' },
       { id:'travel', label:'Travel' },
       { id:'blog', label:'Everyday Learning' },
-      { id:'math', label:'Math' },
-      { id:'sql', label:'SQL' },
+      
     ];
 
     const chips = document.getElementById('chips');
