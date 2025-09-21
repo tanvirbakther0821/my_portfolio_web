@@ -188,8 +188,8 @@
     
     /* Enhanced Toolbar */
     .toolbar {
-      position: sticky;
-      top: 0;
+      position: static;
+      
       z-index: 100;
       background: rgba(10, 10, 11, 0.9);
       backdrop-filter: saturate(180%) blur(20px);
@@ -696,9 +696,40 @@
         scroll-behavior: auto !important;
       }
     }
-  </style>
+  
+    /* ====== Navbar (copied to match index) ====== */
+    .navbar{position:fixed;inset:0 0 auto 0;z-index:1000;padding:20px 50px;background:rgba(0,0,0,.9);backdrop-filter:blur(14px);transition:.3s}
+    .navbar.scrolled{background:rgba(0,0,0,.96);padding:14px 50px}
+    .nav-container{max-width:1400px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-weight:600;font-size:1.1rem;color:#fff;text-decoration:none;letter-spacing:.3px}
+    .logo:hover{color:var(--brand)}
+    .nav-menu{display:flex;list-style:none;gap:28px}
+    .nav-menu a{color:#fff;text-decoration:none;position:relative}
+    .nav-menu a::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--brand);transition:.25s}
+    .nav-menu a:hover::after,.nav-menu a.active::after{width:100%}
+
+
+    /* Compensate for fixed navbar height */
+    body { padding-top: 84px; }
+
+</style>
 </head>
 <body>
+
+  <!-- ======= NAVBAR (copied from index) ======= -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">Tanvir Bakther</a>
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="photography.html">Photography</a></li>
+        <li><a class="nav-link active" href="analytics.html">Analytics</a></li>
+        <li><a class="nav-link" href="blog.html">Everyday Learning</a></li>
+        <li><a class="nav-link" href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <!-- Skip to main content for accessibility -->
   <a href="#main-content" class="sr-only">Skip to main content</a>
   
@@ -1158,6 +1189,21 @@
         console.log(`Page load time: ${navigationTiming.loadEventEnd - navigationTiming.fetchStart}ms`);
       });
     }
-  </script>
+  
+    // Sticky nav styling on scroll (match index behavior)
+    const navbarEl = document.getElementById('navbar');
+    addEventListener('scroll', () => {
+      if (scrollY > 80) navbarEl.classList.add('scrolled'); else navbarEl.classList.remove('scrolled');
+    });
+
+    // Simple active state (already set for Analytics)
+    document.querySelectorAll('.nav-link').forEach(a=>{
+      a.addEventListener('click', e=>{
+        document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));
+        a.classList.add('active');
+      })
+    });
+
+</script>
 </body>
 </html>
