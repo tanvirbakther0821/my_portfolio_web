@@ -1,0 +1,1333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Everyday Learning | Tanvir Bakther</title>
+  <meta name="description" content="Comprehensive learning notes on data processing, OpenRefine, Python, Flask, and Regular Expressions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ====== REUSED THEME FROM HOMEPAGE ====== */
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--primary:#1a1a1a;--secondary:#f5f5f5;--accent:#d4af37;--white:#fff}
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;color:var(--secondary);background:#000;overflow-x:hidden}
+
+    /* Navbar */
+    .navbar{position:fixed;inset:0 0 auto 0;z-index:1000;padding:20px 50px;background:rgba(0,0,0,.9);backdrop-filter:blur(14px);transition:.3s}
+    .navbar.scrolled{background:rgba(0,0,0,.96);padding:14px 50px}
+    .nav-container{max-width:1400px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Playfair Display',serif;font-size:1.6rem;color:#fff;text-decoration:none;letter-spacing:.3px}
+    .logo:hover{color:var(--accent)}
+    .nav-menu{display:flex;list-style:none;gap:28px}
+    .nav-menu a{color:#fff;text-decoration:none;position:relative}
+    .nav-menu a::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--accent);transition:.25s}
+    .nav-menu a:hover::after,.nav-menu a.active::after{width:100%}
+
+    /* Hero */
+    .hero{min-height:60vh;display:grid;place-items:center;position:relative;background:radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.08), transparent 60%), #000}
+    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2400&auto=format&fit=crop') center/cover;filter:brightness(.3) contrast(1.1)}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,.8) 100%)}
+    .hero-inner{position:relative;z-index:2;max-width:900px;margin-inline:auto;padding:0 18px;text-align:center}
+    .kicker{color:var(--accent);letter-spacing:.2em;text-transform:uppercase;font-size:.85rem;margin-bottom:10px}
+    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:600;letter-spacing:-.02em;margin:.1em 0 .35em}
+    .hero-sub{color:#cfcfcf;font-size:clamp(1rem,2.5vw,1.15rem);max-width:720px;margin:0 auto 26px}
+
+    /* Sections */
+    .section{padding:80px 20px;background:#fff;color:#111}
+    .section.dark{background:#111;color:#e9e9e9}
+    .section.accent{background:#f8f9fa;color:#111}
+    .wrap{max-width:1200px;margin:auto}
+    .section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:16px;color:#d4af37}
+    .section h3{font-family:'Playfair Display',serif;font-size:1.6rem;margin:32px 0 16px;color:#d4af37}
+    .section h4{font-size:1.2rem;margin:24px 0 12px;color:#333;font-weight:600}
+    .dark h4{color:#e9e9e9}
+    .section h5{font-size:1rem;margin:16px 0 8px;color:#555;font-weight:600}
+    .dark h5{color:#ccc}
+    .muted{color:#666}
+    .dark .muted{color:#999}
+
+    /* Table of Contents */
+    .toc{background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:24px;margin:24px 0}
+    .toc h4{margin-top:0;color:#333}
+    .toc ul{list-style:none;padding-left:0}
+    .toc li{margin:8px 0}
+    .toc a{color:#d4af37;text-decoration:none}
+    .toc a:hover{text-decoration:underline}
+
+    /* Code blocks */
+    .code-section{background:#0a0a0a;border:1px solid #333;border-radius:8px;padding:20px;margin:16px 0;overflow-x:auto}
+    .code-section pre{color:#e9e9e9;font-family:'Consolas','Monaco','Courier New',monospace;font-size:.9rem;white-space:pre-wrap;line-height:1.4}
+    .code-label{color:var(--accent);font-size:.85rem;margin-bottom:8px;text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+
+    /* Step boxes */
+    .step-box{background:#f0f7ff;border-left:4px solid #d4af37;padding:16px;margin:16px 0;border-radius:0 8px 8px 0}
+    .step-box h5{color:#333;margin-top:0}
+    .dark .step-box{background:#1a1a2e;color:#e9e9e9}
+
+    /* Warning/tip boxes */
+    .tip-box{background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);border-radius:8px;padding:16px;margin:16px 0}
+    .tip-box h5{color:var(--accent);margin-top:0}
+    .warning-box{background:rgba(220,53,69,.1);border:1px solid rgba(220,53,69,.3);border-radius:8px;padding:16px;margin:16px 0}
+    .warning-box h5{color:#dc3545;margin-top:0}
+
+    /* File structure display */
+    .file-tree{background:#f8f9fa;border:1px solid #e9ecef;padding:16px;border-radius:8px;font-family:monospace;margin:16px 0}
+    .file-tree pre{color:#333;margin:0}
+
+    /* Reference tables */
+    .ref-table{width:100%;border-collapse:collapse;margin:16px 0;border:1px solid #ddd}
+    .ref-table th,.ref-table td{border:1px solid #ddd;padding:12px;text-align:left}
+    .ref-table th{background:#f8f9fa;font-weight:600}
+    .dark .ref-table{border-color:#444}
+    .dark .ref-table th,.dark .ref-table td{border-color:#444}
+    .dark .ref-table th{background:#222;color:#e9e9e9}
+
+    /* Future content areas */
+    .future-section{border:2px dashed #444;border-radius:8px;padding:24px;margin:32px 0;text-align:center;background:#0a0a0a}
+    .future-section h4{color:#666;margin-bottom:8px}
+    .future-section p{color:#555;font-style:italic}
+
+    footer{padding:28px 20px;border-top:1px solid #111;background:#000;color:#8c8c8c;text-align:center}
+
+    @media (max-width:900px){
+      .navbar{padding:16px 18px}
+      .nav-menu{display:none}
+    }
+  </style>
+</head>
+<body>
+  <!-- ======= NAVBAR ======= -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">Tanvir Bakther</a>
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="photography.html">Photography</a></li>
+        <li><a class="nav-link" href="analytics.html">Analytics</a></li>
+        <li><a class="nav-link active" href="everyday-learning.html">Everyday Learning</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ======= HERO ======= -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div class="kicker">Comprehensive Learning Reference</div>
+      <h1 class="hero-title">Data Processing Mastery Guide</h1>
+      <p class="hero-sub">Complete tutorials and reference notes for OpenRefine, Flask development, Regular Expressions, and Python data processing.</p>
+    </div>
+  </header>
+
+  <!-- ======= TABLE OF CONTENTS ======= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="toc">
+        <h4>📚 Table of Contents</h4>
+        <ul>
+          <li><a href="#openrefine">1. OpenRefine Data Cleaning Complete Guide</a></li>
+          <li><a href="#flask">2. Flask Web Development Tutorial</a></li>
+          <li><a href="#regex">3. Regular Expressions Reference</a></li>
+          <li><a href="#python-data">4. Python Data Processing Patterns</a></li>
+          <li><a href="#troubleshooting">5. Common Issues & Solutions</a></li>
+          <li><a href="#future">6. Future Learning Areas</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= 1. OPENREFINE COMPLETE GUIDE ======= -->
+  <section class="section dark" id="openrefine">
+    <div class="wrap">
+      <h2>🔧 OpenRefine Data Cleaning Complete Guide</h2>
+      <p class="muted">Master data cleaning, transformation, and quality improvement with OpenRefine</p>
+
+      <h3>Installation & Setup</h3>
+      
+      <div class="step-box">
+        <h5>Step 1: Download OpenRefine</h5>
+        <p>Download OpenRefine 3.6.2 from: <code>https://github.com/OpenRefine/OpenRefine/releases/tag/3.6.2</code></p>
+        <p>Choose your OS version (Windows, Mac, Linux). Version 3.6.2 includes embedded Java.</p>
+      </div>
+
+      <div class="step-box">
+        <h5>Step 2: Launch OpenRefine</h5>
+        <p>1. Extract the downloaded file</p>
+        <p>2. Run the executable (openrefine.exe on Windows)</p>
+        <p>3. Open browser and go to: <code>http://127.0.0.1:3333</code></p>
+      </div>
+
+      <h3>Project Creation & Data Import</h3>
+
+      <div class="step-box">
+        <h5>Creating a New Project</h5>
+        <p>1. Click "Create Project"</p>
+        <p>2. Choose "This Computer" → Browse for your CSV file</p>
+        <p>3. Click "Next" to preview data</p>
+        <p>4. Verify column headers and data types</p>
+        <p>5. Click "Create Project" (top right)</p>
+      </div>
+
+      <div class="tip-box">
+        <h5>💡 Data Import Best Practices</h5>
+        <p>• Always preview your data before creating the project</p>
+        <p>• Check if headers are properly detected</p>
+        <p>• Verify column separation (comma, tab, semicolon)</p>
+        <p>• Note any encoding issues with special characters</p>
+      </div>
+
+      <h3>Core Data Cleaning Operations</h3>
+
+      <h4>1. Removing Blank/Null Values</h4>
+      
+      <div class="step-box">
+        <h5>Using Text Facets to Remove Blanks</h5>
+        <p>1. Click on column dropdown → <strong>Facet</strong> → <strong>Text facet</strong></p>
+        <p>2. In the facet panel (left side), you'll see all unique values</p>
+        <p>3. Click on <strong>(blank)</strong> to select only blank rows</p>
+        <p>4. Click <strong>All</strong> → <strong>Edit rows</strong> → <strong>Remove all matching rows</strong></p>
+        <p>5. Close the facet when done</p>
+      </div>
+
+      <h4>2. Filtering Data</h4>
+
+      <div class="step-box">
+        <h5>Text Filtering</h5>
+        <p>1. Click column dropdown → <strong>Text filter</strong></p>
+        <p>2. Enter your search term (e.g., "Airport")</p>
+        <p>3. Note: Filtering is case-sensitive by default</p>
+        <p>4. To keep only matching rows: <strong>All</strong> → <strong>Edit rows</strong> → <strong>Remove all non-matching rows</strong></p>
+      </div>
+
+      <h4>3. Creating New Columns with GREL</h4>
+
+      <div class="step-box">
+        <h5>Adding Columns Based on Existing Data</h5>
+        <p>1. Click source column dropdown → <strong>Edit column</strong> → <strong>Add column based on this column</strong></p>
+        <p>2. Enter new column name</p>
+        <p>3. Write GREL expression in the expression box</p>
+        <p>4. Preview shows first few results</p>
+        <p>5. Click <strong>OK</strong> to create column</p>
+      </div>
+
+      <h3>GREL (General Refine Expression Language) Reference</h3>
+
+      <h4>Essential GREL Functions</h4>
+
+      <table class="ref-table">
+        <tr>
+          <th>Function</th>
+          <th>Purpose</th>
+          <th>Example</th>
+        </tr>
+        <tr>
+          <td><code>contains(value, "text")</code></td>
+          <td>Check if value contains text</td>
+          <td><code>contains(value, "Airport")</code></td>
+        </tr>
+        <tr>
+          <td><code>value.match(/pattern/)</code></td>
+          <td>Extract text matching regex</td>
+          <td><code>value.match(/([A-Za-z\s]+Airport)/)</code></td>
+        </tr>
+        <tr>
+          <td><code>split(value, delimiter)</code></td>
+          <td>Split text into array</td>
+          <td><code>split(value, ",")</code></td>
+        </tr>
+        <tr>
+          <td><code>trim(value)</code></td>
+          <td>Remove leading/trailing spaces</td>
+          <td><code>trim(value)</code></td>
+        </tr>
+        <tr>
+          <td><code>if(condition, true_value, false_value)</code></td>
+          <td>Conditional logic</td>
+          <td><code>if(contains(value, "Airport"), "Yes", "No")</code></td>
+        </tr>
+      </table>
+
+      <h4>Real-World GREL Examples</h4>
+
+      <div class="code-section">
+        <div class="code-label">Extract Airport Names</div>
+        <pre>if(contains(value, "Airport"),
+  value.match(/([A-Za-z\s]+Airport)/)[0].trim(),
+  ""
+)</pre>
+      </div>
+
+      <div class="code-section">
+        <div class="code-label">Clean and Standardize Text</div>
+        <pre>value.trim().replace(/\s+/, " ").toTitlecase()</pre>
+      </div>
+
+      <div class="code-section">
+        <div class="code-label">Extract Text After Specific Word</div>
+        <pre>if(contains(value, " at "),
+  split(value, " at ")[1].trim(),
+  value
+)</pre>
+      </div>
+
+      <h3>Clustering & Merging Similar Values</h3>
+
+      <div class="step-box">
+        <h5>Using Cluster and Edit Feature</h5>
+        <p>1. Select the column with similar values</p>
+        <p>2. Go to <strong>Edit cells</strong> → <strong>Cluster and edit</strong></p>
+        <p>3. Try different clustering methods:</p>
+        <p>   • <strong>Key collision → fingerprint</strong>: Basic similarity</p>
+        <p>   • <strong>Key collision → ngram-fingerprint</strong>: Handles typos</p>
+        <p>   • <strong>Nearest neighbor → levenshtein</strong>: Character differences</p>
+        <p>4. Review suggested clusters and choose merge values</p>
+        <p>5. Check <strong>Merge?</strong> for clusters you want to merge</p>
+        <p>6. Click <strong>Merge Selected & Re-Cluster</strong></p>
+      </div>
+
+      <h3>Exporting Results</h3>
+
+      <div class="step-box">
+        <h5>Export Cleaned Data</h5>
+        <p>1. Click <strong>Export</strong> (top right) → <strong>Comma-separated value</strong></p>
+        <p>2. Save the cleaned CSV file</p>
+      </div>
+
+      <div class="step-box">
+        <h5>Export History (for Reproducibility)</h5>
+        <p>1. Go to <strong>Undo/Redo</strong> tab → <strong>Extract</strong> → <strong>Export</strong></p>
+        <p>2. Downloads <code>history.json</code> with all operations</p>
+        <p>3. Can be used to replay operations on similar datasets</p>
+      </div>
+
+      <div class="warning-box">
+        <h5>⚠️ Common Mistakes to Avoid</h5>
+        <p>• Always backup original data before major operations</p>
+        <p>• Test GREL expressions on small datasets first</p>
+        <p>• Check for case sensitivity in filters and matching</p>
+        <p>• Verify row counts after filtering operations</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= 2. FLASK WEB DEVELOPMENT TUTORIAL ======= -->
+  <section class="section" id="flask">
+    <div class="wrap">
+      <h2>🌐 Flask Web Development Complete Tutorial</h2>
+      <p class="muted">Build data-driven web applications with Python Flask</p>
+
+      <h3>Flask Installation & Setup</h3>
+
+      <div class="step-box">
+        <h5>Install Flask</h5>
+        <div class="code-section">
+          <div class="code-label">Terminal/Command Prompt</div>
+          <pre># Install Flask
+pip install Flask
+
+# Optional: Create virtual environment first
+python -m venv flask_env
+# Windows: flask_env\Scripts\activate
+# Mac/Linux: source flask_env/bin/activate
+pip install Flask</pre>
+        </div>
+      </div>
+
+      <h3>Basic Flask Application Structure</h3>
+
+      <div class="file-tree">
+        <pre>project_folder/
+├── run.py                 # Main application runner
+├── flaskapp/
+│   ├── __init__.py       # Flask app initialization
+│   ├── routes.py         # URL routes and view functions
+│   └── templates/
+│       └── index.html    # HTML templates
+└── data/
+    └── dataset.csv       # Data files</pre>
+      </div>
+
+      <h4>1. Application Runner (run.py)</h4>
+
+      <div class="code-section">
+        <div class="code-label">run.py</div>
+        <pre>""" run.py - Run the Flask app """
+from flaskapp import app
+
+if __name__ == '__main__':
+    # Start the Flask development server
+    app.run(host='127.0.0.1', port=3001, debug=True)</pre>
+      </div>
+
+      <h4>2. Flask App Initialization</h4>
+
+      <div class="code-section">
+        <div class="code-label">flaskapp/__init__.py</div>
+        <pre>from flask import Flask
+
+# Create Flask application instance
+app = Flask(__name__)
+
+# Import routes (must be after app creation)
+from flaskapp import routes</pre>
+      </div>
+
+      <h4>3. Data Processing Module</h4>
+
+      <div class="code-section">
+        <div class="code-label">data_processing.py</div>
+        <pre>import csv
+
+def username():
+    return 'your_username'
+
+def data_wrangling(filter_class=None):
+    """
+    Process CSV data and return formatted results
+    
+    Args:
+        filter_class (str): Optional filter for data category
+    
+    Returns:
+        tuple: (header, table_data, dropdown_options)
+    """
+    with open('data/dataset.csv', 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        table = []
+        all_classes = set()
+        
+        # Read header row
+        header = next(reader)
+        
+        # Read and process data rows
+        for row in reader:
+            # Convert numeric columns
+            processed_row = [
+                row[0],                    # species (string)
+                row[1],                    # class (string) 
+                int(row[2]) if row[2] else 0  # count (integer)
+            ]
+            table.append(processed_row)
+            all_classes.add(row[1])  # Collect unique classes
+        
+        # Create sorted dropdown options
+        dropdown_options = sorted(list(all_classes))
+        
+        # Apply filtering if specified
+        if filter_class:
+            table = [row for row in table if row[1] == filter_class]
+        
+        # Sort by count (descending) and limit to top 10
+        table.sort(key=lambda x: x[2], reverse=True)
+        table = table[:10]
+    
+    return header, table, dropdown_options</pre>
+      </div>
+
+      <h4>4. Routes and View Functions</h4>
+
+      <div class="code-section">
+        <div class="code-label">flaskapp/routes.py</div>
+        <pre>from flask import render_template, request
+from flaskapp import app
+from data_processing import data_wrangling
+
+@app.route('/')
+@app.route('/index')
+def index():
+    """Main page route"""
+    # Get filter parameter from URL
+    filter_class = request.args.get('filter_class')
+    
+    # Process data with optional filter
+    header, table, dropdown_options = data_wrangling(filter_class)
+    
+    # Render template with data
+    return render_template('index.html',
+                         header=header,
+                         table=table,
+                         dropdown_options=dropdown_options,
+                         current_filter=filter_class)
+
+@app.route('/api/data')
+def api_data():
+    """API endpoint for JSON data"""
+    filter_class = request.args.get('filter_class')
+    header, table, dropdown_options = data_wrangling(filter_class)
+    
+    return {
+        'header': header,
+        'data': table,
+        'filters': dropdown_options,
+        'count': len(table)
+    }</pre>
+      </div>
+
+      <h4>5. HTML Template</h4>
+
+      <div class="code-section">
+        <div class="code-label">flaskapp/templates/index.html</div>
+        <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Wildlife Data Dashboard&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .filter-section { margin-bottom: 20px; }
+        select { padding: 8px; margin-right: 10px; }
+        button { padding: 8px 16px; background: #007bff; color: white; border: none; cursor: pointer; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Wildlife Trafficking Data&lt;/h1&gt;
+    
+    &lt;!-- Filter Section --&gt;
+    &lt;div class="filter-section"&gt;
+        &lt;form method="GET"&gt;
+            &lt;label for="filter_class"&gt;Filter by Class:&lt;/label&gt;
+            &lt;select name="filter_class" id="filter_class"&gt;
+                &lt;option value=""&gt;All Classes&lt;/option&gt;
+                {% for option in dropdown_options %}
+                &lt;option value="{{ option }}" 
+                        {% if option == current_filter %}selected{% endif %}&gt;
+                    {{ option }}
+                &lt;/option&gt;
+                {% endfor %}
+            &lt;/select&gt;
+            &lt;button type="submit"&gt;Filter&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Data Table --&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                {% for col in header %}
+                &lt;th&gt;{{ col }}&lt;/th&gt;
+                {% endfor %}
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            {% for row in table %}
+            &lt;tr&gt;
+                {% for cell in row %}
+                &lt;td&gt;{{ cell }}&lt;/td&gt;
+                {% endfor %}
+            &lt;/tr&gt;
+            {% endfor %}
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;!-- JavaScript for dynamic updates --&gt;
+    &lt;script&gt;
+        // Auto-submit form when dropdown changes
+        document.getElementById('filter_class').addEventListener('change', function() {
+            this.form.submit();
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <h3>Running Your Flask Application</h3>
+
+      <div class="step-box">
+        <h5>Start the Development Server</h5>
+        <div class="code-section">
+          <div class="code-label">Terminal</div>
+          <pre># Navigate to your project folder
+cd your_project_folder
+
+# Run the application
+python run.py
+
+# Output should show:
+# * Running on http://127.0.0.1:3001</pre>
+        </div>
+        <p>Open your browser and go to: <code>http://127.0.0.1:3001</code></p>
+      </div>
+
+      <h3>Flask Development Best Practices</h3>
+
+      <div class="tip-box">
+        <h5>💡 Essential Tips</h5>
+        <p>• Use <code>debug=True</code> for development (auto-reload on changes)</p>
+        <p>• Organize code into modules (routes, models, utilities)</p>
+        <p>• Use templates for all HTML (avoid HTML in Python code)</p>
+        <p>• Handle errors gracefully with try-catch blocks</p>
+        <p>• Use environment variables for configuration</p>
+      </div>
+
+      <h3>Common Flask Patterns</h3>
+
+      <h4>URL Parameters</h4>
+      <div class="code-section">
+        <div class="code-label">Dynamic Routes</div>
+        <pre>@app.route('/species/&lt;species_name&gt;')
+def species_detail(species_name):
+    # Process species_name parameter
+    return render_template('species.html', species=species_name)</pre>
+      </div>
+
+      <h4>Form Handling</h4>
+      <div class="code-section">
+        <div class="code-label">POST Request Handling</div>
+        <pre>@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        search_term = request.form['search']
+        # Process search
+        results = perform_search(search_term)
+        return render_template('results.html', results=results)
+    return render_template('search.html')</pre>
+      </div>
+
+      <!-- FUTURE FLASK CONTENT AREA -->
+      <div class="future-section">
+        <h4>🚀 Advanced Flask Topics to Add</h4>
+        <p>Database integration, user authentication, API development, deployment, testing, blueprints, error handling</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= 3. REGULAR EXPRESSIONS REFERENCE ======= -->
+  <section class="section dark" id="regex">
+    <div class="wrap">
+      <h2>🔍 Regular Expressions Complete Reference</h2>
+      <p class="muted">Master pattern matching for text processing and data extraction</p>
+
+      <h3>RegEx Fundamentals</h3>
+
+      <h4>Basic Syntax Elements</h4>
+      <table class="ref-table">
+        <tr>
+          <th>Pattern</th>
+          <th>Description</th>
+          <th>Example</th>
+          <th>Matches</th>
+        </tr>
+        <tr>
+          <td><code>.</code></td>
+          <td>Any single character</td>
+          <td><code>a.c</code></td>
+          <td>abc, axc, a1c</td>
+        </tr>
+        <tr>
+          <td><code>*</code></td>
+          <td>Zero or more of preceding</td>
+          <td><code>ab*c</code></td>
+          <td>ac, abc, abbc</td>
+        </tr>
+        <tr>
+          <td><code>+</code></td>
+          <td>One or more of preceding</td>
+          <td><code>ab+c</code></td>
+          <td>abc, abbc (not ac)</td>
+        </tr>
+        <tr>
+          <td><code>?</code></td>
+          <td>Zero or one of preceding</td>
+          <td><code>ab?c</code></td>
+          <td>ac, abc</td>
+        </tr>
+        <tr>
+          <td><code>^</code></td>
+          <td>Start of string</td>
+          <td><code>^Hello</code></td>
+          <td>Hello world</td>
+        </tr>
+        <tr>
+          <td><code>$</code></td>
+          <td>End of string</td>
+          <td><code>world$</code></td>
+          <td>Hello world</td>
+        </tr>
+        <tr>
+          <td><code>\b</code></td>
+          <td>Word boundary</td>
+          <td><code>\bcat\b</code></td>
+          <td>cat (not category)</td>
+        </tr>
+      </table>
+
+      <h4>Character Classes</h4>
+      <table class="ref-table">
+        <tr>
+          <th>Class</th>
+          <th>Description</th>
+          <th>Equivalent</th>
+        </tr>
+        <tr>
+          <td><code>[a-z]</code></td>
+          <td>Lowercase letters</td>
+          <td>a, b, c, ..., z</td>
+        </tr>
+        <tr>
+          <td><code>[A-Z]</code></td>
+          <td>Uppercase letters</td>
+          <td>A, B, C, ..., Z</td>
+        </tr>
+        <tr>
+          <td><code>[0-9]</code></td>
+          <td>Digits</td>
+          <td>0, 1, 2, ..., 9</td>
+        </tr>
+        <tr>
+          <td><code>\d</code></td>
+          <td>Digit</td>
+          <td>[0-9]</td>
+        </tr>
+        <tr>
+          <td><code>\w</code></td>
+          <td>Word character</td>
+          <td>[a-zA-Z0-9_]</td>
+        </tr>
+        <tr>
+          <td><code>\s</code></td>
+          <td>Whitespace</td>
+          <td>Space, tab, newline</td>
+        </tr>
+      </table>
+
+      <h3>Data Extraction Patterns</h3>
+
+      <h4>Airport Name Extraction</h4>
+      <div class="code-section">
+        <div class="code-label">Pattern: Extract "City Name Airport"</div>
+        <pre># Python
+import re
+
+# Basic airport pattern
+pattern = r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+((?:International\s+)?Airport)\b'
+
+text = "77kg of sandalwood at the Chhatrapati Shivaji Maharaj International Airport"
+match = re.search(pattern, text)
+if match:
+    airport_name = f"{match.group(1)} {match.group(2)}"
+    print(airport_name)  # "Chhatrapati Shivaji Maharaj International Airport"</pre>
+      </div>
+
+      <div class="code-section">
+        <div class="code-label">Pattern: Extract text after "at"</div>
+        <pre># Extract everything after " at " until comma or end
+pattern = r'\sat\s+(?:the\s+)?([^,]+)'
+
+text = "Ivory seized at Beijing Capital Airport, suspect arrested"
+match = re.search(pattern, text)
+if match:
+    location = match.group(1).strip()
+    print(location)  # "Beijing Capital Airport"</pre>
+      </div>
+
+      <h4>Email Address Extraction</h4>
+      <div class="code-section">
+        <div class="code-label">Email Pattern</div>
+        <pre># Basic email pattern
+pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+
+text = "Contact us at support@example.com or admin@site.org"
+emails = re.findall(pattern, text)
+print(emails)  # ['support@example.com', 'admin@site.org']</pre>
+      </div>
+
+      <h4>Phone Number Extraction</h4>
+      <div class="code-section">
+        <div class="code-label">Phone Pattern (US Format)</div>
+        <pre># US phone number patterns
+patterns = [
+    r'\b\(\d{3}\)\s*\d{3}-\d{4}\b',          # (123) 456-7890
+    r'\b\d{3}-\d{3}-\d{4}\b',                 # 123-456-7890
+    r'\b\d{3}\.\d{3}\.\d{4}\b',               # 123.456.7890
+    r'\b\d{10}\b'                             # 1234567890
+]
+
+text = "Call me at (555) 123-4567 or 555.987.6543"
+for pattern in patterns:
+    matches = re.findall(pattern, text)
+    if matches:
+        print(f"Found: {matches}")</pre>
+      </div>
+
+      <h3>Text Cleaning Patterns</h3>
+
+      <h4>Remove Extra Whitespace</h4>
+      <div class="code-section">
+        <div class="code-label">Whitespace Cleanup</div>
+        <pre># Remove multiple spaces, tabs, newlines
+text = "This   has    too   much   whitespace"
+cleaned = re.sub(r'\s+', ' ', text).strip()
+print(cleaned)  # "This has too much whitespace"</pre>
+      </div>
+
+      <h4>Extract Numbers</h4>
+      <div class="code-section">
+        <div class="code-label">Number Extraction</div>
+        <pre># Extract integers
+text = "Found 25 elephants and 12 rhinos"
+numbers = re.findall(r'\d+', text)
+print(numbers)  # ['25', '12']
+
+# Extract decimals
+text = "Weight: 15.5kg, Height: 2.3m"
+decimals = re.findall(r'\d+\.\d+', text)
+print(decimals)  # ['15.5', '2.3']</pre>
+      </div>
+
+      <h3>Advanced RegEx Techniques</h3>
+
+      <h4>Lookahead and Lookbehind</h4>
+      <div class="code-section">
+        <div class="code-label">Advanced Patterns</div>
+        <pre># Positive lookahead: match word followed by "Airport"
+pattern = r'\b\w+(?=\s+Airport)'
+text = "Beijing Capital Airport and Shanghai Pudong Airport"
+matches = re.findall(pattern, text)
+print(matches)  # ['Capital', 'Pudong']
+
+# Positive lookbehind: match word preceded by "Airport"
+pattern = r'(?<=Airport\s)\w+'
+text = "Airport Code: LAX, Airport Name: Los Angeles"
+matches = re.findall(pattern, text)
+print(matches)  # ['Code:', 'Name:']</pre>
+      </div>
+
+      <h4>Named Groups</h4>
+      <div class="code-section">
+        <div class="code-label">Named Capture Groups</div>
+        <pre># Extract structured data with named groups
+pattern = r'(?P&lt;city&gt;[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+(?P&lt;type&gt;(?:International\s+)?Airport)'
+
+text = "Flights to Beijing Capital International Airport"
+match = re.search(pattern, text)
+if match:
+    city = match.group('city')      # "Beijing Capital"
+    airport_type = match.group('type')  # "International Airport"
+    print(f"City: {city}, Type: {airport_type}")</pre>
+      </div>
+
+      <h3>Python RegEx Functions</h3>
+
+      <table class="ref-table">
+        <tr>
+          <th>Function</th>
+          <th>Purpose</th>
+          <th>Returns</th>
+        </tr>
+        <tr>
+          <td><code>re.search(pattern, text)</code></td>
+          <td>Find first match</td>
+          <td>Match object or None</td>
+        </tr>
+        <tr>
+          <td><code>re.findall(pattern, text)</code></td>
+          <td>Find all matches</td>
+          <td>List of strings</td>
+        </tr>
+        <tr>
+          <td><code>re.finditer(pattern, text)</code></td>
+          <td>Find all matches</td>
+          <td>Iterator of Match objects</td>
+        </tr>
+        <tr>
+          <td><code>re.sub(pattern, replacement, text)</code></td>
+          <td>Replace matches</td>
+          <td>Modified string</td>
+        </tr>
+        <tr>
+          <td><code>re.split(pattern, text)</code></td>
+          <td>Split on pattern</td>
+          <td>List of strings</td>
+        </tr>
+      </table>
+
+      <h3>Real-World RegEx Examples</h3>
+
+      <div class="code-section">
+        <div class="code-label">Complete Data Cleaning Function</div>
+        <pre>import re
+
+def clean_airport_data(text):
+    """Comprehensive airport name extraction and cleaning"""
+    if not text or pd.isna(text):
+        return ""
+    
+    # Remove common prefixes
+    text = re.sub(r'^(seized\s+at|at|from|to|in)\s+', '', text, flags=re.IGNORECASE)
+    
+    # Extract airport name patterns
+    patterns = [
+        r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+(International\s+Airport)\b',
+        r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+(Airport)\b'
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if match:
+            city_part = match.group(1)
+            airport_part = match.group(2)
+            
+            # Skip common non-city words
+            if city_part not in ['The', 'At', 'From', 'To', 'In', 'Seized']:
+                return f"{city_part} {airport_part}"
+    
+    return ""
+
+# Usage example
+texts = [
+    "77kg of sandalwood at the Chhatrapati Shivaji Maharaj International Airport",
+    "Ivory seized at Beijing Capital Airport",
+    "Live animals found at Chennai International Airport"
+]
+
+for text in texts:
+    airport = clean_airport_data(text)
+    print(f"'{text}' → '{airport}'")</pre>
+      </div>
+
+      <!-- FUTURE REGEX CONTENT AREA -->
+      <div class="future-section">
+        <h4>🎯 Advanced RegEx Topics to Add</h4>
+        <p>Unicode patterns, performance optimization, regex debugging tools, complex parsing scenarios</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= 4. PYTHON DATA PROCESSING PATTERNS ======= -->
+  <section class="section accent" id="python-data">
+    <div class="wrap">
+      <h2>🐍 Python Data Processing Patterns</h2>
+      <p class="muted">Essential Python techniques for data manipulation and analysis</p>
+
+      <h3>Pandas Data Manipulation</h3>
+
+      <h4>Essential Pandas Operations</h4>
+      <div class="code-section">
+        <div class="code-label">Data Loading and Basic Operations</div>
+        <pre>import pandas as pd
+import numpy as np
+
+# Load CSV data
+df = pd.read_csv('data.csv')
+
+# Basic data exploration
+print(f"Shape: {df.shape}")
+print(f"Columns: {df.columns.tolist()}")
+print(f"Data types:\n{df.dtypes}")
+print(f"Missing values:\n{df.isnull().sum()}")
+
+# Display first few rows
+print(df.head())
+
+# Basic statistics
+print(df.describe())</pre>
+      </div>
+
+      <h4>Data Cleaning Patterns</h4>
+      <div class="code-section">
+        <div class="code-label">Remove Duplicates and Handle Missing Data</div>
+        <pre># Remove duplicate rows
+df_clean = df.drop_duplicates()
+
+# Remove rows with missing values in specific columns
+df_clean = df.dropna(subset=['important_column'])
+
+# Fill missing values
+df['column'] = df['column'].fillna('default_value')
+df['numeric_column'] = df['numeric_column'].fillna(df['numeric_column'].mean())
+
+# Remove rows where column is empty string
+df_clean = df[df['column'].str.strip() != '']</pre>
+      </div>
+
+      <h4>Filtering and Querying</h4>
+      <div class="code-section">
+        <div class="code-label">Advanced Filtering Techniques</div>
+        <pre># Basic filtering
+airport_data = df[df['Subject'].str.contains('Airport', case=True, na=False)]
+
+# Multiple conditions
+filtered = df[
+    (df['Count'] > 10) & 
+    (df['Country'].isin(['China', 'India'])) &
+    (df['Date'].str.contains('2024'))
+]
+
+# Using query method (more readable for complex conditions)
+result = df.query("Count > 10 and Country in ['China', 'India']")
+
+# String operations
+df['clean_name'] = df['name'].str.strip().str.title()
+has_keyword = df[df['description'].str.contains('wildlife', case=False, na=False)]</pre>
+      </div>
+
+      <h3>Data Transformation Patterns</h3>
+
+      <h4>Creating New Columns</h4>
+      <div class="code-section">
+        <div class="code-label">Column Creation and Transformation</div>
+        <pre># Apply function to create new column
+df['airport'] = df['Subject'].apply(extract_airport_name)
+
+# Conditional column creation
+df['category'] = df['Count'].apply(lambda x: 'High' if x > 50 else 'Low')
+
+# Using numpy.where for conditions
+df['risk_level'] = np.where(df['Count'] > 100, 'Critical', 
+                   np.where(df['Count'] > 50, 'High', 'Normal'))
+
+# Map values using dictionary
+status_map = {'Active': 1, 'Inactive': 0}
+df['status_code'] = df['status'].map(status_map)</pre>
+      </div>
+
+      <h4>Grouping and Aggregation</h4>
+      <div class="code-section">
+        <div class="code-label">GroupBy Operations</div>
+        <pre># Basic grouping
+country_stats = df.groupby('Country')['Count'].agg(['sum', 'mean', 'count'])
+
+# Multiple columns and functions
+summary = df.groupby(['Country', 'Year']).agg({
+    'Count': ['sum', 'mean'],
+    'Value': 'max',
+    'Species': 'nunique'
+})
+
+# Custom aggregation functions
+def custom_stat(series):
+    return series.max() - series.min()
+
+df.groupby('Country')['Count'].apply(custom_stat)</pre>
+      </div>
+
+      <h3>Text Processing Functions</h3>
+
+      <div class="code-section">
+        <div class="code-label">String Manipulation Utilities</div>
+        <pre>def standardize_airport_names(name):
+    """Standardize airport name variations"""
+    if pd.isna(name) or name == "":
+        return ""
+    
+    # Mapping dictionary for common variations
+    mappings = {
+        'Beijing Capital Airport': 'Beijing Capital International Airport',
+        'Shanghai Pudong Airport': 'Shanghai Pudong International Airport',
+        # Add more mappings as needed
+    }
+    
+    return mappings.get(name, name)
+
+def extract_numeric_value(text):
+    """Extract first number from text string"""
+    import re
+    if pd.isna(text):
+        return None
+    
+    match = re.search(r'\d+\.?\d*', str(text))
+    return float(match.group()) if match else None
+
+# Apply to dataframe
+df['standardized_airport'] = df['airport'].apply(standardize_airport_names)
+df['numeric_weight'] = df['weight_text'].apply(extract_numeric_value)</pre>
+      </div>
+
+      <h3>Data Validation Patterns</h3>
+
+      <div class="code-section">
+        <div class="code-label">Data Quality Checks</div>
+        <pre>def validate_dataset(df):
+    """Comprehensive data validation"""
+    validation_results = {}
+    
+    # Check for required columns
+    required_cols = ['ID', 'Country', 'Date', 'Subject']
+    missing_cols = [col for col in required_cols if col not in df.columns]
+    validation_results['missing_columns'] = missing_cols
+    
+    # Check for empty values
+    empty_counts = df.isnull().sum()
+    validation_results['empty_values'] = empty_counts[empty_counts > 0].to_dict()
+    
+    # Check for duplicates
+    duplicate_count = df.duplicated().sum()
+    validation_results['duplicates'] = duplicate_count
+    
+    # Check data types
+    validation_results['data_types'] = df.dtypes.to_dict()
+    
+    # Check value ranges
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    for col in numeric_cols:
+        validation_results[f'{col}_range'] = {
+            'min': df[col].min(),
+            'max': df[col].max(),
+            'negative_count': (df[col] < 0).sum()
+        }
+    
+    return validation_results
+
+# Run validation
+validation_report = validate_dataset(df)
+print("Validation Report:")
+for key, value in validation_report.items():
+    print(f"{key}: {value}")</pre>
+      </div>
+
+      <!-- FUTURE PYTHON CONTENT AREA -->
+      <div class="future-section">
+        <h4>🚀 Advanced Python Topics to Add</h4>
+        <p>Machine learning with scikit-learn, data visualization with matplotlib/seaborn, API development, database connections</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= 5. TROUBLESHOOTING GUIDE ======= -->
+  <section class="section dark" id="troubleshooting">
+    <div class="wrap">
+      <h2>🔧 Common Issues & Solutions</h2>
+      <p class="muted">Solutions to frequent problems encountered in data processing</p>
+
+      <h3>OpenRefine Issues</h3>
+
+      <div class="warning-box">
+        <h5>⚠️ "GREL Expression Error"</h5>
+        <p><strong>Problem:</strong> GREL syntax errors or unexpected results</p>
+        <p><strong>Solutions:</strong></p>
+        <p>• Test expressions on small data samples first</p>
+        <p>• Use parentheses to ensure proper order of operations</p>
+        <p>• Check for typos in function names (case-sensitive)</p>
+        <p>• Use <code>value.toString()</code> if working with numbers</p>
+      </div>
+
+      <div class="warning-box">
+        <h5>⚠️ "Row Count Mismatch After Filtering"</h5>
+        <p><strong>Problem:</strong> Lost rows during data processing</p>
+        <p><strong>Solutions:</strong></p>
+        <p>• Check for case sensitivity in filters</p>
+        <p>• Verify GREL expressions don't return empty strings</p>
+        <p>• Use facets to inspect data before filtering</p>
+        <p>• Export history to track which operation caused loss</p>
+      </div>
+
+      <h3>Python/Pandas Issues</h3>
+
+      <div class="warning-box">
+        <h5>⚠️ "KeyError: Column not found"</h5>
+        <p><strong>Problem:</strong> Referencing non-existent column</p>
+        <div class="code-section">
+          <div class="code-label">Solution</div>
+          <pre># Check available columns
+print(df.columns.tolist())
+
+# Safe column access
+if 'column_name' in df.columns:
+    result = df['column_name']
+else:
+    print("Column not found")
+
+# Use .get() method for safe access
+value = df.get('column_name', default_value)</pre>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <h5>⚠️ "SettingWithCopyWarning"</h5>
+        <p><strong>Problem:</strong> Pandas warning about chained assignments</p>
+        <div class="code-section">
+          <div class="code-label">Solution</div>
+          <pre># Avoid chained assignment
+# Bad: df[df['A'] > 5]['B'] = 'new_value'
+
+# Good: Use .loc
+df.loc[df['A'] > 5, 'B'] = 'new_value'
+
+# Or create explicit copy
+subset = df[df['A'] > 5].copy()
+subset['B'] = 'new_value'</pre>
+        </div>
+      </div>
+
+      <h3>Flask Issues</h3>
+
+      <div class="warning-box">
+        <h5>⚠️ "Template Not Found"</h5>
+        <p><strong>Problem:</strong> Flask can't locate HTML templates</p>
+        <p><strong>Solutions:</strong></p>
+        <p>• Ensure templates are in <code>templates/</code> folder</p>
+        <p>• Check file name spelling and case</p>
+        <p>• Verify Flask app initialization includes template folder</p>
+        <div class="code-section">
+          <div class="code-label">Correct Structure</div>
+          <pre>app = Flask(__name__, template_folder='templates')</pre>
+        </div>
+      </div>
+
+      <h3>RegEx Debugging</h3>
+
+      <div class="tip-box">
+        <h5>💡 RegEx Testing Strategy</h5>
+        <p>• Use online tools: regex101.com, regexr.com</p>
+        <p>• Test patterns incrementally (build complexity gradually)</p>
+        <p>• Print intermediate results to debug extraction</p>
+        <div class="code-section">
+          <div class="code-label">Debug RegEx Pattern</div>
+          <pre>import re
+
+def debug_regex(pattern, text):
+    """Debug regex pattern with detailed output"""
+    print(f"Pattern: {pattern}")
+    print(f"Text: {text}")
+    
+    match = re.search(pattern, text)
+    if match:
+        print(f"Full match: '{match.group()}'")
+        for i, group in enumerate(match.groups(), 1):
+            print(f"Group {i}: '{group}'")
+    else:
+        print("No match found")
+    
+    # Test with findall for multiple matches
+    all_matches = re.findall(pattern, text)
+    print(f"All matches: {all_matches}")
+
+# Usage
+debug_regex(r'([A-Z][a-z]+)\s+(Airport)', 
+           "Beijing Capital Airport and Shanghai Pudong Airport")</pre>
+        </div>
+      </div>
+
+      <!-- FUTURE TROUBLESHOOTING AREA -->
+      <div class="future-section">
+        <h4>🔧 Additional Troubleshooting Topics</h4>
+        <p>Add solutions for database connectivity issues, deployment problems, performance optimization, memory errors</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= 6. FUTURE LEARNING AREAS ======= -->
+  <section class="section" id="future">
+    <div class="wrap">
+      <h2>🚀 Future Learning Areas</h2>
+      <p class="muted">Structured areas for expanding knowledge and skills</p>
+
+      <h3>Data Science & Analytics</h3>
+      <div class="future-section">
+        <h4>📊 Machine Learning</h4>
+        <p>Add notes on: scikit-learn, model training, evaluation metrics, feature engineering, data preprocessing</p>
+      </div>
+
+      <div class="future-section">
+        <h4>📈 Data Visualization</h4>
+        <p>Add tutorials for: matplotlib, seaborn, plotly, dashboard creation, interactive charts</p>
+      </div>
+
+      <h3>Web Development</h3>
+      <div class="future-section">
+        <h4>🌐 Advanced Flask</h4>
+        <p>Add content on: database integration, user authentication, API development, deployment strategies</p>
+      </div>
+
+      <div class="future-section">
+        <h4>⚛️ Frontend Technologies</h4>
+        <p>Add learning notes for: JavaScript, React, HTML/CSS advanced techniques, responsive design</p>
+      </div>
+
+      <h3>Database & SQL</h3>
+      <div class="future-section">
+        <h4>🗄️ Database Design</h4>
+        <p>Add tutorials on: SQL queries, database normalization, performance optimization, NoSQL databases</p>
+      </div>
+
+      <h3>Tools & Automation</h3>
+      <div class="future-section">
+        <h4>🔧 Development Tools</h4>
+        <p>Add guides for: Git version control, Docker containerization, CI/CD pipelines, testing frameworks</p>
+      </div>
+
+      <div class="future-section">
+        <h4>☁️ Cloud Platforms</h4>
+        <p>Add learning for: AWS, Azure, Google Cloud, serverless computing, cloud databases</p>
+      </div>
+
+      <h3>How to Add New Learning Sections</h3>
+      <div class="tip-box">
+        <h5>📝 Template for New Topics</h5>
+        <p>1. Create a new section with appropriate ID</p>
+        <p>2. Include: Overview, Installation/Setup, Core Concepts, Code Examples, Best Practices</p>
+        <p>3. Add practical examples and real-world use cases</p>
+        <p>4. Include troubleshooting section for common issues</p>
+        <p>5. Update table of contents with new section</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    © <span id="year"></span> Tanvir Bakther • Comprehensive Learning Reference
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    addEventListener('scroll', () => {
+      if (scrollY > 80) navbar.classList.add('scrolled'); 
+      else navbar.classList.remove('scrolled');
+    });
+
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Copy code functionality (optional enhancement)
+    document.querySelectorAll('.code-section').forEach(section => {
+      const pre = section.querySelector('pre');
+      if (pre) {
+        section.style.position = 'relative';
+        const copyBtn = document.createElement('button');
+        copyBtn.textContent = 'Copy';
+        copyBtn.style.cssText = `
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          background: #d4af37;
+          color: #000;
+          border: none;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          cursor: pointer;
+        `;
+        
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(pre.textContent).then(() => {
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+          });
+        });
+        
+        section.appendChild(copyBtn);
+      }
+    });
+  </script>
+</body>
+</html>
