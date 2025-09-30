@@ -24,8 +24,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://cdn.myportfolio.com">
+  <link rel="stylesheet" href="assets/styles.css">
 
-  <link rel="icon" href="https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/6ef70278-e082-48dc-9e99-54856d1ce22f_carw_1x1x32.jpg?h=d223fd7852360d3049f319f2abe71902" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
 
   <script type="application/ld+json">
   {
@@ -65,13 +67,6 @@
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Reset and Base Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     html {
       scroll-behavior: smooth;
     }
@@ -92,18 +87,6 @@
     *:focus-visible {
       outline: 2px solid var(--brand);
       outline-offset: 2px;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
     }
 
     /* Custom Scrollbar */
