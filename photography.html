@@ -5,224 +5,257 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tanvir Bakther — Photography Portfolio | Travel, Wildlife, Nature & Landscape Photography</title>
 
-  <meta name="description" content="Explore Tanvir Bakther's photography portfolio featuring travel photography from Istanbul, Bangladesh, Florida, wildlife photography, nature shots, and architectural captures. Professional photographer showcasing work from around the world." />
-  <meta name="keywords" content="Tanvir Bakther, Photography, Travel Photography, Wildlife Photography, Nature Photography, Istanbul, Bangladesh, Florida, Portrait Photography, Landscape Photography" />
+  <meta name="description" content="Explore Tanvir Bakther's photography portfolio featuring travel photography from Istanbul, Bangladesh, Florida, wildlife photography, nature shots, and architectural captures." />
+  <meta name="keywords" content="Tanvir Bakther, Photography, Travel Photography, Wildlife Photography, Nature Photography, Istanbul, Bangladesh, Florida" />
   <meta name="author" content="Tanvir Bakther" />
-  <meta name="robots" content="index, follow" />
-
-  <meta property="og:title" content="Tanvir Bakther - Photography Portfolio" />
-  <meta property="og:description" content="Professional photography portfolio featuring travel, wildlife, and nature photography from around the world" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://bakthertanvir.com/photography" />
-  <meta property="og:image" content="https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/9f46056d-3c53-4422-9041-0eeaa2681229_rwc_0x192x3840x2164x32.jpg?h=be9edad25eb94d7f0c276a5c12ba25a1" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Tanvir Bakther - Photography Portfolio" />
-  <meta name="twitter:description" content="Travel, wildlife, and nature photography from around the world" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://cdn.myportfolio.com">
-  <link rel="stylesheet" href="assets/styles.css">
-
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="apple-touch-icon" href="assets/favicon.svg">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    "name": "Tanvir Bakther Photography Portfolio",
-    "description": "Professional photography portfolio featuring travel, wildlife, and nature photography",
-    "author": {
-      "@type": "Person",
-      "name": "Tanvir Bakther"
-    },
-    "url": "https://bakthertanvir.com/photography"
-  }
-  </script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <style>
-    /* CSS Custom Properties for Consistent Branding */
+    /* ========================================
+       UNIFIED DESIGN SYSTEM - Tanvir Bakther
+       ======================================== */
+    
+    *{margin:0;padding:0;box-sizing:border-box}
+    
     :root {
-      --bg: #0a0a0b;
-      --bg-soft: #111113;
-      --text: #eaeaea;
-      --muted: #9aa0a6;
-      --brand: #58a6ff;
-      --card: #151517;
-      --chip: #1f1f23;
-      --accent: #6366f1;
-      --accent-glow: rgba(99,102,241,0.3);
-      --accent-soft: #8b5cf6;
-      --shadow: 0 8px 32px rgba(0,0,0,.3);
-      --shadow-lg: 0 20px 60px rgba(0,0,0,.4);
-      --glass: rgba(255,255,255,0.08);
-      --glass-border: rgba(255,255,255,0.15);
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      --border-radius: 20px;
+      /* Primary Palette - Warm Gold */
+      --gold-100: #f5e6c8;
+      --gold-200: #e6d5a8;
+      --gold-300: #c2b49b;
+      --gold-400: #ca9a4e;
+      --gold-500: #ad8546;
+      --gold-600: #8a6b38;
+      --gold-700: #5e4211;
+      
+      /* Dark Palette */
+      --dark-100: #1a1512;
+      --dark-200: #110a08;
+      --dark-300: #0d0806;
+      --dark-400: #080403;
+      --dark-500: #050302;
+      
+      /* Accent Colors */
+      --accent-blue: #58a6ff;
+      --accent-purple: #6366f1;
+      --accent-green: #22c55e;
+      
+      /* Semantic Colors */
+      --text-primary: var(--gold-300);
+      --text-secondary: rgba(194,180,155,0.8);
+      --text-muted: rgba(194,180,155,0.6);
+      --bg-primary: var(--dark-400);
+      --bg-secondary: var(--dark-300);
+      --border-color: rgba(94,66,17,0.4);
+      --border-hover: rgba(202,154,78,0.6);
+      
+      /* Effects */
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.2);
+      --shadow-md: 0 8px 24px rgba(94,66,17,0.2);
+      --shadow-lg: 0 12px 40px rgba(94,66,17,0.3);
+      --glass: rgba(8,4,3,0.85);
+      --glass-border: rgba(94,66,17,0.3);
+      
+      /* Spacing */
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      
+      /* Transitions */
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
+    
     html {
       scroll-behavior: smooth;
     }
-
+    
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
       line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
       overflow-x: hidden;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(99,102,241,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(139,92,246,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(59,130,246,0.05) 0%, transparent 50%);
-    }
-
-    /* Accessibility Improvements */
-    *:focus-visible {
-      outline: 2px solid var(--brand);
-      outline-offset: 2px;
+      padding-top: 80px;
     }
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent-soft); }
+    ::-webkit-scrollbar-track { background: var(--dark-400); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-600); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-500); }
 
-    /* Enhanced Typography */
+    /* Accessibility */
+    *:focus-visible {
+      outline: 2px solid var(--gold-400);
+      outline-offset: 2px;
+    }
+    
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
     a {
-      color: var(--brand);
+      color: var(--gold-400);
       text-decoration: none;
       transition: var(--transition);
     }
 
-    a:hover, a:focus {
-      color: var(--accent);
-      text-decoration: none;
+    a:hover {
+      color: var(--gold-300);
     }
 
-    /* Layout Container */
+    /* ========================================
+       NAVBAR
+       ======================================== */
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      background: rgba(8,4,3,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+    
+    .navbar::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(202,154,78,0.4), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .navbar:hover::after {
+      opacity: 1;
+    }
+    
+    .navbar.scrolled {
+      background: rgba(8,4,3,0.98);
+      padding: 14px 50px;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .nav-container {
+      max-width: 1400px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold-400);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .logo:hover {
+      color: var(--gold-300);
+      transform: scale(1.02);
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 35px;
+    }
+    
+    .nav-menu a {
+      color: var(--text-primary);
+      text-decoration: none;
+      position: relative;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-500));
+      transition: width 0.3s ease;
+    }
+    
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--gold-400);
+    }
+    
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .mobile-toggle span {
+      width: 25px;
+      height: 2px;
+      background: var(--gold-400);
+      transition: 0.3s;
+    }
+
+    .mobile-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
     .wrap {
       max-width: 1200px;
       margin: auto;
       padding: 20px 24px;
     }
 
-    /* Enhanced Header */
-    header.site {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: saturate(180%) blur(20px);
-      background: rgba(10,10,11,0.9);
-      border-bottom: 1px solid var(--glass-border);
-      transition: var(--transition);
-      animation: slideIn 0.8s ease-out;
-    }
-
-    header.site::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, var(--accent-glow) 50%, transparent 100%);
-      height: 1px;
-      bottom: 0;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    header.site:hover::before {
-      opacity: 1;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      animation: fadeInUp 0.6s ease;
-    }
-
-    .brand h1 {
-      font-size: 22px;
-      margin: 0;
-      letter-spacing: -0.5px;
-      font-weight: 700;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: var(--transition);
-    }
-
-    .brand h1:hover {
-      transform: scale(1.05);
-    }
-
-    nav.menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-      animation: fadeInUp 0.8s ease;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 50px;
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-      font-weight: 500;
-      position: relative;
-      overflow: hidden;
-      font-size: 14px;
-    }
-
-    .chip::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-1);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 50px;
-    }
-
-    .chip:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--accent);
-    }
-
-    .chip:hover::before {
-      opacity: 0.1;
-    }
-
-    .chip.active {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 0 30px var(--accent-glow);
-      animation: glow 2s ease-in-out infinite;
-    }
-
-    /* Hero Section */
+    /* ========================================
+       HERO SECTION
+       ======================================== */
     .hero-section {
       padding: 60px 0 40px;
       text-align: center;
-      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 100%);
-      border-radius: var(--border-radius);
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--dark-300) 100%);
+      border-radius: var(--radius-lg);
       margin-bottom: 40px;
       position: relative;
       overflow: hidden;
@@ -231,35 +264,31 @@
     .hero-section::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="%2358a6ff" opacity="0.3"/><circle cx="75" cy="45" r="1.5" fill="%236366f1" opacity="0.4"/><circle cx="50" cy="75" r="1" fill="%2358a6ff" opacity="0.2"/></svg>');
-      animation: float 15s ease-in-out infinite;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(202,154,78,0.08), transparent 60%);
       pointer-events: none;
     }
 
     .hero-title {
+      font-family: 'Playfair Display', serif;
       font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: 20px;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--gold-400);
       animation: fadeInUp 0.8s ease;
     }
 
     .hero-subtitle {
-      font-size: 1.2rem;
-      color: var(--muted);
+      font-size: 1.1rem;
+      color: var(--text-secondary);
       max-width: 600px;
       margin: 0 auto 30px;
       animation: fadeInUp 1s ease 0.2s both;
     }
 
-    /* Statistics Section */
+    /* ========================================
+       STATISTICS
+       ======================================== */
     .stats {
       display: flex;
       justify-content: center;
@@ -270,34 +299,36 @@
 
     .stat {
       text-align: center;
-      padding: 20px;
+      padding: 20px 30px;
       background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
       transition: var(--transition);
     }
 
     .stat:hover {
       transform: translateY(-4px);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-hover);
     }
 
     .stat-number {
       font-size: 2rem;
       font-weight: 700;
-      color: var(--brand);
+      color: var(--gold-400);
       display: block;
       margin-bottom: 8px;
     }
 
     .stat-label {
-      color: var(--muted);
+      color: var(--text-muted);
       font-weight: 500;
       font-size: 0.9rem;
     }
 
-    /* Enhanced Toolbar */
+    /* ========================================
+       TOOLBAR
+       ======================================== */
     .toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -307,11 +338,9 @@
       margin: 24px 0;
       padding: 20px;
       background: var(--glass);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      animation: fadeInUp 0.8s ease;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
     }
 
     .search {
@@ -326,7 +355,7 @@
       left: 16px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--muted);
+      color: var(--text-muted);
       z-index: 1;
       pointer-events: none;
     }
@@ -334,23 +363,22 @@
     .search input {
       width: 100%;
       padding: 14px 16px 14px 48px;
-      border-radius: 12px;
-      border: 1px solid var(--glass-border);
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-      color: var(--text);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background: rgba(8,4,3,0.6);
+      color: var(--text-primary);
       font-size: 14px;
       transition: var(--transition);
     }
 
     .search input:focus {
       outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent-glow);
+      border-color: var(--gold-500);
+      box-shadow: 0 0 20px rgba(173,133,70,0.2);
     }
 
     .search input::placeholder {
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
     .view-controls {
@@ -362,9 +390,9 @@
     .view-btn {
       padding: 10px 12px;
       background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 8px;
-      color: var(--muted);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
       cursor: pointer;
       transition: var(--transition);
       font-size: 16px;
@@ -372,9 +400,9 @@
 
     .view-btn.active,
     .view-btn:hover {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
+      background: var(--gold-500);
+      color: var(--gold-100);
+      border-color: var(--gold-500);
     }
 
     .cta-row {
@@ -384,53 +412,75 @@
       align-items: center;
     }
 
+    /* ========================================
+       BUTTONS
+       ======================================== */
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--gradient-1);
-      border: none;
+      background: var(--glass);
+      border: 1px solid var(--gold-500);
       padding: 12px 20px;
-      border-radius: 12px;
-      color: white;
-      font-weight: 600;
+      border-radius: var(--radius-md);
+      color: var(--gold-400);
+      font-weight: 500;
       cursor: pointer;
       transition: var(--transition);
       text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      font-size: 14px;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3), transparent 70%);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
+      font-size: 13px;
+      letter-spacing: 0.05em;
     }
 
     .btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: var(--shadow-lg), 0 0 30px var(--accent-glow);
+      background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
+      color: var(--gold-100);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
-    .btn:hover::before {
-      transform: translateX(100%);
-    }
-
-    /* Enhanced Filter Chips */
+    /* ========================================
+       FILTER CHIPS
+       ======================================== */
     .filters {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin: 20px 0;
-      animation: fadeInUp 1s ease;
       justify-content: center;
     }
 
-    /* Enhanced Grid */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 50px;
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .chip:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-400);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chip.active {
+      background: var(--gold-500);
+      color: var(--gold-100);
+      border-color: var(--gold-400);
+      box-shadow: 0 0 20px rgba(202,154,78,0.3);
+    }
+
+    /* ========================================
+       GRID
+       ======================================== */
     .grid {
       display: grid;
       gap: 24px;
@@ -440,7 +490,6 @@
 
     .grid.masonry {
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      /* The magic row height for JS-powered masonry */
       grid-auto-rows: 10px;
     }
 
@@ -451,41 +500,26 @@
       margin-right: auto;
     }
 
-    /* Enhanced Photography Cards */
+    /* ========================================
+       CARDS
+       ======================================== */
     .card {
       background: var(--glass);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+      transition: var(--transition);
       position: relative;
       cursor: pointer;
       animation: fadeInScale 0.6s ease;
       animation-fill-mode: both;
-      /* Remove fixed height to allow for masonry */
       align-self: start;
     }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-1);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      border-radius: var(--border-radius);
-      z-index: 1;
-    }
-
     .card:hover {
-      transform: translateY(-12px) rotateX(5deg);
-      box-shadow: var(--shadow-lg), 0 0 50px var(--accent-glow);
-      border-color: var(--accent);
-    }
-
-    .card:hover::before {
-      opacity: 0.05;
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-hover);
     }
 
     .grid.list .card {
@@ -495,50 +529,45 @@
     }
 
     .grid.list .card:hover {
-      transform: translateY(-4px) rotateX(0deg);
+      transform: translateY(-4px);
     }
 
-    .card .thumb {
+    .thumb {
       position: relative;
-      /* Aspect-ratio is handled dynamically by JS for masonry, but kept as fallback */
-      aspect-ratio: 16/10;
-      background: #0a0a0a;
       overflow: hidden;
       display: block;
     }
 
-    .grid.list .card .thumb {
-      width: 50%;
-      height: 300px;
-      aspect-ratio: unset;
+    .grid.masonry .thumb {
+      aspect-ratio: auto;
     }
 
-    .card img {
+    .grid.list .thumb {
+      width: 40%;
+      aspect-ratio: 16/9;
+    }
+
+    .thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+      transition: 0.5s ease;
     }
 
-    .card:hover img {
-      transform: scale(1.1) rotate(1deg);
-    }
-
-    .grid.list .card:hover img {
-      transform: scale(1.05) rotate(0deg);
+    .card:hover .thumb img {
+      transform: scale(1.08);
     }
 
     .photo-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 60%);
+      background: linear-gradient(180deg, transparent 40%, rgba(8,4,3,0.9) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
       opacity: 0;
       transition: var(--transition);
-      display: flex;
-      align-items: end;
-      padding: 20px;
-      z-index: 2;
     }
 
     .card:hover .photo-overlay {
@@ -546,106 +575,100 @@
     }
 
     .photo-info {
-      color: white;
+      color: var(--gold-100);
     }
 
-    .photo-info .photo-title {
+    .photo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
-    .photo-info .photo-tags {
-      font-size: 12px;
-      opacity: 0.8;
+    .photo-tags {
+      font-size: 0.85rem;
+      color: var(--gold-300);
     }
 
-    .card .body {
+    .body {
       padding: 20px;
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
-    .grid.list .card .body {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .grid.list .body {
+      width: 60%;
+      padding: 25px;
     }
 
-    .card .body .title {
+    .title {
+      font-family: 'Playfair Display', serif;
       font-weight: 600;
-      margin: 0 0 8px 0;
-      font-size: 16px;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin: 0 0 10px;
+      font-size: 1.1rem;
       line-height: 1.4;
+      color: var(--gold-500);
     }
 
-    .card .meta {
+    .meta {
       font-size: 13px;
-      color: var(--muted);
+      color: var(--text-muted);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      gap: 8px;
     }
 
     .location-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: var(--accent);
-      color: white;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 500;
+      color: var(--gold-400);
     }
 
-    /* Enhanced Lightbox */
-    dialog#lightbox {
+    /* ========================================
+       LIGHTBOX
+       ======================================== */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(5,3,2,0.95);
+      backdrop-filter: blur(20px);
       border: none;
-      border-radius: var(--border-radius);
       padding: 0;
-      max-width: min(95vw,1200px);
-      background: var(--card);
-      backdrop-filter: blur(30px);
-      box-shadow: var(--shadow-lg);
-      animation: fadeInScale 0.4s ease;
+      max-width: 100vw;
+      max-height: 100vh;
+      width: 100%;
+      height: 100%;
     }
 
-    dialog::backdrop {
-      background: rgba(0,0,0,0.9);
-      backdrop-filter: blur(8px);
-      animation: fadeIn 0.4s ease;
+    #lightbox::backdrop {
+      background: rgba(5,3,2,0.9);
     }
 
     .lightbox-content {
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 20px;
     }
 
     .lightbox-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: var(--border-radius) var(--border-radius) 0 0;
-      transition: transform 0.3s ease;
-      max-height: 70vh;
+      flex: 1;
+      max-width: 100%;
+      max-height: calc(100vh - 120px);
       object-fit: contain;
+      margin: 0 auto;
+      display: block;
+      border-radius: var(--radius-md);
     }
 
     .lightbox-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 24px;
+      padding: 20px;
+      margin-top: 20px;
       background: var(--glass);
-      backdrop-filter: blur(20px);
-      color: var(--text);
-      border-radius: 0 0 var(--border-radius) var(--border-radius);
-      border-top: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
     }
 
     .lightbox-info {
@@ -653,83 +676,77 @@
     }
 
     .lightbox-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
       font-weight: 600;
-      font-size: 18px;
-      margin-bottom: 4px;
+      color: var(--gold-400);
+      margin-bottom: 5px;
     }
 
     .lightbox-meta {
-      font-size: 14px;
-      color: var(--muted);
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
     .lightbox-controls {
       display: flex;
-      gap: 12px;
-      align-items: center;
+      gap: 10px;
     }
 
     .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       background: var(--glass);
-      border: 1px solid var(--glass-border);
-      color: var(--text);
-      padding: 8px 12px;
-      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      color: var(--gold-400);
+      font-size: 20px;
       cursor: pointer;
       transition: var(--transition);
-      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .lightbox-nav:hover {
-      background: var(--accent);
-      color: white;
+    .lightbox-nav:hover:not(:disabled) {
+      background: var(--gold-500);
+      color: var(--gold-100);
+      border-color: var(--gold-400);
     }
 
     .lightbox-nav:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
     }
 
     .lightbox-close {
-      background: var(--accent);
+      padding: 12px 20px;
+      background: var(--gold-500);
       border: none;
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
-      padding: 10px 16px;
-      border-radius: 8px;
+      color: var(--gold-100);
+      border-radius: var(--radius-sm);
       font-weight: 600;
+      cursor: pointer;
       transition: var(--transition);
     }
 
     .lightbox-close:hover {
-      background: var(--accent-soft);
-      transform: scale(1.05);
+      background: var(--gold-400);
     }
 
-    /* Enhanced Sections */
+    /* ========================================
+       SECTIONS
+       ======================================== */
     section {
       margin: 60px 0;
-      animation: fadeInUp 0.8s ease;
-      animation-fill-mode: both;
-    }
-
-    section:nth-child(even) {
-      animation-delay: 0.2s;
-    }
-
-    section:nth-child(odd) {
-      animation-delay: 0.4s;
     }
 
     section h2 {
-      font-size: clamp(1.8rem,4vw,2.5rem);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
       margin: 0 0 16px 0;
-      font-weight: 700;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+      color: var(--gold-400);
       position: relative;
     }
 
@@ -740,13 +757,13 @@
       left: 0;
       width: 60px;
       height: 3px;
-      background: var(--gradient-1);
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-600));
       border-radius: 2px;
     }
 
     section p {
-      color: var(--muted);
-      font-size: 16px;
+      color: var(--text-secondary);
+      font-size: 1rem;
       line-height: 1.7;
     }
 
@@ -754,7 +771,7 @@
     .no-results {
       text-align: center;
       padding: 60px 20px;
-      color: var(--muted);
+      color: var(--text-muted);
       display: none;
     }
 
@@ -763,12 +780,15 @@
     }
 
     .no-results h3 {
+      font-family: 'Playfair Display', serif;
       font-size: 1.5rem;
       margin-bottom: 10px;
-      color: var(--text);
+      color: var(--gold-400);
     }
 
-    /* Enhanced Footer */
+    /* ========================================
+       FOOTER
+       ======================================== */
     footer {
       margin: 80px 0 40px;
       border-top: 1px solid var(--glass-border);
@@ -785,16 +805,15 @@
       transform: translateX(-50%);
       width: 100px;
       height: 1px;
-      background: var(--gradient-1);
+      background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
     }
 
     .pill {
       background: var(--glass);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
+      border: 1px solid var(--border-color);
       border-radius: 50px;
       padding: 6px 14px;
-      color: var(--accent);
+      color: var(--gold-400);
       font-weight: 500;
       display: inline-block;
       margin-top: 12px;
@@ -802,17 +821,18 @@
     }
 
     .pill:hover {
-      background: var(--accent);
-      color: white;
+      background: var(--gold-500);
+      color: var(--gold-100);
       transform: translateY(-2px);
-      box-shadow: var(--shadow);
     }
 
     .muted {
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
-    /* Animations */
+    /* ========================================
+       ANIMATIONS
+       ======================================== */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -825,25 +845,13 @@
 
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
     }
 
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
-      50% { box-shadow: 0 0 40px var(--accent-glow), 0 0 60px var(--accent-glow); }
+    .floating {
+      animation: float 4s ease-in-out infinite;
     }
 
-    @keyframes slideIn {
-      from { transform: translateX(-100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* Scroll Animations */
     .scroll-reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -855,18 +863,55 @@
       transform: translateY(0);
     }
 
-    /* Enhanced Responsiveness */
+    /* Card Animation Delays */
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.15s; }
+    .card:nth-child(3) { animation-delay: 0.2s; }
+    .card:nth-child(4) { animation-delay: 0.25s; }
+    .card:nth-child(5) { animation-delay: 0.3s; }
+    .card:nth-child(6) { animation-delay: 0.35s; }
+    .card:nth-child(7) { animation-delay: 0.4s; }
+    .card:nth-child(8) { animation-delay: 0.45s; }
+
+    /* ========================================
+       RESPONSIVE DESIGN
+       ======================================== */
     @media (max-width: 768px) {
-      .brand {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+      body {
+        padding-top: 70px;
       }
 
-      nav.menu {
-        margin-top: 12px;
-        justify-content: center;
-        width: 100%;
+      .navbar {
+        padding: 16px 20px;
+      }
+
+      .mobile-toggle {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 280px;
+        height: calc(100vh - 70px);
+        background: rgba(8,4,3,0.98);
+        backdrop-filter: blur(20px);
+        border-left: 1px solid var(--glass-border);
+        flex-direction: column;
+        padding: 30px 20px;
+        gap: 25px;
+        transition: right 0.4s ease;
+        z-index: 999;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-menu a {
+        font-size: 13px;
+        padding: 12px 0;
       }
 
       .toolbar {
@@ -898,17 +943,8 @@
         padding: 16px 20px;
       }
 
-      .card:hover {
-        transform: translateY(-8px);
-      }
-
-      section {
-        margin: 40px 0;
-      }
-
       .stats {
         gap: 20px;
-        justify-content: center;
       }
 
       .cta-row {
@@ -933,12 +969,12 @@
       }
 
       .chip {
-        font-size: 13px;
+        font-size: 12px;
         padding: 8px 14px;
       }
 
       .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
 
       .stats {
@@ -948,41 +984,9 @@
       }
     }
 
-    /* Card Animation Delays */
-    .card:nth-child(1) { animation-delay: 0.1s; }
-    .card:nth-child(2) { animation-delay: 0.2s; }
-    .card:nth-child(3) { animation-delay: 0.3s; }
-    .card:nth-child(4) { animation-delay: 0.4s; }
-    .card:nth-child(5) { animation-delay: 0.5s; }
-    .card:nth-child(6) { animation-delay: 0.6s; }
-    .card:nth-child(7) { animation-delay: 0.7s; }
-    .card:nth-child(8) { animation-delay: 0.8s; }
-
-    /* Floating Elements */
-    .floating {
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .floating:nth-child(2n) {
-      animation-delay: -2s;
-    }
-
-    .floating:nth-child(3n) {
-      animation-delay: -4s;
-    }
-
-    /* High contrast mode support */
-    @media (prefers-contrast: high) {
-      .card {
-        border-width: 2px;
-      }
-    }
-
     /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
@@ -994,23 +998,28 @@
 <body>
   <a href="#main-content" class="sr-only">Skip to main content</a>
 
-  <header class="site">
-    <div class="wrap brand">
-      <h1 class="floating">Tanvir Bakther</h1>
-      <nav class="menu" aria-label="Primary navigation">
-        <a class="chip" href="index.html">Home</a>
-        <a class="chip" href="#photography" aria-current="page">Photography</a>
-        <a class="chip" href="analytics.html">Analytics</a>
-        <a class="chip" href="#travel">Travel</a>
-        <a class="chip" href="blog.html">Everyday Learning</a>
-        <a class="chip" href="/contact">Contact</a>
-      </nav>
+  <!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">Tanvir Bakther</a>
+      <div class="mobile-toggle" id="mobile-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link active" href="photography.html">Photography</a></li>
+        <li><a class="nav-link" href="analytics.html">Analytics</a></li>
+        <li><a class="nav-link" href="blog.html">Everyday Learning</a></li>
+        <li><a class="nav-link" href="index.html#contact">Contact</a></li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
   <main id="main-content" class="wrap">
     <section class="hero-section scroll-reveal">
-      <h1 class="hero-title">Photography Portfolio</h1>
+      <h1 class="hero-title">Capturing Moments</h1>
       <p class="hero-subtitle">
         Capturing life's beautiful moments through travel, wildlife, nature, and street photography.
         From the beaches of Bangladesh to the bustling streets of Istanbul, explore the world through my lens.
@@ -1031,7 +1040,7 @@
         </div>
         <div class="stat">
           <span class="stat-number" id="current-showing">0</span>
-          <div class="stat-label">Currently Showing</div>
+          <div class="stat-label">Showing</div>
         </div>
       </div>
     </section>
@@ -1042,7 +1051,7 @@
         <input
           id="q"
           type="search"
-          placeholder="Search photos by location, subject, or style… (e.g., Istanbul, Gorilla, beach)"
+          placeholder="Search photos by location, subject, or style…"
           aria-label="Search photography portfolio"
         />
       </div>
@@ -1051,7 +1060,7 @@
         <button class="view-btn" data-view="list" title="List view" aria-label="List view">☰</button>
       </div>
       <div class="cta-row">
-        <a class="btn floating" href="/analytics.html">📊 Analytics</a>
+        <a class="btn floating" href="analytics.html">📊 Analytics</a>
         <a class="btn floating" href="#travel">🌍 Travel Stories</a>
       </div>
     </section>
@@ -1066,25 +1075,10 @@
       </div>
 
       <div class="grid masonry" id="grid"></div>
-    </section>
-
-    <section id="analytics" class="scroll-reveal">
-      <h2>Analytics Projects</h2>
-      <p class="muted">A growing collection of data projects and dashboards. <a href="/analytics.html">See more →</a></p>
-    </section>
-
-    <section id="travel" class="scroll-reveal">
-      <h2>Travel</h2>
-      <p class="muted">Stories and frames from London, Istanbul, Bangladesh, Florida, Georgia, and more. Documenting cultures, landscapes, and moments from around the world.</p>
-    </section>
-
-    <section id="blog" class="scroll-reveal">
-      <h2>Everyday Learning</h2>
-      <p class="muted">Daily notes on learning, photography techniques, gear reviews, and creative process insights.</p>
-    </section>
+   
 
     <footer class="scroll-reveal">
-      <p class="muted">© <span id="y"></span> Tanvir Bakther <span class="pill floating">Life long learner</span></p>
+      <p class="muted">© <span id="y"></span> Tanvir Bakther <span class="pill floating">Lifelong learner</span></p>
     </footer>
   </main>
 
@@ -1106,24 +1100,24 @@
   </dialog>
 
   <script>
-    // Enhanced Photography Data with better categorization
+    // Photography Data
     const items = [
-        {
+      {
         title: "Cox's Bazar, Bangladesh",
         year: 2025,
         tags: ["beach", "Bangladesh", "travel", "landscape"],
         location: "Bangladesh",
         category: "Travel",
-        href: "/coxs-bazar-bangladesh",
+        href: "#",
         img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1e02822a-d410-43b7-b1dd-3791309ff49f_rw_1920.jpg?h=25bc70e64cf71013e06f1ce5f64c36b6"
       },
       {
-        title: "Bosphorus Strait, Istanbul, Turkey",
+        title: "Bosphorus Strait, Istanbul",
         year: 2025,
         tags: ["Istanbul", "water", "bridge", "travel", "architecture"],
         location: "Turkey",
         category: "Travel",
-        href: "/bosphorus-straitistanbulturkey",
+        href: "#",
         img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/479add1a-32a1-4a03-aca7-9cac5f58d18a_rw_1920.jpg?h=8efad2c6e1cf469dee81b97c8078975f"
       },
       {
@@ -1132,7 +1126,7 @@
         tags: ["Istanbul", "city", "travel", "urban"],
         location: "Turkey",
         category: "Urban",
-        href: "/citi-of-istanbulturkey",
+        href: "#",
         img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/a8200412-67eb-40ce-b0e0-7d95585abd5e_rw_1920.jpg?h=a5783aec77e82c0e1e2006ad72176100"
       },
       {
@@ -1141,39 +1135,43 @@
         tags: ["Istanbul", "architecture", "travel", "heritage"],
         location: "Turkey",
         category: "Architecture",
-        href: "/hagia-sophia-and-blue-mosque",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/35fce0f9-231e-4a06-9f09-a725ea881f86_rw_1920.jpg?h=b1e68a3aa0ab7e43fa356881a5a58922"},
+        href: "#",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/35fce0f9-231e-4a06-9f09-a725ea881f86_rw_1920.jpg?h=b1e68a3aa0ab7e43fa356881a5a58922"
+      },
       {
-        title: "Big Talbot Island, Jacksonville, Florida",
+        title: "Big Talbot Island, Florida",
         year: 2024,
         tags: ["Florida", "beach", "USA", "travel", "nature"],
         location: "USA",
         category: "Nature",
-        href: "/big-talbot-island-jacksonville-florida",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e5ab94fa-0f24-4afa-b6d0-90f80e7069a4_rw_1920.jpg?h=b97ee49a46634766a30c9aaa871b1bce"},
+        href: "#",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e5ab94fa-0f24-4afa-b6d0-90f80e7069a4_rw_1920.jpg?h=b97ee49a46634766a30c9aaa871b1bce"
+      },
       {
         title: "Crescent Beach, Florida",
         year: 2024,
         tags: ["Florida", "beach", "USA", "sunset"],
         location: "USA",
         category: "Landscape",
-        href: "/crescent-beach-florida",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/c8e6c1d9-5bbc-4f46-8896-1a06fccf2005_rw_1920.jpg?h=f8b2b9091c38c26956b7ec38965a9cb4"},
+        href: "#",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/c8e6c1d9-5bbc-4f46-8896-1a06fccf2005_rw_1920.jpg?h=f8b2b9091c38c26956b7ec38965a9cb4"
+      },
       {
-        title: "A Snowy Day (Atlanta)",
+        title: "A Snowy Day in Atlanta",
         year: 2024,
         tags: ["Atlanta", "weather", "USA", "winter"],
         location: "USA",
         category: "Weather",
-        href: "/snow-storm-in-atlanta",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b025a2b7-7ea3-4382-af2b-371084920a5d_rw_3840.JPG?h=13259a471dcad2b2bcf3e4990e8602bc"},
+        href: "#",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b025a2b7-7ea3-4382-af2b-371084920a5d_rw_3840.JPG?h=13259a471dcad2b2bcf3e4990e8602bc",
+      },
       {
         title: "Western Lowland Gorilla",
         year: 2024,
         tags: ["animals", "gorilla", "zoo", "wildlife"],
         location: "Zoo",
         category: "Wildlife",
-        href: "/western-lowland-gorilla",
+        href: "#",
         img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ec2845f1-2b30-47eb-bc1f-1b62595eb6a7_rw_1920.jpg?h=2410794d7f7b4c38b0b3c6adf0c9a60d"
       },
       {
@@ -1182,7 +1180,7 @@
         tags: ["animals", "meerkat", "wildlife"],
         location: "Zoo",
         category: "Wildlife",
-        href: "/meerkat",
+        href: "#",
         img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/099bcd1d-0e2b-48c1-aee5-480aea5ed774_rw_1920.jpg?h=aeab83aaf8480131523a9a08e3ac0395"
       },
       {
@@ -1191,52 +1189,17 @@
         tags: ["fish", "macro", "aquatic"],
         location: "Aquarium",
         category: "Macro",
-        href: "/piranha",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/da784ccb-bee0-467b-bcb2-fdb2a6e51bdf_rw_1920.jpg?h=9218c6f2073b9638932fba7555408f6e"},
+        href: "#",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/da784ccb-bee0-467b-bcb2-fdb2a6e51bdf_rw_1920.jpg?h=9218c6f2073b9638932fba7555408f6e"
+      },
       {
         title: "Dragonfly",
         year: 2024,
         tags: ["macro", "nature", "insects"],
         location: "Garden",
         category: "Macro",
-        href: "/dragonfly",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d34705b4-59b9-4454-bb8f-b8f69d8471c4_carw_16x9x32.jpg?h=3575dddf010c055b082a7b4bb15b3007"
-      },
-      {
-        title: "Glass Frog",
-        year: 2024,
-        tags: ["nature", "frog", "wildlife"],
-        location: "Nature Reserve",
-        category: "Wildlife",
-        href: "/glass-frog",
-        img: "#https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/8e32c42e-c109-419c-bd90-a4790c2651ab_carw_16x9x32.jpg?h=6dc446b0007edb7739a029ee88eca58b"
-      },
-      {
-        title: "Sunrise in London, United Kingdom",
-        year: 2024,
-        tags: ["London", "sunrise", "travel", "urban"],
-        location: "UK",
-        category: "Travel",
-        href: "/sunrise-in-london-united-kingdom",
-        img: "#https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b05f337e-29b0-4640-a414-72ce433ae8b8_carw_16x9x32.jpg?h=f6275694cfc4d560558096c1a4f43db2"
-      },
-      {
-        title: "Hyacinth Macaw",
-        year: 2024,
-        tags: ["birds", "macaw", "animals", "colorful"],
-        location: "Zoo",
-        category: "Wildlife",
-        href: "/hyacinith-macaw",
-        img: "#https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e8dc13dc-3210-4d8b-bb86-b68a8a2c7642_rwc_334x288x1246x702x32.jpg?h=215ef5822fff25190260725b17674614"
-      },
-      {
-        title: "Graduation at Emory University",
-        year: 2024,
-        tags: ["Emory", "graduation", "event", "celebration"],
-        location: "USA",
-        category: "Events",
-        href: "/graduation-of-dc-emory-university",
-        img: "#https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/db5b551e-b452-4245-9c16-5ead46b21375_carw_16x9x32.jpg?h=f515e30f535b818695ac851b95092894"
+        href: "#",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/08848f02-5588-4438-9ddb-0d6f74321a0d_rw_1920.jpg?h=f2285060a32610ce7d44af4898f9f035"
       },
       {
         title: "Tybee Island Sunrise",
@@ -1244,12 +1207,63 @@
         tags: ["sunrise", "beach", "Georgia", "golden-hour"],
         location: "USA",
         category: "Landscape",
-        href: "/chasing-the-sunrise-in-tybee-island",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e2b30cdb-a7a9-49a1-955c-1a13c4b0bd01_rwc_0x96x1920x1082x32.jpg?h=3d55db7648d23c244cf0245f4f9ab902"
-      }
+        href: "#",
+        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/72b36ed5-bcef-49ca-841f-1a0f5b97a1bc_rw_1920.jpg?h=cfad32b1efef02afd90e3f07677d5b36"
+      },
+		{
+    title:"Sumatran Tiger",
+    year: 2024,
+    tags: [],
+	location:"USA",
+    href:"/sumatran-tiger",
+    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/fbc4f90c-1ae3-4ebe-bc34-a0a9fb253f60_rw_1920.jpg?h=27d4b6385265410db1cc33dd8dd3024c"
+  },
+  {
+    title:"Hyacinith Macaw",
+    year: 2024,
+    tags: ["macaw"],
+	 location:"USA", 
+    href:"/hyacinith-macaw",
+    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/2bdfc624-9c79-4c75-b104-018c8ced7adb_rw_1920.jpg?h=a7d2e9f154ba54022dfbcced7694c2f5"
+  },
+  
+  {
+    title:"Mr Grasshopper",
+    year: 2024,
+    tags: [],
+	  location:"USA",
+    href:"/mr-grasshopper",
+    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/4511bbfd-cb45-4802-a70a-6ad197b8ca73_rw_1920.jpg?h=495b6da004f564ef558d82d044c0e50d"
+  },
+
+  {
+    title:"Sandy Paws And Wagging Tails In Crescent Beach",
+    year: null,
+    tags: ["beach", "Florida"],
+	  location: "Florida",
+    href:"/sandy-paws-and-wagging-tails-in-crescent-beach",
+    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e6806fd0-ba02-42ca-b6cb-ae5734b9eafe_rw_1920.jpg?h=5231a97762f274cd8f31c327c38d6692"
+  },
+		{
+    title:"Glass Frog",
+    year: 2024,
+			location:"USA",
+    tags: [],
+    href:"/glass-frog",
+    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/3e907b02-1576-41ad-a004-91d5b91ea899_rw_1920.jpg?h=1068a2c51869c0e4659d39fb4843fbc0"
+  },
+		{
+    title:"Panda",
+    year: 2024,
+			location: "USA",
+    tags: [],
+    href:"/panda",
+    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/acda05b1-7665-40a6-80be-ea2b18ff60df_rw_1920.jpg?h=7edc77c7cdf3ea631b31519fb43cbc28"
+		}
+    
     ];
 
-    /** @type {object} Application State */
+    // State
     const state = {
       items: items,
       filteredItems: items,
@@ -1259,7 +1273,7 @@
       currentLightboxIndex: 0
     };
 
-    /** @type {object} Cached DOM Elements */
+    // DOM Elements
     const elements = {
       filters: document.getElementById('filters'),
       grid: document.getElementById('grid'),
@@ -1277,44 +1291,24 @@
       lightboxNext: document.getElementById('lb-next')
     };
 
-    /**
-     * Debounces a function to limit the rate at which it gets called.
-     * @param {Function} func The function to debounce.
-     * @param {number} wait The debounce duration in milliseconds.
-     * @returns {Function} The debounced function.
-     */
+    // Utilities
     function debounce(func, wait) {
       let timeout;
-      return function executedFunction(...args) {
-        const later = () => {
-          clearTimeout(timeout);
-          func(...args);
-        };
+      return function(...args) {
         clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
+        timeout = setTimeout(() => func(...args), wait);
       };
     }
 
-    /**
-     * Updates the portfolio statistics displayed in the hero section.
-     */
     function updateStats() {
-      if (!state.items.length) return;
-
       const uniqueLocations = new Set(state.items.map(item => item.location)).size;
       const uniqueCategories = new Set(state.items.map(item => item.category)).size;
-
       elements.totalPhotos.textContent = state.items.length;
       elements.locationsCount.textContent = uniqueLocations;
       elements.categoriesCount.textContent = uniqueCategories;
       elements.currentShowing.textContent = state.filteredItems.length;
     }
 
-    /**
-     * Creates a filter chip button element.
-     * @param {string} label The text label for the chip.
-     * @returns {HTMLButtonElement} The created chip element.
-     */
     function createChip(label) {
       const el = document.createElement('button');
       el.className = 'chip';
@@ -1327,12 +1321,6 @@
       return el;
     }
 
-    /**
-     * Creates a photography card element.
-     * @param {object} item The photo data item.
-     * @param {number} index The index of the item in the filtered list.
-     * @returns {HTMLElement} The created card element.
-     */
     function createCard(item, index) {
       const el = document.createElement('article');
       el.className = 'card';
@@ -1363,34 +1351,22 @@
       return el;
     }
 
-    /**
-     * Opens the lightbox modal with a specific photo.
-     * @param {number} index The index of the photo to display.
-     */
     function openLightbox(index) {
       state.currentLightboxIndex = index;
       const item = state.filteredItems[index];
-
       elements.lightboxImg.src = item.img;
       elements.lightboxImg.alt = item.title;
       elements.lightboxTitle.textContent = item.title;
       elements.lightboxMeta.textContent = `${item.year || 'Recent'} • ${item.location} • ${item.category}`;
-
       elements.lightboxPrev.disabled = index === 0;
       elements.lightboxNext.disabled = index === state.filteredItems.length - 1;
-
       elements.lightbox.showModal();
     }
 
-    /** Closes the lightbox modal. */
     function closeLightbox() {
       elements.lightbox.close();
     }
 
-    /**
-     * Navigates the lightbox to the previous or next photo.
-     * @param {number} direction -1 for previous, 1 for next.
-     */
     function navigateLightbox(direction) {
       const newIndex = state.currentLightboxIndex + direction;
       if (newIndex >= 0 && newIndex < state.filteredItems.length) {
@@ -1398,44 +1374,27 @@
       }
     }
 
-    /**
-     * Applies the masonry layout to the grid items.
-     * This function calculates the required row span for each card based on its content height.
-     */
     function applyMasonryLayout() {
-        if (state.currentView !== 'masonry' || !elements.grid) return;
-
-        const cards = elements.grid.querySelectorAll('.card');
-        cards.forEach(card => {
-            const img = card.querySelector('img');
-
-            // Function to calculate and apply the row span
-            const resizeCard = () => {
-                const rowHeight = 10; // Corresponds to grid-auto-rows in CSS
-                const rowGap = 24; // Corresponds to grid-gap in CSS
-
-                // Resetting the span allows the card to assume its natural height
-                card.style.gridRowEnd = 'auto';
-
-                // Calculate the span needed to encompass the card's full height plus the gap
-                const cardHeight = card.offsetHeight;
-                const span = Math.ceil((cardHeight + rowGap) / (rowHeight + rowGap));
-
-                card.style.gridRowEnd = `span ${span}`;
-            };
-
-            // If image is already loaded, resize immediately. Otherwise, wait for it to load.
-            if (img.complete) {
-                resizeCard();
-            } else {
-                img.addEventListener('load', resizeCard, { once: true });
-            }
-        });
+      if (state.currentView !== 'masonry' || !elements.grid) return;
+      const cards = elements.grid.querySelectorAll('.card');
+      cards.forEach(card => {
+        const img = card.querySelector('img');
+        const resizeCard = () => {
+          const rowHeight = 10;
+          const rowGap = 24;
+          card.style.gridRowEnd = 'auto';
+          const cardHeight = card.offsetHeight;
+          const span = Math.ceil((cardHeight + rowGap) / (rowHeight + rowGap));
+          card.style.gridRowEnd = `span ${span}`;
+        };
+        if (img.complete) {
+          resizeCard();
+        } else {
+          img.addEventListener('load', resizeCard, { once: true });
+        }
+      });
     }
 
-    /**
-     * Filters the items based on the current search term and active filters.
-     */
     function filterItems() {
       const term = state.searchTerm.toLowerCase().trim();
       state.filteredItems = state.items.filter(item => {
@@ -1450,41 +1409,6 @@
       });
     }
 
-    /**
-     * Updates the browser URL with the current search and filter state.
-     */
-    function updateURL() {
-      const params = new URLSearchParams();
-      if (state.searchTerm) {
-        params.set('q', state.searchTerm);
-      }
-      state.activeFilters.forEach(filter => {
-        params.append('filter', filter);
-      });
-      const newUrl = `${window.location.pathname}?${params.toString()}`;
-      window.history.replaceState({ path: newUrl }, '', newUrl);
-    }
-
-    /**
-     * Initializes the application state from the URL query parameters.
-     */
-    function initStateFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      const query = params.get('q');
-      const filters = params.getAll('filter');
-
-      if (query) {
-        state.searchTerm = query;
-        elements.search.value = query;
-      }
-      if (filters.length > 0) {
-        state.activeFilters = new Set(filters);
-      }
-    }
-
-    /**
-     * The main function to render the gallery based on the current state.
-     */
     function render() {
       filterItems();
 
@@ -1503,32 +1427,24 @@
           card.style.animationDelay = `${index * 0.05}s`;
           elements.grid.appendChild(card);
         });
-
-        // Use a short timeout to allow images to begin rendering before applying masonry
         setTimeout(applyMasonryLayout, 100);
       }
 
       updateStats();
-      updateURL();
     }
 
-    /**
-     * Initializes the entire application.
-     */
     function init() {
       const uniqueTags = [...new Set(items.flatMap(x => x.tags))].sort();
       const popularTags = ['travel', 'wildlife', 'nature', 'beach', 'architecture', 'macro'];
       const orderedTags = popularTags.concat(uniqueTags.filter(t => !popularTags.includes(t)));
-
       orderedTags.forEach(tag => elements.filters.appendChild(createChip(tag)));
 
       document.querySelectorAll('.view-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          const view = btn.getAttribute('data-view');
-          state.currentView = view;
-          elements.grid.className = `grid ${view}`;
+          state.currentView = btn.getAttribute('data-view');
+          elements.grid.className = `grid ${state.currentView}`;
           render();
         });
       });
@@ -1540,7 +1456,6 @@
 
       elements.lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
       elements.lightboxNext.addEventListener('click', () => navigateLightbox(1));
-
       elements.lightbox.addEventListener('click', e => e.target === elements.lightbox && closeLightbox());
 
       document.addEventListener('keydown', e => {
@@ -1555,26 +1470,44 @@
         }
       });
 
-      // Add a debounced resize listener for the masonry layout
       window.addEventListener('resize', debounce(applyMasonryLayout, 200));
 
-      initStateFromURL();
       render();
       document.getElementById('y').textContent = new Date().getFullYear();
     }
 
-    // --- Start Application ---
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Initialize
     document.addEventListener('DOMContentLoaded', () => {
-        init();
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('revealed');
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+      init();
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('revealed');
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
     });
   </script>
 </body>
-</html>
+</html><strong></strong>
