@@ -76,8 +76,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       background-image:
-        radial-gradient(circle at 20% 20%, rgba(88, 166, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
+       url("https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d8a1d898-62b9-4f05-bd12-85144c93e8e9_rw_1200.jpg?h=d7d3ea18a7d5fb46eea18c1a07604568") center/cover;
     }
 
     /* Accessibility Improvements */
@@ -122,9 +121,16 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(202,154,78,0.3), transparent);
+      background:url("https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d8a1d898-62b9-4f05-bd12-85144c93e8e9_rw_1200.jpg?h=d7d3ea18a7d5fb46eea18c1a07604568") center/cover;;
       animation: float 20s ease-in-out infinite;
       pointer-events: none;
+	filter:brightness(.25) contrast(1.1);
+      animation:slowZoom 30s ease-in-out infinite alternate;
+    }
+	  .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(8,4,3,.3) 0%, rgba(8,4,3,.8) 60%, rgba(8,4,3,.95) 100%);
     }
 
     @keyframes float {
@@ -732,7 +738,7 @@
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">Home</a> · Analytics
       </nav>
-      <h1 class="title">Analytics Projects & Interactive Tools</h1>
+      <h1 class="title">Analytics Projects And  Interactive Tools</h1>
       <p class="sub">SQL patterns, Python notebooks, dashboards, interactive simulations, and end‑to‑end case studies I'm building and learning from. Explore real-world applications of data science, machine learning, and business intelligence solutions.</p>
       
       <!-- Featured Interactive Tool Banner -->
@@ -814,13 +820,13 @@
               <span style="padding: 6px 12px; background: rgba(99, 102, 241, 0.2); color: #6366f1; border-radius: 6px; font-size: 0.9rem;">Logistics</span>
             </div>
             <div style="display: flex; gap: 15px;">
-              <a href="supply-chain-simulator-animated.html" style="padding: 12px 24px; background: linear-gradient(135deg, #58a6ff, #6366f1); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(88, 166, 255, 0.4); transition: all 0.3s; border: none;">
+              <a href="Simulation.html" style="padding: 12px 24px; background: linear-gradient(135deg, #58a6ff, #6366f1); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(88, 166, 255, 0.4); transition: all 0.3s; border: none;">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M10 2L8 8H2l5 4-2 6 5-4 5 4-2-6 5-4h-6z"/>
                 </svg>
-                Launch Tool
+                 Launch Tool 
               </a>
-              <a href="https://github.com/tanvirbakther/supply-chain-optimizer" target="_blank" style="padding: 12px 24px; background: rgba(21, 21, 23, 0.8); color: #9aa0a6; border: 1px solid rgba(88, 166, 255, 0.3); border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;">
+              <a href="https://github.com/tanvirbakther0821/Supply-Chain-Optimizer-using-Monte-Carlo-News-vendor-Simulation" target="_blank" style="padding: 12px 24px; background: rgba(21, 21, 23, 0.8); color: #9aa0a6; border: 1px solid rgba(88, 166, 255, 0.3); border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0110 4.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.138 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z"/>
                 </svg>
@@ -857,7 +863,7 @@
 
   <footer>
     <div class="wrap">
-      <p>© <span id="y"></span> Tanvir Bakther • Analytics Portfolio • Built with modern web technologies</p>
+      <p>© <span id="y"></span> Tanvir Bakther • Analytics Portfolio •</p>
     </div>
   </footer>
 
