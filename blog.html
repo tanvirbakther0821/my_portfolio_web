@@ -7,82 +7,471 @@
   <meta name="description" content="Complete learning reference covering data processing, machine learning, OpenRefine, Python, Flask, Regular Expressions, and advanced ML algorithms." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    /* ========================================
+       UNIFIED DESIGN SYSTEM - Tanvir Bakther
+       ======================================== */
+    
+    *{margin:0;padding:0;box-sizing:border-box}
+    
+    :root {
+      --gold-100: #f5e6c8;
+      --gold-200: #e6d5a8;
+      --gold-300: #c2b49b;
+      --gold-400: #ca9a4e;
+      --gold-500: #ad8546;
+      --gold-600: #8a6b38;
+      --gold-700: #5e4211;
+      
+      --dark-100: #1a1512;
+      --dark-200: #110a08;
+      --dark-300: #0d0806;
+      --dark-400: #080403;
+      --dark-500: #050302;
+      
+      --accent-blue: #58a6ff;
+      --accent-purple: #6366f1;
+      --accent-green: #22c55e;
+      --accent-orange: #ff8a4c;
+      --accent-red: #ef4444;
+      
+      --text-primary: var(--gold-300);
+      --text-secondary: rgba(194,180,155,0.8);
+      --text-muted: rgba(194,180,155,0.6);
+      --bg-primary: var(--dark-400);
+      --bg-secondary: var(--dark-300);
+      --border-color: rgba(94,66,17,0.4);
+      --border-hover: rgba(202,154,78,0.6);
+      
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.2);
+      --shadow-md: 0 8px 24px rgba(94,66,17,0.2);
+      --shadow-lg: 0 12px 40px rgba(94,66,17,0.3);
+      --glass: rgba(8,4,3,0.85);
+      --glass-border: rgba(94,66,17,0.3);
+      
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      overflow-x: hidden;
+      padding-top: 80px;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--dark-400); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-600); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-500); }
+
+    *:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; }
+
+    a { color: var(--gold-400); text-decoration: none; transition: var(--transition); }
+    a:hover { color: var(--gold-300); }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      background: rgba(8,4,3,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+    
+    .navbar.scrolled {
+      padding: 14px 50px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold-400);
+      letter-spacing: 1px;
+    }
+
+    .nav-menu { display: flex; gap: 35px; list-style: none; }
+
+    .nav-link {
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-600));
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:hover, .nav-link.active { color: var(--gold-400); }
+
+    /* WRAP */
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
     /* Hero */
-    .hero{min-height:60vh;display:grid;place-items:center;position:relative;background:radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.08), transparent 60%), #000}
-    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2400&auto=format&fit=crop') center/cover;filter:brightness(.3) contrast(1.1)}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,.8) 100%)}
-    .hero-inner{position:relative;z-index:2;max-width:900px;margin-inline:auto;padding:0 18px;text-align:center}
-    .kicker{color:var(--accent);letter-spacing:.2em;text-transform:uppercase;font-size:.85rem;margin-bottom:10px}
-    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:600;letter-spacing:-.02em;margin:.1em 0 .35em}
-    .hero-sub{color:#cfcfcf;font-size:clamp(1rem,2.5vw,1.15rem);max-width:720px;margin:0 auto 26px}
+    .hero {
+      min-height: 50vh;
+      display: grid;
+      place-items: center;
+      position: relative;
+      background: radial-gradient(1200px 800px at 50% 20%, rgba(202,154,78,.08), transparent 60%), var(--bg-primary);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2400&auto=format&fit=crop') center/cover;
+      filter: brightness(.25) contrast(1.1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,4,3,.3) 0%, rgba(8,4,3,.9) 100%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin-inline: auto;
+      padding: 60px 30px;
+      text-align: center;
+    }
+
+    .kicker {
+      color: var(--gold-400);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-size: .85rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--gold-400);
+      letter-spacing: -.02em;
+      margin: .1em 0 .35em;
+    }
+
+    .hero-sub {
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      max-width: 720px;
+      margin: 0 auto 26px;
+    }
 
     /* Sections */
-    .section.dark{background:#111;color:#e9e9e9}
-    .section.accent{background:#f8f9fa;color:#111}
-    .section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:16px;color:#d4af37}
-    .section h3{font-family:'Playfair Display',serif;font-size:1.6rem;margin:32px 0 16px;color:#d4af37}
-    .section h4{font-size:1.2rem;margin:24px 0 12px;color:#333;font-weight:600}
-    .dark h4{color:#e9e9e9}
-    .section h5{font-size:1rem;margin:16px 0 8px;color:#555;font-weight:600}
-    .dark h5{color:#ccc}
-    .dark .muted{color:#999}
+    .section {
+      padding: 60px 0;
+    }
+
+    .section.dark {
+      background: var(--dark-200);
+    }
+
+    .section.accent {
+      background: var(--dark-100);
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      margin-bottom: 16px;
+      color: var(--gold-400);
+    }
+
+    .section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin: 40px 0 16px;
+      color: var(--gold-400);
+    }
+
+    .section h4 {
+      font-size: 1.1rem;
+      margin: 28px 0 12px;
+      color: var(--gold-300);
+      font-weight: 600;
+    }
+
+    .section h5 {
+      font-size: 1rem;
+      margin: 16px 0 8px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .section p, .section li {
+      color: var(--text-secondary);
+      margin: 8px 0;
+    }
+
+    .section ul, .section ol {
+      margin-left: 20px;
+    }
+
+    .muted { color: var(--text-muted); }
 
     /* Table of Contents */
-    .toc{background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:24px;margin:24px 0}
-    .toc h4{margin-top:0;color:#333}
-    .toc ul{list-style:none;padding-left:0}
-    .toc li{margin:8px 0}
-    .toc a{color:#d4af37;text-decoration:none}
-    .toc a:hover{text-decoration:underline}
-    .toc-section{margin-bottom:20px}
-    .toc-section h5{color:#555;margin-bottom:8px;font-weight:600}
+    .toc {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin: 30px 0;
+    }
+
+    .toc h4 {
+      margin-top: 0;
+      color: var(--gold-400);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    .toc ul { list-style: none; padding-left: 0; }
+    .toc li { margin: 10px 0; }
+    .toc a { color: var(--gold-400); }
+    .toc a:hover { color: var(--gold-300); text-decoration: underline; }
+
+    .toc-section { margin-bottom: 24px; }
+    .toc-section h5 { color: var(--text-muted); margin-bottom: 12px; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; }
+
+    /* Featured Link */
+    .featured-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(202,154,78,0.15), rgba(173,133,70,0.1));
+      border: 1px solid var(--gold-600);
+      border-radius: var(--radius-md);
+      margin: 10px 0;
+      transition: var(--transition);
+    }
+
+    .featured-link:hover {
+      border-color: var(--gold-400);
+      transform: translateX(5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .featured-link .icon {
+      font-size: 2rem;
+    }
+
+    .featured-link .content h6 {
+      color: var(--gold-400);
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .featured-link .content p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
 
     /* Code blocks */
-    .code-section{background:#0a0a0a;border:1px solid #333;border-radius:8px;padding:20px;margin:16px 0;overflow-x:auto}
-    .code-section pre{color:#e9e9e9;font-family:'Consolas','Monaco','Courier New',monospace;font-size:.9rem;white-space:pre-wrap;line-height:1.4}
-    .code-label{color:var(--accent);font-size:.85rem;margin-bottom:8px;text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+    .code-section {
+      background: var(--dark-500);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 16px 0;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .code-section pre {
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
+      font-size: .85rem;
+      white-space: pre-wrap;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .code-label {
+      color: var(--gold-400);
+      font-size: .8rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 600;
+    }
 
     /* Step boxes */
-    .step-box{background:#f0f7ff;border-left:4px solid #d4af37;padding:16px;margin:16px 0;border-radius:0 8px 8px 0}
-    .step-box h5{color:#333;margin-top:0}
-    .dark .step-box{background:#1a1a2e;color:#e9e9e9}
+    .step-box {
+      background: rgba(202,154,78,0.08);
+      border-left: 4px solid var(--gold-400);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
 
-    /* Warning/tip boxes */
-    .tip-box{background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);border-radius:8px;padding:16px;margin:16px 0}
-    .tip-box h5{color:var(--accent);margin-top:0}
-    .warning-box{background:rgba(220,53,69,.1);border:1px solid rgba(220,53,69,.3);border-radius:8px;padding:16px;margin:16px 0}
-    .warning-box h5{color:#dc3545;margin-top:0}
+    .step-box h5 { color: var(--gold-400); margin-top: 0; }
+    .step-box p { margin: 8px 0; }
+    .step-box code { 
+      background: var(--dark-400); 
+      padding: 2px 8px; 
+      border-radius: 4px; 
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+    }
+
+    /* Tip/Warning boxes */
+    .tip-box {
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .tip-box h5 { color: var(--accent-green); margin-top: 0; }
+
+    .warning-box {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .warning-box h5 { color: var(--accent-red); margin-top: 0; }
 
     /* Formula boxes */
-    .formula{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:16px;margin:16px 0;text-align:center;font-family:'Times New Roman',serif;font-size:1.1em}
-    .dark .formula{background:#1a1a2e;border-color:#444;color:#e9e9e9}
+    .formula {
+      background: var(--dark-300);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1em;
+      color: var(--gold-300);
+    }
 
     /* File structure display */
-    .file-tree{background:#f8f9fa;border:1px solid #e9ecef;padding:16px;border-radius:8px;font-family:monospace;margin:16px 0}
-    .file-tree pre{color:#333;margin:0}
+    .file-tree {
+      background: var(--dark-300);
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      border-radius: var(--radius-md);
+      font-family: 'JetBrains Mono', monospace;
+      margin: 16px 0;
+    }
+
+    .file-tree pre { color: var(--text-secondary); margin: 0; font-size: 0.9rem; }
 
     /* Reference tables */
-    .ref-table{width:100%;border-collapse:collapse;margin:16px 0;border:1px solid #ddd}
-    .ref-table th,.ref-table td{border:1px solid #ddd;padding:12px;text-align:left}
-    .ref-table th{background:#f8f9fa;font-weight:600}
-    .dark .ref-table{border-color:#444}
-    .dark .ref-table th,.dark .ref-table td{border-color:#444}
-    .dark .ref-table th{background:#222;color:#e9e9e9}
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .ref-table th, .ref-table td {
+      border: 1px solid var(--border-color);
+      padding: 14px;
+      text-align: left;
+    }
+
+    .ref-table th {
+      background: var(--dark-200);
+      font-weight: 600;
+      color: var(--gold-400);
+    }
+
+    .ref-table td { color: var(--text-secondary); }
+    .ref-table code { 
+      background: var(--dark-400); 
+      padding: 2px 6px; 
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
 
     /* Future content areas */
-    .future-section{border:2px dashed #444;border-radius:8px;padding:24px;margin:32px 0;text-align:center;background:#0a0a0a}
-    .future-section h4{color:#666;margin-bottom:8px}
-    .future-section p{color:#555;font-style:italic}
+    .future-section {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 30px;
+      margin: 30px 0;
+      text-align: center;
+      background: var(--dark-300);
+    }
 
+    .future-section h4 { color: var(--text-muted); margin-bottom: 8px; }
+    .future-section p { color: var(--text-muted); font-style: italic; }
+
+    /* Footer */
+    footer {
+      padding: 40px 30px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar { padding: 15px 20px; }
+      .nav-menu { display: none; }
+      .wrap { padding: 0 20px; }
+      .hero-inner { padding: 40px 20px; }
+      .toc { padding: 20px; }
+      .ref-table { font-size: 0.85rem; }
+      .ref-table th, .ref-table td { padding: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
-  <!-- ======= NAVBAR ======= -->
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a class="logo" href="index.html">Tanvir Bakther</a>
@@ -90,28 +479,39 @@
         <li><a class="nav-link" href="index.html">Home</a></li>
         <li><a class="nav-link" href="photography.html">Photography</a></li>
         <li><a class="nav-link" href="analytics.html">Analytics</a></li>
-        <li><a class="nav-link active" href="everyday-learning.html">Everyday Learning</a></li>
-        <li><a class="nav-link" href="#contact">Contact</a></li>
+        <li><a class="nav-link active" href="blog.html">Everyday Learning</a></li>
+        <li><a class="nav-link" href="index.html#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ======= HERO ======= -->
+  <!-- HERO -->
   <header class="hero">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-inner">
       <div class="kicker">Comprehensive Learning Reference</div>
       <h1 class="hero-title">Data Science & ML Mastery Guide</h1>
-      <p class="hero-sub">Complete tutorials and reference notes for data processing, machine learning algorithms, OpenRefine, Flask development, Regular Expressions, and advanced ML concepts.</p>
+      <p class="hero-sub">Complete tutorials and reference notes for data processing, machine learning algorithms, interactive math tools, OpenRefine, Flask development, and advanced ML concepts.</p>
     </div>
   </header>
 
-  <!-- ======= TABLE OF CONTENTS ======= -->
+  <!-- TABLE OF CONTENTS -->
   <section class="section">
     <div class="wrap">
       <div class="toc">
         <h4>📚 Complete Learning Reference</h4>
+
+        <div class="toc-section">
+          <h5>Interactive Learning Tools</h5>
+          <a href="Calculus.html" class="featured-link">
+            <span class="icon">🧮</span>
+            <div class="content">
+              <h6>Math Explorer — Functions, Derivatives & Probability</h6>
+              <p>Interactive learning with hands-on exercises, visualizations, and quizzes</p>
+            </div>
+          </a>
+        </div>
         
         <div class="toc-section">
           <h5>Data Processing Fundamentals</h5>
@@ -149,7 +549,7 @@
     </div>
   </section>
 
-  <!-- ======= 1. OPENREFINE COMPLETE GUIDE ======= -->
+  <!-- 1. OPENREFINE COMPLETE GUIDE -->
   <section class="section dark" id="openrefine">
     <div class="wrap">
       <h2>🔧 OpenRefine Data Cleaning Complete Guide</h2>
@@ -202,30 +602,7 @@
         <p>5. Close the facet when done</p>
       </div>
 
-      <h4>2. Filtering Data</h4>
-
-      <div class="step-box">
-        <h5>Text Filtering</h5>
-        <p>1. Click column dropdown → <strong>Text filter</strong></p>
-        <p>2. Enter your search term (e.g., "Airport")</p>
-        <p>3. Note: Filtering is case-sensitive by default</p>
-        <p>4. To keep only matching rows: <strong>All</strong> → <strong>Edit rows</strong> → <strong>Remove all non-matching rows</strong></p>
-      </div>
-
-      <h4>3. Creating New Columns with GREL</h4>
-
-      <div class="step-box">
-        <h5>Adding Columns Based on Existing Data</h5>
-        <p>1. Click source column dropdown → <strong>Edit column</strong> → <strong>Add column based on this column</strong></p>
-        <p>2. Enter new column name</p>
-        <p>3. Write GREL expression in the expression box</p>
-        <p>4. Preview shows first few results</p>
-        <p>5. Click <strong>OK</strong> to create column</p>
-      </div>
-
       <h3>GREL (General Refine Expression Language) Reference</h3>
-
-      <h4>Essential GREL Functions</h4>
 
       <table class="ref-table">
         <tr>
@@ -254,13 +631,11 @@
           <td><code>trim(value)</code></td>
         </tr>
         <tr>
-          <td><code>if(condition, true_value, false_value)</code></td>
+          <td><code>if(condition, true, false)</code></td>
           <td>Conditional logic</td>
           <td><code>if(contains(value, "Airport"), "Yes", "No")</code></td>
         </tr>
       </table>
-
-      <h4>Real-World GREL Examples</h4>
 
       <div class="code-section">
         <div class="code-label">Extract Airport Names</div>
@@ -268,49 +643,6 @@
   value.match(/([A-Za-z\s]+Airport)/)[0].trim(),
   ""
 )</pre>
-      </div>
-
-      <div class="code-section">
-        <div class="code-label">Clean and Standardize Text</div>
-        <pre>value.trim().replace(/\s+/, " ").toTitlecase()</pre>
-      </div>
-
-      <div class="code-section">
-        <div class="code-label">Extract Text After Specific Word</div>
-        <pre>if(contains(value, " at "),
-  split(value, " at ")[1].trim(),
-  value
-)</pre>
-      </div>
-
-      <h3>Clustering & Merging Similar Values</h3>
-
-      <div class="step-box">
-        <h5>Using Cluster and Edit Feature</h5>
-        <p>1. Select the column with similar values</p>
-        <p>2. Go to <strong>Edit cells</strong> → <strong>Cluster and edit</strong></p>
-        <p>3. Try different clustering methods:</p>
-        <p>   • <strong>Key collision → fingerprint</strong>: Basic similarity</p>
-        <p>   • <strong>Key collision → ngram-fingerprint</strong>: Handles typos</p>
-        <p>   • <strong>Nearest neighbor → levenshtein</strong>: Character differences</p>
-        <p>4. Review suggested clusters and choose merge values</p>
-        <p>5. Check <strong>Merge?</strong> for clusters you want to merge</p>
-        <p>6. Click <strong>Merge Selected & Re-Cluster</strong></p>
-      </div>
-
-      <h3>Exporting Results</h3>
-
-      <div class="step-box">
-        <h5>Export Cleaned Data</h5>
-        <p>1. Click <strong>Export</strong> (top right) → <strong>Comma-separated value</strong></p>
-        <p>2. Save the cleaned CSV file</p>
-      </div>
-
-      <div class="step-box">
-        <h5>Export History (for Reproducibility)</h5>
-        <p>1. Go to <strong>Undo/Redo</strong> tab → <strong>Extract</strong> → <strong>Export</strong></p>
-        <p>2. Downloads <code>history.json</code> with all operations</p>
-        <p>3. Can be used to replay operations on similar datasets</p>
       </div>
 
       <div class="warning-box">
@@ -323,7 +655,7 @@
     </div>
   </section>
 
-  <!-- ======= 2. FLASK WEB DEVELOPMENT TUTORIAL ======= -->
+  <!-- 2. FLASK WEB DEVELOPMENT TUTORIAL -->
   <section class="section" id="flask">
     <div class="wrap">
       <h2>🌐 Flask Web Development Complete Tutorial</h2>
@@ -331,11 +663,9 @@
 
       <h3>Flask Installation & Setup</h3>
 
-      <div class="step-box">
-        <h5>Install Flask</h5>
-        <div class="code-section">
-          <div class="code-label">Terminal/Command Prompt</div>
-          <pre># Install Flask
+      <div class="code-section">
+        <div class="code-label">Terminal/Command Prompt</div>
+        <pre># Install Flask
 pip install Flask
 
 # Optional: Create virtual environment first
@@ -343,7 +673,6 @@ python -m venv flask_env
 # Windows: flask_env\Scripts\activate
 # Mac/Linux: source flask_env/bin/activate
 pip install Flask</pre>
-        </div>
       </div>
 
       <h3>Basic Flask Application Structure</h3>
@@ -360,141 +689,23 @@ pip install Flask</pre>
     └── dataset.csv       # Data files</pre>
       </div>
 
-      <h4>1. Application Runner (run.py)</h4>
-
       <div class="code-section">
         <div class="code-label">run.py</div>
         <pre>""" run.py - Run the Flask app """
 from flaskapp import app
 
 if __name__ == '__main__':
-    # Start the Flask development server
     app.run(host='127.0.0.1', port=3001, debug=True)</pre>
       </div>
-
-      <h4>2. Flask App Initialization</h4>
 
       <div class="code-section">
         <div class="code-label">flaskapp/__init__.py</div>
         <pre>from flask import Flask
 
-# Create Flask application instance
 app = Flask(__name__)
 
-# Import routes (must be after app creation)
 from flaskapp import routes</pre>
       </div>
-
-      <h4>3. Data Processing Module</h4>
-
-      <div class="code-section">
-        <div class="code-label">data_processing.py</div>
-        <pre>import csv
-
-def username():
-    return 'your_username'
-
-def data_wrangling(filter_class=None):
-    """
-    Process CSV data and return formatted results
-    
-    Args:
-        filter_class (str): Optional filter for data category
-    
-    Returns:
-        tuple: (header, table_data, dropdown_options)
-    """
-    with open('data/dataset.csv', 'r', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        table = []
-        all_classes = set()
-        
-        # Read header row
-        header = next(reader)
-        
-        # Read and process data rows
-        for row in reader:
-            # Convert numeric columns
-            processed_row = [
-                row[0],                    # species (string)
-                row[1],                    # class (string) 
-                int(row[2]) if row[2] else 0  # count (integer)
-            ]
-            table.append(processed_row)
-            all_classes.add(row[1])  # Collect unique classes
-        
-        # Create sorted dropdown options
-        dropdown_options = sorted(list(all_classes))
-        
-        # Apply filtering if specified
-        if filter_class:
-            table = [row for row in table if row[1] == filter_class]
-        
-        # Sort by count (descending) and limit to top 10
-        table.sort(key=lambda x: x[2], reverse=True)
-        table = table[:10]
-    
-    return header, table, dropdown_options</pre>
-      </div>
-
-      <h4>4. Routes and View Functions</h4>
-
-      <div class="code-section">
-        <div class="code-label">flaskapp/routes.py</div>
-        <pre>from flask import render_template, request
-from flaskapp import app
-from data_processing import data_wrangling
-
-@app.route('/')
-@app.route('/index')
-def index():
-    """Main page route"""
-    # Get filter parameter from URL
-    filter_class = request.args.get('filter_class')
-    
-    # Process data with optional filter
-    header, table, dropdown_options = data_wrangling(filter_class)
-    
-    # Render template with data
-    return render_template('index.html',
-                         header=header,
-                         table=table,
-                         dropdown_options=dropdown_options,
-                         current_filter=filter_class)
-
-@app.route('/api/data')
-def api_data():
-    """API endpoint for JSON data"""
-    filter_class = request.args.get('filter_class')
-    header, table, dropdown_options = data_wrangling(filter_class)
-    
-    return {
-        'header': header,
-        'data': table,
-        'filters': dropdown_options,
-        'count': len(table)
-    }</pre>
-      </div>
-
-      <h3>Running Your Flask Application</h3>
-
-      <div class="step-box">
-        <h5>Start the Development Server</h5>
-        <div class="code-section">
-          <div class="code-label">Terminal</div>
-          <pre># Navigate to your project folder
-cd your_project_folder
-
-# Run the application
-python run.py
-
-# Output should show:
-# * Running on http://127.0.0.1:3001</pre>
-        </div>
-        <p>Open your browser and go to: <code>http://127.0.0.1:3001</code></p>
-      </div>
-
-      <h3>Flask Development Best Practices</h3>
 
       <div class="tip-box">
         <h5>💡 Essential Tips</h5>
@@ -502,20 +713,17 @@ python run.py
         <p>• Organize code into modules (routes, models, utilities)</p>
         <p>• Use templates for all HTML (avoid HTML in Python code)</p>
         <p>• Handle errors gracefully with try-catch blocks</p>
-        <p>• Use environment variables for configuration</p>
       </div>
     </div>
   </section>
 
-  <!-- ======= 3. REGULAR EXPRESSIONS REFERENCE ======= -->
+  <!-- 3. REGULAR EXPRESSIONS REFERENCE -->
   <section class="section dark" id="regex">
     <div class="wrap">
       <h2>🔍 Regular Expressions Complete Reference</h2>
       <p class="muted">Master pattern matching for text processing and data extraction</p>
 
-      <h3>RegEx Fundamentals</h3>
-
-      <h4>Basic Syntax Elements</h4>
+      <h3>Basic Syntax Elements</h3>
       <table class="ref-table">
         <tr>
           <th>Pattern</th>
@@ -561,69 +769,25 @@ python run.py
         </tr>
       </table>
 
-      <h4>Data Extraction Patterns</h4>
-
-      <div class="code-section">
-        <div class="code-label">Airport Name Extraction</div>
-        <pre># Python
-import re
-
-# Basic airport pattern
-pattern = r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\s+((?:International\s+)?Airport)\b'
-
-text = "77kg of sandalwood at the Chhatrapati Shivaji Maharaj International Airport"
-match = re.search(pattern, text)
-if match:
-    airport_name = f"{match.group(1)} {match.group(2)}"
-    print(airport_name)  # "Chhatrapati Shivaji Maharaj International Airport"</pre>
-      </div>
-
       <div class="code-section">
         <div class="code-label">Email Address Extraction</div>
-        <pre># Basic email pattern
+        <pre>import re
+
 pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 text = "Contact us at support@example.com or admin@site.org"
 emails = re.findall(pattern, text)
 print(emails)  # ['support@example.com', 'admin@site.org']</pre>
       </div>
-
-      <h3>Python RegEx Functions</h3>
-
-      <table class="ref-table">
-        <tr>
-          <th>Function</th>
-          <th>Purpose</th>
-          <th>Returns</th>
-        </tr>
-        <tr>
-          <td><code>re.search(pattern, text)</code></td>
-          <td>Find first match</td>
-          <td>Match object or None</td>
-        </tr>
-        <tr>
-          <td><code>re.findall(pattern, text)</code></td>
-          <td>Find all matches</td>
-          <td>List of strings</td>
-        </tr>
-        <tr>
-          <td><code>re.sub(pattern, replacement, text)</code></td>
-          <td>Replace matches</td>
-          <td>Modified string</td>
-        </tr>
-      </table>
     </div>
   </section>
 
-  <!-- ======= 4. PYTHON DATA PROCESSING PATTERNS ======= -->
-  <section class="section accent" id="python-data">
+  <!-- 4. PYTHON DATA PROCESSING PATTERNS -->
+  <section class="section" id="python-data">
     <div class="wrap">
       <h2>🐍 Python Data Processing Patterns</h2>
       <p class="muted">Essential Python techniques for data manipulation and analysis</p>
 
-      <h3>Pandas Data Manipulation</h3>
-
-      <h4>Essential Pandas Operations</h4>
       <div class="code-section">
         <div class="code-label">Data Loading and Basic Operations</div>
         <pre>import pandas as pd
@@ -639,67 +803,29 @@ print(f"Data types:\n{df.dtypes}")
 print(f"Missing values:\n{df.isnull().sum()}")
 
 # Display first few rows
-print(df.head())
-
-# Basic statistics
-print(df.describe())</pre>
+print(df.head())</pre>
       </div>
 
-      <h4>Data Cleaning Patterns</h4>
       <div class="code-section">
-        <div class="code-label">Remove Duplicates and Handle Missing Data</div>
+        <div class="code-label">Data Cleaning Patterns</div>
         <pre># Remove duplicate rows
 df_clean = df.drop_duplicates()
 
-# Remove rows with missing values in specific columns
+# Remove rows with missing values
 df_clean = df.dropna(subset=['important_column'])
 
 # Fill missing values
 df['column'] = df['column'].fillna('default_value')
-df['numeric_column'] = df['numeric_column'].fillna(df['numeric_column'].mean())
-
-# Remove rows where column is empty string
-df_clean = df[df['column'].str.strip() != '']</pre>
-      </div>
-
-      <h4>Filtering and Querying</h4>
-      <div class="code-section">
-        <div class="code-label">Advanced Filtering Techniques</div>
-        <pre># Basic filtering
-airport_data = df[df['Subject'].str.contains('Airport', case=True, na=False)]
-
-# Multiple conditions
-filtered = df[
-    (df['Count'] > 10) & 
-    (df['Country'].isin(['China', 'India'])) &
-    (df['Date'].str.contains('2024'))
-]
-
-# Using query method (more readable for complex conditions)
-result = df.query("Count > 10 and Country in ['China', 'India']")
-
-# String operations
-df['clean_name'] = df['name'].str.strip().str.title()
-has_keyword = df[df['description'].str.contains('wildlife', case=False, na=False)]</pre>
+df['numeric'] = df['numeric'].fillna(df['numeric'].mean())</pre>
       </div>
     </div>
   </section>
 
-  <!-- ======= 5. ENSEMBLE METHODS ======= -->
+  <!-- 5. ENSEMBLE METHODS -->
   <section class="section dark" id="ensemble-methods">
     <div class="wrap">
       <h2>🌲 Ensemble Methods (Boosting vs Bagging)</h2>
       <p class="muted">Understanding parallel vs sequential ensemble learning approaches</p>
-
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required packages</div>
-        <pre># Required packages
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import cross_val_score</pre>
-      </div>
 
       <h3>Core Concepts</h3>
       
@@ -708,7 +834,6 @@ from sklearn.model_selection import cross_val_score</pre>
         <li><strong>Parallel training:</strong> Multiple models trained independently</li>
         <li><strong>Bootstrap sampling:</strong> Each model sees different subset of data</li>
         <li><strong>Averaging:</strong> Final prediction is average/majority vote</li>
-        <li><strong>Variance reduction:</strong> Reduces overfitting by averaging</li>
         <li><strong>Example:</strong> Random Forest</li>
       </ul>
 
@@ -717,7 +842,6 @@ from sklearn.model_selection import cross_val_score</pre>
         <li><strong>Sequential training:</strong> Models trained one after another</li>
         <li><strong>Error focusing:</strong> Later models focus on previous mistakes</li>
         <li><strong>Weighted combination:</strong> Better models get higher weight</li>
-        <li><strong>Bias reduction:</strong> Converts weak learners to strong learner</li>
         <li><strong>Example:</strong> AdaBoost, Gradient Boosting</li>
       </ul>
 
@@ -725,76 +849,14 @@ from sklearn.model_selection import cross_val_score</pre>
         <strong>Bagging:</strong> f(x) = (1/M) Σ f_m(x)<br>
         <strong>Boosting:</strong> f(x) = Σ α_m h_m(x)
       </div>
-
-      <h3>Code Examples</h3>
-      <div class="code-section">
-        <div class="code-label">Implementation Examples</div>
-        <pre># Random Forest (Bagging)
-rf = RandomForestClassifier(
-    n_estimators=100,
-    max_features='sqrt',  # Random feature selection
-    bootstrap=True,       # Bootstrap sampling
-    oob_score=True       # Out-of-bag error estimation
-)
-
-# AdaBoost (Boosting)
-ada = AdaBoostClassifier(
-    base_estimator=DecisionTreeClassifier(max_depth=1),
-    n_estimators=50,
-    learning_rate=1.0
-)</pre>
-      </div>
-
-      <h3>Best Practices</h3>
-      <div class="tip-box">
-        <h5>Random Forest Tips</h5>
-        <p>• Use √p features for classification, p/3 for regression</p>
-        <p>• More trees rarely hurt (diminishing returns after ~100)</p>
-        <p>• Use OOB error for model selection</p>
-        <p>• Feature importance provides good interpretability</p>
-      </div>
-
-      <div class="tip-box">
-        <h5>Boosting Tips</h5>
-        <p>• Start with weak learners (shallow trees)</p>
-        <p>• Lower learning rate with more estimators</p>
-        <p>• Monitor training/validation error to avoid overfitting</p>
-        <p>• More sensitive to noise than bagging</p>
-      </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Common Issues</h5>
-        <p>• <strong>Memory issues:</strong> Reduce n_estimators or use n_jobs=1</p>
-        <p>• <strong>Slow training:</strong> Use n_jobs=-1 for parallel processing</p>
-        <p>• <strong>Overfitting in boosting:</strong> Reduce learning rate or max_depth</p>
-        <p>• <strong>Poor Random Forest performance:</strong> Check max_features and min_samples_leaf</p>
-      </div>
     </div>
   </section>
 
-  <!-- ======= 6. CART DECISION TREES ======= -->
+  <!-- 6. CART DECISION TREES -->
   <section class="section" id="cart-decision-trees">
     <div class="wrap">
       <h2>🌳 CART Decision Trees</h2>
       <p class="muted">Classification and Regression Trees for interpretable machine learning</p>
-
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required imports</div>
-        <pre>from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, plot_tree
-import matplotlib.pyplot as plt</pre>
-      </div>
-
-      <h3>Core Concepts</h3>
-      
-      <h4>CART Algorithm</h4>
-      <ul>
-        <li><strong>Binary splits:</strong> Each node has exactly two branches</li>
-        <li><strong>Greedy splitting:</strong> Best split at each node independently</li>
-        <li><strong>Impurity measures:</strong> Gini, Entropy (classification), MSE (regression)</li>
-        <li><strong>Stopping criteria:</strong> Max depth, min samples, impurity threshold</li>
-      </ul>
 
       <div class="formula">
         <strong>Gini Impurity:</strong> G = 1 - Σ p_i²<br>
@@ -802,80 +864,20 @@ import matplotlib.pyplot as plt</pre>
         <strong>Information Gain:</strong> IG = H(parent) - Σ (n_i/n) H(child_i)
       </div>
 
-      <h4>Overfitting Prevention</h4>
-      <ul>
-        <li><strong>Pre-pruning:</strong> max_depth, min_samples_split, min_samples_leaf</li>
-        <li><strong>Post-pruning:</strong> Cost complexity pruning</li>
-        <li><strong>Cross-validation:</strong> For hyperparameter selection</li>
-        <li><strong>Early stopping:</strong> Based on validation error</li>
-      </ul>
-
-      <h3>Code Examples</h3>
-      <div class="code-section">
-        <div class="code-label">CART Implementation</div>
-        <pre># Classification Tree
-clf = DecisionTreeClassifier(
-    criterion='gini',        # or 'entropy'
-    max_depth=10,           # Limit tree depth
-    min_samples_split=20,   # Min samples to split
-    min_samples_leaf=10,    # Min samples in leaf
-    random_state=42
-)
-
-# Visualization
-plt.figure(figsize=(20, 10))
-plot_tree(clf, 
-         feature_names=feature_names,
-         class_names=class_names,
-         filled=True,
-         rounded=True,
-         max_depth=3)  # Show only first 3 levels</pre>
-      </div>
-
-      <h3>Best Practices</h3>
       <div class="tip-box">
         <h5>Hyperparameter Guidelines</h5>
         <p>• <strong>max_depth:</strong> Start with 5-10, tune based on validation</p>
         <p>• <strong>min_samples_split:</strong> 2-20, higher for noisy data</p>
         <p>• <strong>min_samples_leaf:</strong> 1-10, higher prevents overfitting</p>
-        <p>• <strong>max_features:</strong> sqrt(n) for classification, n/3 for regression</p>
-      </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Common Problems</h5>
-        <p>• <strong>Overfitting:</strong> Reduce max_depth, increase min_samples_leaf</p>
-        <p>• <strong>Underfitting:</strong> Increase max_depth, reduce stopping criteria</p>
-        <p>• <strong>Unbalanced trees:</strong> Check data distribution, consider class weights</p>
-        <p>• <strong>Large trees hard to visualize:</strong> Use max_depth=3 in plot_tree</p>
       </div>
     </div>
   </section>
 
-  <!-- ======= 7. COMPRESSED SENSING ======= -->
+  <!-- 7. COMPRESSED SENSING -->
   <section class="section dark" id="compressed-sensing">
     <div class="wrap">
       <h2>📡 Compressed Sensing & Medical Imaging</h2>
       <p class="muted">Sparse signal recovery from underdetermined systems</p>
-
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required packages</div>
-        <pre>import numpy as np
-from sklearn.linear_model import Lasso, Ridge, LassoCV, RidgeCV
-import scipy.io
-import matplotlib.pyplot as plt</pre>
-      </div>
-
-      <h3>Core Concepts</h3>
-      
-      <h4>Compressed Sensing Theory</h4>
-      <ul>
-        <li><strong>Sparse signals:</strong> Most coefficients are zero</li>
-        <li><strong>Underdetermined systems:</strong> n measurements < p unknowns</li>
-        <li><strong>L1 regularization:</strong> Promotes sparsity</li>
-        <li><strong>RIP condition:</strong> Restricted Isometry Property for exact recovery</li>
-      </ul>
 
       <div class="formula">
         <strong>Measurement Model:</strong> y = Ax + ε<br>
@@ -889,327 +891,77 @@ import matplotlib.pyplot as plt</pre>
         <li><strong>Ridge (L2):</strong> Shrinks coefficients, doesn't achieve sparsity</li>
         <li><strong>Medical imaging:</strong> MRI images are naturally sparse in some domain</li>
       </ul>
-
-      <h3>Code Examples</h3>
-      <div class="code-section">
-        <div class="code-label">Compressed Sensing Implementation</div>
-        <pre># Generate sparse signal and measurements
-n_measurements, n_pixels = 1300, 2500
-A = np.random.normal(0, 1, (n_measurements, n_pixels))
-noise = np.random.normal(0, 5, n_measurements)
-y = A @ x_true + noise
-
-# Lasso with cross-validation
-lasso_cv = LassoCV(alphas=np.logspace(-4, 1, 50), cv=10)
-lasso_cv.fit(A, y)
-x_lasso = lasso_cv.coef_
-
-# Ridge with cross-validation
-ridge_cv = RidgeCV(alphas=np.logspace(-2, 3, 50), cv=10)
-ridge_cv.fit(A, y)
-x_ridge = ridge_cv.coef_</pre>
-      </div>
-
-      <h3>Best Practices</h3>
-      <div class="tip-box">
-        <h5>Compressed Sensing Guidelines</h5>
-        <p>• <strong>Measurement matrix:</strong> Use random Gaussian or Fourier measurements</p>
-        <p>• <strong>Lambda selection:</strong> Use cross-validation or information criteria</p>
-        <p>• <strong>Sparsity level:</strong> Ensure sufficient measurements (m ≥ 2s log p)</p>
-        <p>• <strong>Noise handling:</strong> Account for noise level in regularization</p>
-      </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Recovery Issues</h5>
-        <p>• <strong>Poor recovery:</strong> Check sparsity level and measurement count</p>
-        <p>• <strong>Over-regularization:</strong> Lambda too large, reduces to zero</p>
-        <p>• <strong>Under-regularization:</strong> Lambda too small, doesn't promote sparsity</p>
-        <p>• <strong>Numerical issues:</strong> Scale features, add small regularization</p>
-      </div>
     </div>
   </section>
 
-  <!-- ======= 8. ADABOOST ALGORITHM ======= -->
-  <section class="section accent" id="adaboost">
+  <!-- 8. ADABOOST ALGORITHM -->
+  <section class="section" id="adaboost">
     <div class="wrap">
       <h2>⚡ AdaBoost Algorithm</h2>
       <p class="muted">Adaptive boosting for sequential weak learner combination</p>
 
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required imports</div>
-        <pre>import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier</pre>
-      </div>
-
-      <h3>Core Concepts</h3>
-      
       <h4>AdaBoost Algorithm Steps</h4>
       <ol>
         <li><strong>Initialize weights:</strong> D₁(i) = 1/n for all i</li>
-        <li><strong>For t = 1 to T:</strong>
-          <ul>
-            <li>Train weak learner hₜ with weights Dₜ</li>
-            <li>Calculate error: εₜ = Σ Dₜ(i) × I[hₜ(xᵢ) ≠ yᵢ]</li>
-            <li>Calculate alpha: αₜ = ½ ln((1-εₜ)/εₜ)</li>
-            <li>Update weights: Dₜ₊₁(i) = Dₜ(i) × exp(-αₜyᵢhₜ(xᵢ)) / Zₜ</li>
-          </ul>
-        </li>
+        <li><strong>For t = 1 to T:</strong> Train weak learner, calculate error, calculate alpha, update weights</li>
         <li><strong>Final classifier:</strong> H(x) = sign(Σ αₜhₜ(x))</li>
       </ol>
 
       <div class="formula">
         <strong>Weight Update:</strong> Dₜ₊₁(i) = (Dₜ(i) × exp(-αₜyᵢhₜ(xᵢ))) / Zₜ<br>
-        <strong>Alpha:</strong> αₜ = ½ ln((1-εₜ)/εₜ)<br>
-        <strong>Normalization:</strong> Zₜ = Σ Dₜ(i) × exp(-αₜyᵢhₜ(xᵢ))
-      </div>
-
-      <h3>Code Examples</h3>
-      <div class="code-section">
-        <div class="code-label">Manual AdaBoost Implementation</div>
-        <pre># Manual AdaBoost implementation (key parts)
-def find_best_stump(X, y, weights):
-    best_error = float('inf')
-    best_stump = None
-    
-    for feature in [0, 1]:  # For each feature
-        for threshold in thresholds:
-            for polarity in [1, -1]:
-                predictions = np.where(X[:, feature] <= threshold, polarity, -polarity)
-                error = np.sum(weights[predictions != y])
-                
-                if error < best_error:
-                    best_error = error
-                    best_stump = {'feature': feature, 'threshold': threshold, 
-                                'polarity': polarity, 'predictions': predictions}
-    
-    return best_stump, best_error
-
-# Weight updates
-alpha = 0.5 * np.log((1 - error) / error)
-Z = np.sum(D * np.exp(-alpha * y * predictions))
-D_new = D * np.exp(-alpha * y * predictions) / Z</pre>
-      </div>
-
-      <h3>Best Practices</h3>
-      <div class="tip-box">
-        <h5>AdaBoost Guidelines</h5>
-        <p>• <strong>Weak learners:</strong> Use shallow trees (stumps or max_depth=1-3)</p>
-        <p>• <strong>Number of iterations:</strong> Monitor training error, stop when it plateaus</p>
-        <p>• <strong>Data quality:</strong> AdaBoost is sensitive to noise and outliers</p>
-        <p>• <strong>Class balance:</strong> Works best with balanced datasets</p>
-      </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Common Issues</h5>
-        <p>• <strong>Overfitting:</strong> Reduce number of estimators or use early stopping</p>
-        <p>• <strong>Weak learners too strong:</strong> Reduce tree depth</p>
-        <p>• <strong>Numerical instability:</strong> Check for very small errors (ε ≈ 0)</p>
-        <p>• <strong>Poor performance:</strong> Ensure weak learners are actually weak but better than random</p>
+        <strong>Alpha:</strong> αₜ = ½ ln((1-εₜ)/εₜ)
       </div>
     </div>
   </section>
 
-  <!-- ======= 9. RANDOM FOREST ======= -->
+  <!-- 9. RANDOM FOREST -->
   <section class="section dark" id="random-forest">
     <div class="wrap">
       <h2>🌲 Random Forest</h2>
       <p class="muted">Ensemble of decision trees with bootstrap aggregating</p>
 
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required packages</div>
-        <pre>from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.model_selection import cross_val_score
-import numpy as np</pre>
-      </div>
-
-      <h3>Core Concepts</h3>
-      
       <h4>Random Forest Components</h4>
       <ul>
         <li><strong>Bootstrap sampling:</strong> Each tree trained on different subset</li>
-        <li><strong>Random feature selection:</strong> At each split, consider random subset of features</li>
-        <li><strong>Majority voting:</strong> Final prediction by majority vote (classification) or averaging (regression)</li>
+        <li><strong>Random feature selection:</strong> At each split, consider random subset</li>
+        <li><strong>Majority voting:</strong> Final prediction by majority vote or averaging</li>
         <li><strong>Out-of-bag error:</strong> Unbiased error estimate using unused samples</li>
       </ul>
 
-      <h4>Key Parameters</h4>
-      <ul>
-        <li><strong>n_estimators:</strong> Number of trees in forest</li>
-        <li><strong>max_features:</strong> Number of features to consider at each split</li>
-        <li><strong>max_depth:</strong> Maximum depth of trees</li>
-        <li><strong>min_samples_split/leaf:</strong> Minimum samples for splitting/leaf nodes</li>
-      </ul>
-
-      <div class="formula">
-        <strong>OOB Error:</strong> Use ~1/3 of samples not in bootstrap for each tree<br>
-        <strong>Feature Importance:</strong> Average decrease in impurity across all trees
-      </div>
-
-      <h3>Code Examples</h3>
-      <div class="code-section">
-        <div class="code-label">Random Forest Implementation</div>
-        <pre># Random Forest with parameter tuning
-rf = RandomForestClassifier(
-    n_estimators=100,
-    max_features='sqrt',     # √p for classification
-    max_depth=10,
-    min_samples_split=10,
-    min_samples_leaf=5,
-    oob_score=True,         # Out-of-bag error
-    random_state=42,
-    n_jobs=-1              # Parallel processing
-)
-
-# Parameter sensitivity analysis
-max_features_range = [1, 2, 5, 10, int(np.sqrt(n_features)), n_features//3]
-oob_errors = []
-test_errors = []
-
-for max_feat in max_features_range:
-    rf_temp = RandomForestClassifier(max_features=max_feat, oob_score=True)
-    rf_temp.fit(X_train, y_train)
-    oob_errors.append(1 - rf_temp.oob_score_)
-    test_errors.append(1 - rf_temp.score(X_test, y_test))</pre>
-      </div>
-
-      <h3>Best Practices</h3>
       <div class="tip-box">
         <h5>Optimization Tips</h5>
         <p>• <strong>max_features:</strong> √p for classification, p/3 for regression</p>
         <p>• <strong>n_estimators:</strong> Start with 100, increase until OOB error stabilizes</p>
-        <p>• <strong>Tree depth:</strong> Don't limit unless overfitting (Random Forest handles this well)</p>
         <p>• <strong>Feature importance:</strong> Use for feature selection and interpretation</p>
-      </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Performance Issues</h5>
-        <p>• <strong>High bias:</strong> Increase n_estimators, reduce min_samples_leaf</p>
-        <p>• <strong>High variance:</strong> Increase min_samples_split, limit max_depth</p>
-        <p>• <strong>Slow training:</strong> Use n_jobs=-1, reduce n_estimators</p>
-        <p>• <strong>Memory issues:</strong> Reduce max_depth or n_estimators</p>
       </div>
     </div>
   </section>
 
-  <!-- ======= 10. ONE-CLASS SVM ======= -->
+  <!-- 10. ONE-CLASS SVM -->
   <section class="section" id="one-class-svm">
     <div class="wrap">
       <h2>🎯 One-Class SVM</h2>
       <p class="muted">Novelty detection and anomaly identification</p>
 
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required imports</div>
-        <pre>from sklearn.svm import OneClassSVM
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, classification_report</pre>
-      </div>
-
-      <h3>Core Concepts</h3>
-      
       <h4>Novelty Detection Approach</h4>
       <ul>
         <li><strong>Training:</strong> Learn boundary around "normal" data only</li>
         <li><strong>Prediction:</strong> +1 for normal, -1 for outliers/anomalies</li>
         <li><strong>Use cases:</strong> Fraud detection, spam detection, fault detection</li>
-        <li><strong>Assumption:</strong> Anomalies are rare and different from normal data</li>
-      </ul>
-
-      <h4>Key Parameters</h4>
-      <ul>
-        <li><strong>nu (ν):</strong> Fraction of training examples to be outliers (0 < ν ≤ 1)</li>
-        <li><strong>gamma:</strong> RBF kernel parameter controlling decision boundary complexity</li>
-        <li><strong>kernel:</strong> Usually 'rbf' for non-linear boundaries</li>
       </ul>
 
       <div class="formula">
         <strong>Decision Function:</strong> f(x) = sign(Σ αᵢ K(xᵢ, x) - ρ)<br>
         <strong>RBF Kernel:</strong> K(x, y) = exp(-γ||x - y||²)
       </div>
-
-      <h3>Code Examples</h3>
-      <div class="code-section">
-        <div class="code-label">One-Class SVM Implementation</div>
-        <pre># One-Class SVM setup
-# Extract only normal examples for training
-X_normal = X_train[y_train == 0]  # Only non-spam emails
-
-# Feature scaling (important for SVM)
-scaler = StandardScaler()
-X_normal_scaled = scaler.fit_transform(X_normal)
-X_test_scaled = scaler.transform(X_test)
-
-# Hyperparameter tuning
-nu_values = [0.01, 0.05, 0.1, 0.2, 0.3, 0.5]
-gamma_values = ['scale', 'auto', 0.001, 0.01, 0.1, 1.0]
-
-best_params = {}
-best_accuracy = 0
-
-for nu in nu_values:
-    for gamma in gamma_values:
-        ocsvm = OneClassSVM(nu=nu, gamma=gamma, kernel='rbf')
-        ocsvm.fit(X_normal_scaled)
-        
-        predictions = ocsvm.predict(X_test_scaled)
-        # Convert: +1 → 0 (normal), -1 → 1 (anomaly)
-        y_pred = np.where(predictions == 1, 0, 1)
-        accuracy = accuracy_score(y_test, y_pred)
-        
-        if accuracy > best_accuracy:
-            best_accuracy = accuracy
-            best_params = {'nu': nu, 'gamma': gamma}</pre>
-      </div>
-
-      <h3>Best Practices</h3>
-      <div class="tip-box">
-        <h5>One-Class SVM Guidelines</h5>
-        <p>• <strong>Feature scaling:</strong> Always scale features for SVM</p>
-        <p>• <strong>Nu parameter:</strong> Start with expected outlier fraction</p>
-        <p>• <strong>Gamma tuning:</strong> Use grid search with cross-validation</p>
-        <p>• <strong>Evaluation:</strong> Focus on recall for anomaly class</p>
-      </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Common Challenges</h5>
-        <p>• <strong>Poor anomaly detection:</strong> Adjust nu parameter, try different gamma</p>
-        <p>• <strong>Too many false positives:</strong> Decrease nu value</p>
-        <p>• <strong>Too many false negatives:</strong> Increase nu value</p>
-        <p>• <strong>Training instability:</strong> Ensure sufficient normal examples</p>
-      </div>
     </div>
   </section>
 
-  <!-- ======= 11. LOCALLY WEIGHTED LINEAR REGRESSION ======= -->
+  <!-- 11. LOCALLY WEIGHTED LINEAR REGRESSION -->
   <section class="section dark" id="locally-weighted-regression">
     <div class="wrap">
       <h2>📈 Locally Weighted Linear Regression</h2>
       <p class="muted">Non-parametric regression with local model fitting</p>
-
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required packages</div>
-        <pre>import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import KFold</pre>
-      </div>
-
-      <h3>Core Concepts</h3>
-      
-      <h4>Mathematical Foundation</h4>
-      <ul>
-        <li><strong>Local fitting:</strong> Fit linear model locally around prediction point</li>
-        <li><strong>Weighted regression:</strong> Points closer to prediction get higher weight</li>
-        <li><strong>Gaussian kernel:</strong> Weight function based on distance</li>
-        <li><strong>Bandwidth parameter:</strong> Controls locality of fit</li>
-      </ul>
 
       <div class="formula">
         <strong>Objective:</strong> min Σ (yᵢ - β₀ - (x - xᵢ)ᵀβ₁)² Kₕ(x - xᵢ)<br>
@@ -1217,164 +969,31 @@ from sklearn.model_selection import KFold</pre>
         <strong>Gaussian Kernel:</strong> Kₕ(z) = exp(-||z||²/(2h²))
       </div>
 
-      <h4>Matrix Definitions</h4>
-      <ul>
-        <li><strong>X:</strong> (n × (p+1)) design matrix [1, (x-x₁)ᵀ; 1, (x-x₂)ᵀ; ...]</li>
-        <li><strong>W:</strong> (n × n) diagonal weight matrix with Wᵢᵢ = Kₕ(x - xᵢ)</li>
-        <li><strong>Y:</strong> (n × 1) response vector [y₁, y₂, ..., yₙ]ᵀ</li>
-      </ul>
-
-      <h3>Code Examples</h3>
-      <div class="code-section">
-        <div class="code-label">LWLR Implementation</div>
-        <pre>def gaussian_kernel(z, h):
-    """Gaussian kernel function"""
-    return np.exp(-np.sum(z**2, axis=-1) / (2 * h**2))
-
-def locally_weighted_regression(X_train, y_train, x_pred, h):
-    """LWLR at single prediction point"""
-    n, p = X_train.shape
-    
-    # Compute weights
-    weights = gaussian_kernel(X_train - x_pred, h)
-    
-    # Design matrix: [1, (X_train - x_pred)]
-    X_design = np.column_stack([np.ones(n), X_train - x_pred])
-    
-    # Weighted least squares
-    W = np.diag(weights)
-    XTW = X_design.T @ W
-    beta = np.linalg.solve(XTW @ X_design, XTW @ y_train)
-    
-    # Prediction is β₀
-    return beta[0]
-
-# Cross-validation for bandwidth selection
-def cross_validate_lwlr(X, y, h_values, cv_folds=5):
-    kf = KFold(n_splits=cv_folds, shuffle=True, random_state=42)
-    cv_errors = []
-    
-    for h in h_values:
-        fold_errors = []
-        for train_idx, val_idx in kf.split(X):
-            X_train, X_val = X[train_idx], X[val_idx]
-            y_train, y_val = y[train_idx], y[val_idx]
-            
-            y_pred = [locally_weighted_regression(X_train, y_train, x, h) 
-                     for x in X_val.flatten()]
-            mse = np.mean((y_val - np.array(y_pred))**2)
-            fold_errors.append(mse)
-        
-        cv_errors.append(np.mean(fold_errors))
-    
-    return np.array(cv_errors)</pre>
-      </div>
-
-      <h3>Best Practices</h3>
       <div class="tip-box">
         <h5>LWLR Implementation Tips</h5>
         <p>• <strong>Bandwidth selection:</strong> Use cross-validation for optimal h</p>
         <p>• <strong>Numerical stability:</strong> Add small regularization to XᵀWX</p>
         <p>• <strong>Computational efficiency:</strong> Pre-compute distances when possible</p>
-        <p>• <strong>Kernel choice:</strong> Gaussian is most common, but others work</p>
-      </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Implementation Issues</h5>
-        <p>• <strong>Singular matrix:</strong> Add regularization or increase bandwidth</p>
-        <p>• <strong>Poor predictions:</strong> Check bandwidth selection and data quality</p>
-        <p>• <strong>Slow computation:</strong> Use approximate methods for large datasets</p>
-        <p>• <strong>Boundary effects:</strong> Consider different kernels or padding</p>
       </div>
     </div>
   </section>
 
-  <!-- ======= 12. BIAS-VARIANCE TRADEOFF ======= -->
-  <section class="section accent" id="bias-variance-tradeoff">
+  <!-- 12. BIAS-VARIANCE TRADEOFF -->
+  <section class="section" id="bias-variance-tradeoff">
     <div class="wrap">
       <h2>⚖️ Bias-Variance Tradeoff</h2>
       <p class="muted">Understanding the fundamental tradeoff in machine learning</p>
 
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required packages</div>
-        <pre>import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import learning_curve, validation_curve</pre>
-      </div>
-
-      <h3>Core Concepts</h3>
-      
-      <h4>Fundamental Decomposition</h4>
       <div class="formula">
-        <strong>Total Error = Bias² + Variance + Irreducible Error</strong><br>
-        <strong>Bias:</strong> E[f̂(x)] - f(x)<br>
-        <strong>Variance:</strong> E[(f̂(x) - E[f̂(x)])²]
+        <strong>Total Error = Bias² + Variance + Irreducible Error</strong>
       </div>
 
       <h4>Model Complexity Effects</h4>
       <ul>
-        <li><strong>High Bias (Underfitting):</strong>
-          <ul>
-            <li>Model too simple to capture true relationship</li>
-            <li>Poor performance on both training and test data</li>
-            <li>Examples: Linear model for nonlinear data</li>
-          </ul>
-        </li>
-        <li><strong>High Variance (Overfitting):</strong>
-          <ul>
-            <li>Model too complex, fits noise in training data</li>
-            <li>Good training performance, poor test performance</li>
-            <li>Examples: Deep decision tree, high-degree polynomial</li>
-          </ul>
-        </li>
+        <li><strong>High Bias (Underfitting):</strong> Model too simple, poor on both train and test</li>
+        <li><strong>High Variance (Overfitting):</strong> Model too complex, good train, poor test</li>
       </ul>
 
-      <h4>Method-Specific Tradeoffs</h4>
-      <ul>
-        <li><strong>LWLR:</strong> Bandwidth h controls tradeoff (small h = low bias, high variance)</li>
-        <li><strong>Decision Trees:</strong> Depth controls tradeoff</li>
-        <li><strong>Regularization:</strong> λ parameter controls tradeoff</li>
-        <li><strong>Neural Networks:</strong> Architecture and training time</li>
-      </ul>
-
-      <h3>Code Examples</h3>
-      <div class="code-section">
-        <div class="code-label">Bias-Variance Analysis</div>
-        <pre># Validation curve to visualize bias-variance tradeoff
-from sklearn.model_selection import validation_curve
-
-# Example: Decision tree depth
-param_range = np.arange(1, 11)
-train_scores, test_scores = validation_curve(
-    DecisionTreeClassifier(random_state=42), 
-    X, y, param_name='max_depth', param_range=param_range,
-    cv=5, scoring='accuracy'
-)
-
-# Plot bias-variance tradeoff
-plt.figure(figsize=(10, 6))
-plt.plot(param_range, np.mean(train_scores, axis=1), 'o-', label='Training Score')
-plt.plot(param_range, np.mean(test_scores, axis=1), 'o-', label='Validation Score')
-plt.xlabel('Max Depth (Model Complexity)')
-plt.ylabel('Accuracy')
-plt.title('Bias-Variance Tradeoff')
-plt.legend()
-plt.grid(True)
-
-# Bias-variance decomposition (conceptual)
-def bias_variance_decomposition(true_function, model_predictions):
-    """
-    Conceptual bias-variance decomposition
-    """
-    mean_prediction = np.mean(model_predictions, axis=0)
-    bias_squared = np.mean((mean_prediction - true_function)**2)
-    variance = np.mean(np.var(model_predictions, axis=0))
-    return bias_squared, variance</pre>
-      </div>
-
-      <h3>Best Practices</h3>
       <div class="tip-box">
         <h5>Managing Bias-Variance Tradeoff</h5>
         <p>• <strong>Cross-validation:</strong> Use for model selection and hyperparameter tuning</p>
@@ -1382,35 +1001,15 @@ def bias_variance_decomposition(true_function, model_predictions):
         <p>• <strong>Ensemble methods:</strong> Combine multiple models to reduce variance</p>
         <p>• <strong>Data size:</strong> More data generally reduces variance</p>
       </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Diagnosis and Solutions</h5>
-        <p>• <strong>High Bias:</strong> Increase model complexity, add features, reduce regularization</p>
-        <p>• <strong>High Variance:</strong> Decrease complexity, add regularization, get more data</p>
-        <p>• <strong>Both High:</strong> Review model choice and data quality</p>
-        <p>• <strong>Validation:</strong> Use learning curves to diagnose the problem</p>
-      </div>
     </div>
   </section>
 
-  <!-- ======= 13. CROSS-VALIDATION TECHNIQUES ======= -->
+  <!-- 13. CROSS-VALIDATION TECHNIQUES -->
   <section class="section dark" id="cross-validation">
     <div class="wrap">
       <h2>✅ Cross-Validation Techniques</h2>
       <p class="muted">Robust model evaluation and selection methods</p>
 
-      <h3>Installation & Setup</h3>
-      <div class="code-section">
-        <div class="code-label">Required imports</div>
-        <pre>from sklearn.model_selection import (
-    cross_val_score, KFold, StratifiedKFold, 
-    LeaveOneOut, cross_validate, GridSearchCV
-)</pre>
-      </div>
-
-      <h3>Core Concepts</h3>
-      
       <h4>Types of Cross-Validation</h4>
       <ul>
         <li><strong>K-Fold CV:</strong> Split data into k folds, train on k-1, test on 1</li>
@@ -1419,314 +1018,80 @@ def bias_variance_decomposition(true_function, model_predictions):
         <li><strong>Time Series CV:</strong> Respect temporal order in splits</li>
       </ul>
 
-      <h4>Applications</h4>
-      <ul>
-        <li><strong>Model evaluation:</strong> Unbiased estimate of model performance</li>
-        <li><strong>Hyperparameter tuning:</strong> Select optimal parameters</li>
-        <li><strong>Model selection:</strong> Compare different algorithms</li>
-        <li><strong>Feature selection:</strong> Evaluate feature importance</li>
-      </ul>
-
-      <div class="formula">
-        <strong>K-Fold CV Error:</strong> CV = (1/k) Σ L(fᵢ, Dᵢ)<br>
-        <strong>Standard Error:</strong> SE = √(Var(CV errors)/k)
-      </div>
-
-      <h3>Code Examples</h3>
       <div class="code-section">
         <div class="code-label">Cross-Validation Implementation</div>
-        <pre># Basic cross-validation
-from sklearn.model_selection import cross_val_score
+        <pre>from sklearn.model_selection import cross_val_score
 
 # 5-fold cross-validation
 scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
-print(f"CV Score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
-
-# Stratified K-Fold for classification
-skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-scores = cross_val_score(model, X, y, cv=skf, scoring='accuracy')
-
-# Manual cross-validation loop
-kf = KFold(n_splits=5, shuffle=True, random_state=42)
-cv_errors = []
-
-for train_idx, val_idx in kf.split(X):
-    X_train, X_val = X[train_idx], X[val_idx]
-    y_train, y_val = y[train_idx], y[val_idx]
-    
-    model.fit(X_train, y_train)
-    y_pred = model.predict(X_val)
-    error = 1 - accuracy_score(y_val, y_pred)
-    cv_errors.append(error)
-
-cv_error = np.mean(cv_errors)
-cv_std = np.std(cv_errors)
-
-# Grid search with cross-validation
-from sklearn.model_selection import GridSearchCV
-
-param_grid = {
-    'max_depth': [3, 5, 7, 10],
-    'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4]
-}
-
-grid_search = GridSearchCV(
-    DecisionTreeClassifier(random_state=42),
-    param_grid, cv=5, scoring='accuracy', n_jobs=-1
-)
-grid_search.fit(X, y)
-
-print(f"Best parameters: {grid_search.best_params_}")
-print(f"Best CV score: {grid_search.best_score_:.3f}")</pre>
-      </div>
-
-      <h3>Best Practices</h3>
-      <div class="tip-box">
-        <h5>Cross-Validation Guidelines</h5>
-        <p>• <strong>Fold selection:</strong> 5-10 folds typically optimal (bias-variance tradeoff)</p>
-        <p>• <strong>Stratification:</strong> Use for classification to maintain class balance</p>
-        <p>• <strong>Shuffle data:</strong> Unless temporal dependencies exist</p>
-        <p>• <strong>Nested CV:</strong> Use for unbiased model comparison with hyperparameter tuning</p>
-      </div>
-
-      <h3>Troubleshooting</h3>
-      <div class="warning-box">
-        <h5>Common Pitfalls</h5>
-        <p>• <strong>Data leakage:</strong> Ensure no information flows from test to train</p>
-        <p>• <strong>Small datasets:</strong> Use LOO or stratified sampling</p>
-        <p>• <strong>Imbalanced data:</strong> Use stratified CV and appropriate metrics</p>
-        <p>• <strong>Time series:</strong> Use time-based splits, not random</p>
+print(f"CV Score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")</pre>
       </div>
     </div>
   </section>
 
-  <!-- ======= 14. TROUBLESHOOTING GUIDE ======= -->
+  <!-- 14. TROUBLESHOOTING GUIDE -->
   <section class="section" id="troubleshooting">
     <div class="wrap">
       <h2>🔧 Common Issues & Solutions</h2>
       <p class="muted">Solutions to frequent problems in data processing and machine learning</p>
 
-      <h3>OpenRefine Issues</h3>
-
       <div class="warning-box">
-        <h5>⚠️ "GREL Expression Error"</h5>
-        <p><strong>Problem:</strong> GREL syntax errors or unexpected results</p>
-        <p><strong>Solutions:</strong></p>
-        <p>• Test expressions on small data samples first</p>
-        <p>• Use parentheses to ensure proper order of operations</p>
-        <p>• Check for typos in function names (case-sensitive)</p>
-        <p>• Use <code>value.toString()</code> if working with numbers</p>
-      </div>
-
-      <div class="warning-box">
-        <h5>⚠️ "Row Count Mismatch After Filtering"</h5>
-        <p><strong>Problem:</strong> Lost rows during data processing</p>
-        <p><strong>Solutions:</strong></p>
-        <p>• Check for case sensitivity in filters</p>
-        <p>• Verify GREL expressions don't return empty strings</p>
-        <p>• Use facets to inspect data before filtering</p>
-        <p>• Export history to track which operation caused loss</p>
-      </div>
-
-      <h3>Python/Pandas Issues</h3>
-
-      <div class="warning-box">
-        <h5>⚠️ "KeyError: Column not found"</h5>
-        <p><strong>Problem:</strong> Referencing non-existent column</p>
-        <div class="code-section">
-          <div class="code-label">Solution</div>
-          <pre># Check available columns
-print(df.columns.tolist())
-
-# Safe column access
-if 'column_name' in df.columns:
-    result = df['column_name']
-else:
-    print("Column not found")
-
-# Use .get() method for safe access
-value = df.get('column_name', default_value)</pre>
-        </div>
-      </div>
-
-      <div class="warning-box">
-        <h5>⚠️ "SettingWithCopyWarning"</h5>
-        <p><strong>Problem:</strong> Pandas warning about chained assignments</p>
-        <div class="code-section">
-          <div class="code-label">Solution</div>
-          <pre># Avoid chained assignment
-# Bad: df[df['A'] > 5]['B'] = 'new_value'
-
-# Good: Use .loc
-df.loc[df['A'] > 5, 'B'] = 'new_value'
-
-# Or create explicit copy
-subset = df[df['A'] > 5].copy()
-subset['B'] = 'new_value'</pre>
-        </div>
-      </div>
-
-      <h3>Machine Learning Issues</h3>
-
-      <div class="warning-box">
-        <h5>⚠️ "Model Overfitting"</h5>
+        <h5>⚠️ Model Overfitting</h5>
         <p><strong>Problem:</strong> High training accuracy, poor test performance</p>
-        <p><strong>Solutions:</strong></p>
-        <p>• Reduce model complexity (less depth, fewer features)</p>
-        <p>• Add regularization (L1/L2 penalties)</p>
-        <p>• Use cross-validation for hyperparameter tuning</p>
-        <p>• Collect more training data</p>
-        <p>• Use ensemble methods to reduce variance</p>
+        <p><strong>Solutions:</strong> Reduce model complexity, add regularization, use cross-validation, get more data</p>
       </div>
 
       <div class="warning-box">
-        <h5>⚠️ "Poor Cross-Validation Results"</h5>
-        <p><strong>Problem:</strong> High variance in CV scores</p>
-        <p><strong>Solutions:</strong></p>
-        <p>• Check data distribution and class balance</p>
-        <p>• Use stratified CV for classification</p>
-        <p>• Increase number of CV folds</p>
-        <p>• Check for data leakage</p>
-        <p>• Ensure proper preprocessing</p>
+        <h5>⚠️ SettingWithCopyWarning in Pandas</h5>
+        <p><strong>Problem:</strong> Pandas warning about chained assignments</p>
+        <p><strong>Solution:</strong> Use <code>.loc</code> for assignment: <code>df.loc[df['A'] > 5, 'B'] = 'value'</code></p>
       </div>
 
-      <h3>Flask Issues</h3>
-
       <div class="warning-box">
-        <h5>⚠️ "Template Not Found"</h5>
+        <h5>⚠️ Template Not Found (Flask)</h5>
         <p><strong>Problem:</strong> Flask can't locate HTML templates</p>
-        <p><strong>Solutions:</strong></p>
-        <p>• Ensure templates are in <code>templates/</code> folder</p>
-        <p>• Check file name spelling and case</p>
-        <p>• Verify Flask app initialization includes template folder</p>
-        <div class="code-section">
-          <div class="code-label">Correct Structure</div>
-          <pre>app = Flask(__name__, template_folder='templates')</pre>
-        </div>
-      </div>
-
-      <h3>RegEx Debugging</h3>
-
-      <div class="tip-box">
-        <h5>💡 RegEx Testing Strategy</h5>
-        <p>• Use online tools: regex101.com, regexr.com</p>
-        <p>• Test patterns incrementally (build complexity gradually)</p>
-        <p>• Print intermediate results to debug extraction</p>
-        <div class="code-section">
-          <div class="code-label">Debug RegEx Pattern</div>
-          <pre>import re
-
-def debug_regex(pattern, text):
-    """Debug regex pattern with detailed output"""
-    print(f"Pattern: {pattern}")
-    print(f"Text: {text}")
-    
-    match = re.search(pattern, text)
-    if match:
-        print(f"Full match: '{match.group()}'")
-        for i, group in enumerate(match.groups(), 1):
-            print(f"Group {i}: '{group}'")
-    else:
-        print("No match found")
-    
-    # Test with findall for multiple matches
-    all_matches = re.findall(pattern, text)
-    print(f"All matches: {all_matches}")
-
-# Usage
-debug_regex(r'([A-Z][a-z]+)\s+(Airport)', 
-           "Beijing Capital Airport and Shanghai Pudong Airport")</pre>
-        </div>
+        <p><strong>Solutions:</strong> Ensure templates are in <code>templates/</code> folder, check file name spelling</p>
       </div>
     </div>
   </section>
 
-  <!-- ======= 15. FUTURE LEARNING AREAS ======= -->
+  <!-- 15. FUTURE LEARNING AREAS -->
   <section class="section dark" id="future">
     <div class="wrap">
       <h2>🚀 Future Learning Areas</h2>
       <p class="muted">Structured areas for expanding knowledge and skills</p>
 
-      <h3>Advanced Machine Learning</h3>
       <div class="future-section">
         <h4>🧠 Deep Learning</h4>
-        <p>Add notes on: neural networks, TensorFlow/PyTorch, CNNs, RNNs, transformers, deep learning architectures</p>
+        <p>Neural networks, TensorFlow/PyTorch, CNNs, RNNs, transformers</p>
       </div>
 
-      <div class="future-section">
-        <h4>📊 Advanced ML Algorithms</h4>
-        <p>Add tutorials for: SVM kernels, clustering algorithms, dimensionality reduction, reinforcement learning</p>
-      </div>
-
-      <h3>Data Science & Analytics</h3>
       <div class="future-section">
         <h4>📈 Data Visualization</h4>
-        <p>Add tutorials for: matplotlib, seaborn, plotly, dashboard creation, interactive charts</p>
-      </div>
-
-      <div class="future-section">
-        <h4>🔍 Feature Engineering</h4>
-        <p>Add content on: feature selection, feature creation, text processing, time series features</p>
-      </div>
-
-      <h3>Web Development</h3>
-      <div class="future-section">
-        <h4>🌐 Advanced Flask</h4>
-        <p>Add content on: database integration, user authentication, API development, deployment strategies</p>
-      </div>
-
-      <div class="future-section">
-        <h4>⚛️ Frontend Technologies</h4>
-        <p>Add learning notes for: JavaScript, React, HTML/CSS advanced techniques, responsive design</p>
-      </div>
-
-      <h3>Database & SQL</h3>
-      <div class="future-section">
-        <h4>🗄️ Database Design</h4>
-        <p>Add tutorials on: SQL queries, database normalization, performance optimization, NoSQL databases</p>
-      </div>
-
-      <h3>Tools & Automation</h3>
-      <div class="future-section">
-        <h4>🔧 Development Tools</h4>
-        <p>Add guides for: Git version control, Docker containerization, CI/CD pipelines, testing frameworks</p>
+        <p>Matplotlib, seaborn, plotly, dashboard creation, interactive charts</p>
       </div>
 
       <div class="future-section">
         <h4>☁️ Cloud Platforms</h4>
-        <p>Add learning for: AWS, Azure, Google Cloud, serverless computing, cloud databases</p>
-      </div>
-
-      <h3>How to Add New Learning Sections</h3>
-      <div class="tip-box">
-        <h5>📝 Template for New Topics</h5>
-        <p>1. Create a new section with appropriate ID</p>
-        <p>2. Include: Overview, Installation/Setup, Core Concepts, Code Examples, Best Practices</p>
-        <p>3. Add practical examples and real-world use cases</p>
-        <p>4. Include troubleshooting section for common issues</p>
-        <p>5. Update table of contents with new section</p>
+        <p>AWS, Azure, Google Cloud, serverless computing</p>
       </div>
     </div>
   </section>
 
-  <!-- ======= FOOTER ======= -->
+  <!-- FOOTER -->
   <footer>
     © <span id="year"></span> Tanvir Bakther • Comprehensive Learning Reference
   </footer>
 
   <script>
-    // Navbar scroll effect
     const navbar = document.getElementById('navbar');
     addEventListener('scroll', () => {
       if (scrollY > 80) navbar.classList.add('scrolled'); 
       else navbar.classList.remove('scrolled');
     });
 
-    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -1737,7 +1102,6 @@ debug_regex(r'([A-Z][a-z]+)\s+(Airport)',
       });
     });
 
-    // Copy code functionality (optional enhancement)
     document.querySelectorAll('.code-section').forEach(section => {
       const pre = section.querySelector('pre');
       if (pre) {
@@ -1748,10 +1112,10 @@ debug_regex(r'([A-Z][a-z]+)\s+(Airport)',
           position: absolute;
           top: 8px;
           right: 8px;
-          background: #d4af37;
-          color: #000;
+          background: var(--gold-400);
+          color: var(--dark-400);
           border: none;
-          padding: 4px 8px;
+          padding: 4px 10px;
           border-radius: 4px;
           font-size: 12px;
           cursor: pointer;
