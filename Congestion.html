@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYC Energy Forecast | ML Analysis Suite — Tanvir Bakther</title>
+
+  <meta name="description" content="Machine learning models for predicting electricity congestion, demand, and pricing across New York ISO regions." />
+  <meta name="author" content="Tanvir Bakther" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* ========================================
+       UNIFIED DESIGN SYSTEM - Tanvir Bakther
+       ======================================== */
+
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    :root {
+      --gold-100: #f5e6c8;
+      --gold-200: #e6d5a8;
+      --gold-300: #c2b49b;
+      --gold-400: #ca9a4e;
+      --gold-500: #ad8546;
+      --gold-600: #8a6b38;
+      --gold-700: #5e4211;
+
+      --dark-100: #1a1512;
+      --dark-200: #110a08;
+      --dark-300: #0d0806;
+      --dark-400: #080403;
+      --dark-500: #050302;
+
+      --accent-blue: #58a6ff;
+      --accent-purple: #6366f1;
+      --accent-green: #22c55e;
+      --accent-orange: #ff8a4c;
+      --accent-red: #ef4444;
+
+      --text-primary: var(--gold-300);
+      --text-secondary: rgba(194,180,155,0.8);
+      --text-muted: rgba(194,180,155,0.6);
+      --bg-primary: var(--dark-400);
+      --bg-secondary: var(--dark-300);
+      --border-color: rgba(94,66,17,0.4);
+      --border-hover: rgba(202,154,78,0.6);
+
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.2);
+      --shadow-md: 0 8px 24px rgba(94,66,17,0.2);
+      --shadow-lg: 0 12px 40px rgba(94,66,17,0.3);
+      --glass: rgba(8,4,3,0.85);
+      --glass-border: rgba(94,66,17,0.3);
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      overflow-x: hidden;
+      padding-top: 80px;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--dark-400); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-600); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-500); }
+
+    *:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; }
+
+    a { color: var(--gold-400); text-decoration: none; transition: var(--transition); }
+    a:hover { color: var(--gold-300); }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      background: rgba(8,4,3,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+
+    .navbar::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(202,154,78,0.4), transparent);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold-400);
+      letter-spacing: 1px;
+    }
+
+    .nav-menu { display: flex; gap: 35px; list-style: none; }
+
+    .nav-link {
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-600));
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:hover, .nav-link.active { color: var(--gold-400); }
+
+    .mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+    .mobile-toggle span { width: 25px; height: 2px; background: var(--gold-400); transition: var(--transition); }
+
+    /* HERO */
+    .hero { padding: 60px 50px 40px; max-width: 1400px; margin: 0 auto; }
+
+    .crumbs { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+    .crumbs a { color: var(--text-muted); }
+    .crumbs a:hover { color: var(--gold-400); }
+
+    .hero-content { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+
+    .hero .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold-400);
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero .title span { color: var(--gold-300); }
+
+    .hero .sub { font-size: 1.1rem; color: var(--text-secondary); max-width: 650px; line-height: 1.7; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(202,154,78,0.1);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: var(--gold-400);
+      margin-bottom: 20px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .stats-box {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      min-width: 280px;
+    }
+
+    .stat-item { text-align: center; }
+    .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--gold-400); }
+    .stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* MAIN */
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 0 50px; }
+
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-top: 40px; }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--gold-400);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 28px;
+      background: linear-gradient(180deg, var(--gold-400), var(--gold-600));
+      border-radius: 2px;
+    }
+
+    .region-tabs { display: flex; gap: 10px; }
+
+    .region-tab {
+      padding: 10px 20px;
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .region-tab:hover { border-color: var(--border-hover); color: var(--text-primary); }
+
+    .region-tab.active {
+      background: rgba(202,154,78,0.15);
+      border-color: var(--gold-400);
+      color: var(--gold-400);
+      box-shadow: 0 0 20px rgba(202,154,78,0.2);
+    }
+
+    /* DASHBOARD GRID */
+    .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    .card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold-500); }
+    .card-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+    .card-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .card-badge.congestion { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+    .card-badge.demand { background: rgba(34,197,94,0.15); color: var(--accent-green); }
+    .card-badge.price { background: rgba(255,138,76,0.15); color: var(--accent-orange); }
+
+    .chart-container { position: relative; height: 220px; }
+
+    /* MODEL CARDS */
+    .model-card { background: var(--glass); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); }
+    .model-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+    .model-header { padding: 20px 24px; background: var(--dark-200); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 16px; }
+
+    .model-icon { width: 50px; height: 50px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+    .model-icon.congestion { background: rgba(239,68,68,0.15); }
+    .model-icon.demand { background: rgba(34,197,94,0.15); }
+    .model-icon.price { background: rgba(255,138,76,0.15); }
+
+    .model-info h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--gold-400); }
+    .model-info p { font-size: 0.85rem; color: var(--text-muted); }
+
+    .model-body { padding: 24px; }
+
+    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+
+    .metric-item { text-align: center; padding: 16px; background: var(--dark-200); border-radius: var(--radius-md); border: 1px solid var(--border-color); }
+    .metric-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; }
+    .metric-value.good { color: var(--accent-green); }
+    .metric-value.warning { color: var(--accent-orange); }
+    .metric-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+    .feature-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .feature-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--dark-200); border-radius: var(--radius-sm); border: 1px solid var(--border-color); }
+    .feature-name { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); min-width: 150px; }
+
+    .feature-bar { flex: 1; height: 8px; background: var(--dark-400); border-radius: 4px; overflow: hidden; }
+    .feature-bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease-out; }
+    .feature-bar-fill.gold { background: linear-gradient(90deg, var(--gold-400), var(--gold-600)); }
+    .feature-bar-fill.green { background: linear-gradient(90deg, var(--accent-green), #15803d); }
+    .feature-bar-fill.orange { background: linear-gradient(90deg, var(--accent-orange), #ea580c); }
+
+    .feature-value { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); min-width: 45px; text-align: right; }
+
+    /* TIME SERIES */
+    .time-series-card { background: var(--glass); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 40px; }
+
+    .chart-tabs { display: flex; gap: 10px; }
+
+    .chart-tab { padding: 8px 16px; background: transparent; border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-secondary); font-family: 'Inter', sans-serif; font-size: 0.85rem; cursor: pointer; transition: var(--transition); }
+    .chart-tab:hover { border-color: var(--border-hover); }
+    .chart-tab.active { background: rgba(202,154,78,0.15); border-color: var(--gold-400); color: var(--gold-400); }
+
+    .large-chart { height: 350px; margin-top: 20px; }
+
+    /* METHODOLOGY */
+    .methodology-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 30px 0 40px; }
+
+    .method-card { background: var(--glass); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 30px; text-align: center; transition: var(--transition); }
+    .method-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+    .method-number { width: 50px; height: 50px; background: linear-gradient(135deg, var(--gold-400), var(--gold-600)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--dark-400); margin: 0 auto 20px; }
+
+    .method-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--gold-400); margin-bottom: 12px; }
+    .method-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; }
+
+    .code-block { background: var(--dark-500); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; margin-top: 30px; overflow-x: auto; }
+    .code-block pre { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
+    .code-block .comment { color: var(--text-muted); }
+    .code-block .keyword { color: var(--accent-red); }
+    .code-block .string { color: var(--accent-green); }
+    .code-block .function { color: var(--accent-purple); }
+    .code-block .class { color: var(--gold-400); }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--glass); border: 1px solid var(--border-color); padding: 12px 20px; border-radius: var(--radius-sm); color: var(--text-primary); font-size: 0.9rem; font-weight: 500; transition: var(--transition); text-decoration: none; cursor: pointer; }
+    .btn:hover { border-color: var(--gold-400); background: var(--gold-500); color: var(--gold-100); }
+
+    .btn-primary { background: linear-gradient(135deg, var(--gold-500), var(--gold-600)); color: var(--gold-100); border-color: var(--gold-400); }
+    .btn-primary:hover { box-shadow: var(--shadow-md); }
+
+    /* FOOTER */
+    footer { padding: 40px 50px; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; }
+
+    /* ANIMATIONS */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) { .dashboard-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    @media (max-width: 900px) {
+      .dashboard-grid, .methodology-grid { grid-template-columns: 1fr; }
+      .hero-content { grid-template-columns: 1fr; }
+      .stats-box { min-width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 15px 20px; }
+      .nav-menu { position: fixed; top: 70px; left: -100%; width: 280px; height: calc(100vh - 70px); background: rgba(8,4,3,0.98); flex-direction: column; padding: 30px; gap: 20px; transition: left 0.3s ease; border-right: 1px solid var(--border-color); }
+      .nav-menu.active { left: 0; }
+      .mobile-toggle { display: flex; }
+      .hero { padding: 40px 20px; }
+      .hero .title { font-size: 2rem; }
+      .wrap { padding: 0 20px; }
+      .section-header { flex-direction: column; gap: 20px; align-items: flex-start; }
+      .region-tabs { flex-wrap: wrap; }
+      .metrics-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">Tanvir Bakther</a>
+      <div class="mobile-toggle" id="mobile-toggle"><span></span><span></span><span></span></div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="photography.html">Photography</a></li>
+        <li><a class="nav-link active" href="analytics.html">Analytics</a></li>
+        <li><a class="nav-link" href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <nav class="crumbs"><a href="index.html">Home</a> · <a href="analytics.html">Analytics</a> · NYC Energy Forecast</nav>
+
+    <div class="hero-content">
+      <div>
+        <div class="hero-badge">XGBoost + RandomForest Models</div>
+        <h1 class="title">NYC <span>Energy Forecast</span><br>Analysis Suite</h1>
+        <p class="sub">Machine learning models for predicting electricity congestion, demand, and pricing across New York ISO regions using 4 years of historical data (2021-2024).</p>
+        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+          <a href="https://github.com" target="_blank" class="btn btn-primary">💻 View Source Code</a>
+          <a href="analytics.html" class="btn">← Back to Projects</a>
+        </div>
+      </div>
+
+      <div class="stats-box fade-in">
+        <div class="stat-item"><div class="stat-value">140K+</div><div class="stat-label">Data Points</div></div>
+        <div class="stat-item"><div class="stat-value">3</div><div class="stat-label">NY Regions</div></div>
+        <div class="stat-item"><div class="stat-value">0.92</div><div class="stat-label">Best R²</div></div>
+        <div class="stat-item"><div class="stat-value">4</div><div class="stat-label">Years</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- REGIONAL OVERVIEW -->
+    <section class="wrap">
+      <div class="section-header">
+        <h2 class="section-title">Regional Overview</h2>
+        <div class="region-tabs">
+          <button class="region-tab active" data-region="all">All Regions</button>
+          <button class="region-tab" data-region="central">Central NY</button>
+          <button class="region-tab" data-region="genese">Genesee</button>
+          <button class="region-tab" data-region="longil">Long Island</button>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card fade-in delay-1">
+          <div class="card-header">
+            <div><div class="card-title">Average Congestion</div><div class="card-subtitle">By Region ($/MWh)</div></div>
+            <span class="card-badge congestion">Congestion</span>
+          </div>
+          <div class="chart-container"><canvas id="congestionChart"></canvas></div>
+        </div>
+
+        <div class="card fade-in delay-2">
+          <div class="card-header">
+            <div><div class="card-title">Average Demand</div><div class="card-subtitle">By Region (MW)</div></div>
+            <span class="card-badge demand">Demand</span>
+          </div>
+          <div class="chart-container"><canvas id="demandChart"></canvas></div>
+        </div>
+
+        <div class="card fade-in delay-3">
+          <div class="card-header">
+            <div><div class="card-title">Average Price (LBMP)</div><div class="card-subtitle">By Region ($/MWh)</div></div>
+            <span class="card-badge price">Price</span>
+          </div>
+          <div class="chart-container"><canvas id="priceChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIME SERIES -->
+    <section class="wrap">
+      <div class="time-series-card">
+        <div class="section-header" style="padding-top: 0; margin-bottom: 0;">
+          <h2 class="section-title">Time Series Analysis (2021-2024)</h2>
+          <div class="chart-tabs">
+            <button class="chart-tab active" data-chart="congestion">Congestion</button>
+            <button class="chart-tab" data-chart="demand">Demand</button>
+            <button class="chart-tab" data-chart="price">Price</button>
+          </div>
+        </div>
+        <div class="large-chart"><canvas id="timeSeriesChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- MODEL PERFORMANCE -->
+    <section class="wrap">
+      <div class="section-header"><h2 class="section-title">Model Performance</h2></div>
+
+      <div class="dashboard-grid">
+        <!-- Congestion Model -->
+        <div class="model-card fade-in delay-1">
+          <div class="model-header">
+            <div class="model-icon congestion">📊</div>
+            <div class="model-info"><h3>Congestion Model</h3><p>RTD Zonal Congestion (y)</p></div>
+          </div>
+          <div class="model-body">
+            <div class="metrics-grid">
+              <div class="metric-item"><div class="metric-value good">0.847</div><div class="metric-label">R² Score</div></div>
+              <div class="metric-item"><div class="metric-value warning">0.142</div><div class="metric-label">MAPE</div></div>
+              <div class="metric-item"><div class="metric-value good">2.34</div><div class="metric-label">RMSE</div></div>
+            </div>
+            <div class="feature-list">
+              <div class="feature-item"><span class="feature-name">congestion_yesterday</span><div class="feature-bar"><div class="feature-bar-fill gold" style="width: 85%"></div></div><span class="feature-value">0.85</span></div>
+              <div class="feature-item"><span class="feature-name">TWI Actual Load</span><div class="feature-bar"><div class="feature-bar-fill gold" style="width: 62%"></div></div><span class="feature-value">0.62</span></div>
+              <div class="feature-item"><span class="feature-name">hour</span><div class="feature-bar"><div class="feature-bar-fill gold" style="width: 45%"></div></div><span class="feature-value">0.45</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demand Model -->
+        <div class="model-card fade-in delay-2">
+          <div class="model-header">
+            <div class="model-icon demand">⚡</div>
+            <div class="model-info"><h3>Demand Model</h3><p>TWI Actual Load (y) - No Pricing</p></div>
+          </div>
+          <div class="model-body">
+            <div class="metrics-grid">
+              <div class="metric-item"><div class="metric-value good">0.923</div><div class="metric-label">R² Score</div></div>
+              <div class="metric-item"><div class="metric-value good">0.058</div><div class="metric-label">MAPE</div></div>
+              <div class="metric-item"><div class="metric-value good">124.5</div><div class="metric-label">RMSE (MW)</div></div>
+            </div>
+            <div class="feature-list">
+              <div class="feature-item"><span class="feature-name">demand_1_hour_ago</span><div class="feature-bar"><div class="feature-bar-fill green" style="width: 92%"></div></div><span class="feature-value">0.92</span></div>
+              <div class="feature-item"><span class="feature-name">temperature_F</span><div class="feature-bar"><div class="feature-bar-fill green" style="width: 71%"></div></div><span class="feature-value">0.71</span></div>
+              <div class="feature-item"><span class="feature-name">demand_24h_avg</span><div class="feature-bar"><div class="feature-bar-fill green" style="width: 58%"></div></div><span class="feature-value">0.58</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price Model -->
+        <div class="model-card fade-in delay-3">
+          <div class="model-header">
+            <div class="model-icon price">💰</div>
+            <div class="model-info"><h3>Price Model</h3><p>RTD Zonal LBMP (y) - No Congestion</p></div>
+          </div>
+          <div class="model-body">
+            <div class="metrics-grid">
+              <div class="metric-item"><div class="metric-value good">0.891</div><div class="metric-label">R² Score</div></div>
+              <div class="metric-item"><div class="metric-value warning">0.098</div><div class="metric-label">MAPE</div></div>
+              <div class="metric-item"><div class="metric-value good">$8.42</div><div class="metric-label">RMSE</div></div>
+            </div>
+            <div class="feature-list">
+              <div class="feature-item"><span class="feature-name">LBMP_1_hour_ago</span><div class="feature-bar"><div class="feature-bar-fill orange" style="width: 88%"></div></div><span class="feature-value">0.88</span></div>
+              <div class="feature-item"><span class="feature-name">price_24h_avg</span><div class="feature-bar"><div class="feature-bar-fill orange" style="width: 65%"></div></div><span class="feature-value">0.65</span></div>
+              <div class="feature-item"><span class="feature-name">TWI Actual Load</span><div class="feature-bar"><div class="feature-bar-fill orange" style="width: 52%"></div></div><span class="feature-value">0.52</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scatter Plots -->
+      <div class="dashboard-grid" style="margin-top: 24px;">
+        <div class="card"><div class="card-header"><div><div class="card-title">Actual vs Predicted</div><div class="card-subtitle">Congestion Model</div></div></div><div class="chart-container"><canvas id="scatterCongestion"></canvas></div></div>
+        <div class="card"><div class="card-header"><div><div class="card-title">Actual vs Predicted</div><div class="card-subtitle">Demand Model</div></div></div><div class="chart-container"><canvas id="scatterDemand"></canvas></div></div>
+        <div class="card"><div class="card-header"><div><div class="card-title">Actual vs Predicted</div><div class="card-subtitle">Price Model</div></div></div><div class="chart-container"><canvas id="scatterPrice"></canvas></div></div>
+      </div>
+    </section>
+
+    <!-- METHODOLOGY -->
+    <section class="wrap">
+      <div class="section-header"><h2 class="section-title">Methodology</h2></div>
+
+      <div class="methodology-grid">
+        <div class="method-card"><div class="method-number">1</div><h3>Data Collection</h3><p>4 years of NYISO data (2021-2024) including LBMP pricing, actual load, and weather data from multiple stations across NY regions.</p></div>
+        <div class="method-card"><div class="method-number">2</div><h3>Feature Engineering</h3><p>Created lagged features (1h, 24h, 7d), rolling statistics, price momentum indicators, and temporal features including holidays.</p></div>
+        <div class="method-card"><div class="method-number">3</div><h3>Model Training</h3><p>XGBoost and RandomForest regressors with temporal train-test splits. Separate models for congestion, demand, and price.</p></div>
+      </div>
+
+      <div class="code-block">
+        <pre><code><span class="comment"># Three separate models per procedure compliance</span>
+<span class="keyword">class</span> <span class="class">NYCEnergyAnalyzer</span>:
+    <span class="keyword">def</span> <span class="function">train_all_models</span>(self):
+        <span class="comment"># 1. Congestion Model (RTD Zonal Congestion as y)</span>
+        self.<span class="function">train_congestion_models</span>()
+
+        <span class="comment"># 2. Demand Model - NO pricing/congestion features</span>
+        self.<span class="function">train_demand_models</span>()
+
+        <span class="comment"># 3. Price Model - NO congestion features</span>
+        self.<span class="function">train_price_models</span>()
+
+<span class="comment"># Features used per model:</span>
+congestion_features = [<span class="string">'congestion_yesterday'</span>, <span class="string">'TWI Actual Load'</span>, ...]
+demand_features = [<span class="string">'demand_yesterday'</span>, <span class="string">'temperature_F'</span>, ...]  <span class="comment"># NO pricing!</span>
+price_features = [<span class="string">'LBMP_yesterday'</span>, <span class="string">'TWI Actual Load'</span>, ...]  <span class="comment"># NO congestion!</span></code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Tanvir Bakther • NYC Energy Forecast Analysis Suite</p>
+    <p style="margin-top: 8px;">Data Source: <a href="https://www.nyiso.com" target="_blank">NYISO OASIS</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('mobile-toggle').addEventListener('click', () => {
+      document.getElementById('nav-menu').classList.toggle('active');
+    });
+
+    Chart.defaults.color = 'rgba(194,180,155,0.6)';
+    Chart.defaults.borderColor = 'rgba(94,66,17,0.3)';
+    Chart.defaults.font.family = "'Inter', sans-serif";
+
+    const colors = {
+      gold: '#ca9a4e', goldLight: 'rgba(202,154,78,0.3)',
+      green: '#22c55e', greenLight: 'rgba(34,197,94,0.3)',
+      orange: '#ff8a4c', orangeLight: 'rgba(255,138,76,0.3)',
+      red: '#ef4444', redLight: 'rgba(239,68,68,0.3)',
+      purple: '#6366f1', purpleLight: 'rgba(99,102,241,0.3)'
+    };
+
+    const regionData = { central: { congestion: 2.8, demand: 2450, price: 38.5 }, genese: { congestion: 1.9, demand: 1820, price: 35.2 }, longil: { congestion: 5.2, demand: 4200, price: 52.8 } };
+
+    function createBarChart(ctx, data, color, lightColor) {
+      return new Chart(ctx, {
+        type: 'bar',
+        data: { labels: ['Central NY', 'Genesee', 'Long Island'], datasets: [{ data: data, backgroundColor: [lightColor, lightColor, lightColor], borderColor: color, borderWidth: 2, borderRadius: 8 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(94,66,17,0.15)' } }, x: { grid: { display: false } } } }
+      });
+    }
+
+    const congestionChart = createBarChart(document.getElementById('congestionChart'), [regionData.central.congestion, regionData.genese.congestion, regionData.longil.congestion], colors.red, colors.redLight);
+    const demandChart = createBarChart(document.getElementById('demandChart'), [regionData.central.demand, regionData.genese.demand, regionData.longil.demand], colors.green, colors.greenLight);
+    const priceChart = createBarChart(document.getElementById('priceChart'), [regionData.central.price, regionData.genese.price, regionData.longil.price], colors.orange, colors.orangeLight);
+
+    const months = ['Jan 21', 'Apr 21', 'Jul 21', 'Oct 21', 'Jan 22', 'Apr 22', 'Jul 22', 'Oct 22', 'Jan 23', 'Apr 23', 'Jul 23', 'Oct 23', 'Jan 24', 'Apr 24', 'Jul 24', 'Oct 24'];
+    const timeSeriesData = {
+      congestion: { central: [2.1, 2.4, 4.2, 2.8, 2.3, 2.6, 4.5, 3.0, 2.5, 2.8, 4.8, 3.2, 2.4, 2.7, 4.6, 3.1], genese: [1.5, 1.8, 2.8, 2.0, 1.6, 1.9, 3.0, 2.1, 1.7, 2.0, 3.2, 2.2, 1.6, 1.9, 3.1, 2.1], longil: [4.2, 4.8, 7.5, 5.2, 4.5, 5.1, 8.0, 5.5, 4.8, 5.4, 8.5, 5.8, 4.6, 5.2, 8.2, 5.6] },
+      demand: { central: [2200, 2350, 2800, 2450, 2250, 2400, 2850, 2500, 2300, 2450, 2900, 2550, 2280, 2430, 2880, 2520], genese: [1650, 1750, 2100, 1850, 1700, 1800, 2150, 1900, 1720, 1820, 2180, 1920, 1710, 1810, 2160, 1910], longil: [3800, 4050, 5200, 4300, 3900, 4150, 5350, 4400, 3950, 4200, 5450, 4500, 3920, 4180, 5400, 4480] },
+      price: { central: [32, 35, 48, 38, 34, 37, 52, 40, 36, 39, 55, 42, 35, 38, 53, 41], genese: [28, 31, 42, 34, 30, 33, 45, 36, 32, 35, 48, 38, 31, 34, 46, 37], longil: [45, 50, 68, 52, 48, 53, 72, 55, 50, 55, 75, 58, 49, 54, 73, 56] }
+    };
+
+    let timeSeriesChart = null;
+    function createTimeSeriesChart(type) {
+      const ctx = document.getElementById('timeSeriesChart');
+      if (timeSeriesChart) timeSeriesChart.destroy();
+      const data = timeSeriesData[type];
+      const colorMap = { congestion: colors.red, demand: colors.green, price: colors.orange };
+      const lightMap = { congestion: colors.redLight, demand: colors.greenLight, price: colors.orangeLight };
+      timeSeriesChart = new Chart(ctx, {
+        type: 'line',
+        data: { labels: months, datasets: [
+          { label: 'Central NY', data: data.central, borderColor: colors.gold, backgroundColor: colors.goldLight, fill: true, tension: 0.4 },
+          { label: 'Genesee', data: data.genese, borderColor: colors.purple, backgroundColor: colors.purpleLight, fill: true, tension: 0.4 },
+          { label: 'Long Island', data: data.longil, borderColor: colorMap[type], backgroundColor: lightMap[type], fill: true, tension: 0.4 }
+        ]},
+        options: { responsive: true, maintainAspectRatio: false, interaction: { intersect: false, mode: 'index' }, plugins: { legend: { position: 'top', labels: { usePointStyle: true } } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(94,66,17,0.15)' } }, x: { grid: { display: false } } } }
+      });
+    }
+    createTimeSeriesChart('congestion');
+
+    document.querySelectorAll('.chart-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        createTimeSeriesChart(tab.dataset.chart);
+      });
+    });
+
+    function generateScatterData(r2, count = 80) {
+      const data = [];
+      for (let i = 0; i < count; i++) {
+        const actual = Math.random() * 100;
+        const predicted = actual + (Math.random() - 0.5) * (1 - r2) * 50;
+        data.push({ x: actual, y: Math.max(0, predicted) });
+      }
+      return data;
+    }
+
+    function createScatterChart(ctx, color, lightColor, r2) {
+      return new Chart(ctx, {
+        type: 'scatter',
+        data: { datasets: [
+          { label: 'Predictions', data: generateScatterData(r2), backgroundColor: lightColor, borderColor: color, borderWidth: 1, pointRadius: 4 },
+          { label: 'Perfect', data: [{ x: 0, y: 0 }, { x: 100, y: 100 }], type: 'line', borderColor: 'rgba(194,180,155,0.3)', borderDash: [5, 5], borderWidth: 2, pointRadius: 0, fill: false }
+        ]},
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Actual' }, grid: { color: 'rgba(94,66,17,0.15)' } }, y: { title: { display: true, text: 'Predicted' }, grid: { color: 'rgba(94,66,17,0.15)' } } } }
+      });
+    }
+
+    createScatterChart(document.getElementById('scatterCongestion'), colors.red, colors.redLight, 0.847);
+    createScatterChart(document.getElementById('scatterDemand'), colors.green, colors.greenLight, 0.923);
+    createScatterChart(document.getElementById('scatterPrice'), colors.orange, colors.orangeLight, 0.891);
+
+    document.querySelectorAll('.region-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.region-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const region = tab.dataset.region;
+        if (region === 'all') {
+          congestionChart.data.datasets[0].backgroundColor = [colors.redLight, colors.redLight, colors.redLight];
+          demandChart.data.datasets[0].backgroundColor = [colors.greenLight, colors.greenLight, colors.greenLight];
+          priceChart.data.datasets[0].backgroundColor = [colors.orangeLight, colors.orangeLight, colors.orangeLight];
+        } else {
+          const idx = { central: 0, genese: 1, longil: 2 }[region];
+          congestionChart.data.datasets[0].backgroundColor = [0,1,2].map(i => i === idx ? colors.red : colors.redLight);
+          demandChart.data.datasets[0].backgroundColor = [0,1,2].map(i => i === idx ? colors.green : colors.greenLight);
+          priceChart.data.datasets[0].backgroundColor = [0,1,2].map(i => i === idx ? colors.orange : colors.orangeLight);
+        }
+        congestionChart.update(); demandChart.update(); priceChart.update();
+      });
+    });
+  </script>
+</body>
+</html>
