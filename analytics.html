@@ -113,7 +113,7 @@
       overflow: hidden;
     }
 
-    header.hero::before {
+   header.hero::before {
       content: '';
       position: absolute;
       top: 0;
@@ -126,28 +126,21 @@
 	filter:brightness(.25) contrast(1.1);
       animation:slowZoom 30s ease-in-out infinite alternate;
     }
-	  	  	  header.hero {
+	  header.hero {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 90vh;
   text-align: center;
 }
+	  header.hero .wrap {
+  position: relative;
+  z-index:0;
+}
 	  .hero-overlay{
       position:absolute;
       inset:0;
       background:linear-gradient(180deg, rgba(8,4,3,.3) 0%, rgba(8,4,3,.8) 60%, rgba(8,4,3,.95) 100%);
-    }
-	   .hero .title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin: 0 0 20px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, var(--ink) 0%, var(--brand) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-     
-      animation: fadeInUp 1s ease-out;
     }
 
 
