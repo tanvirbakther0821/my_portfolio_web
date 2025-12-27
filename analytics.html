@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tanvir Bakther — Analytics Projects & Data Science Portfolio</title>
+  <title>Tanvir Bakther — Complete Analytics Portfolio with Interactive Tools</title>
 
   <!-- Enhanced SEO -->
-  <meta name="description" content="Explore Tanvir Bakther's analytics projects including SQL patterns, Python notebooks, Power BI dashboards, A/B tests, and end-to-end case studies. Data science portfolio showcasing machine learning, statistical analysis, and business intelligence." />
+  <meta name="description" content="Explore Tanvir Bakther's complete analytics portfolio featuring interactive tools, Monte Carlo simulations, SQL patterns, Python notebooks, Power BI dashboards, A/B tests, and end-to-end case studies. Data science portfolio showcasing machine learning, statistical analysis, and business intelligence." />
   <meta name="keywords" content="Tanvir Bakther, Data Analytics, SQL, Python, Power BI, Tableau, Machine Learning, Statistical Analysis, Business Intelligence, Data Science Portfolio" />
   <meta name="author" content="Tanvir Bakther" />
   <meta name="robots" content="index, follow" />
@@ -122,7 +122,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%2358a6ff" opacity="0.3"/><circle cx="80" cy="40" r="1.5" fill="%236366f1" opacity="0.4"/><circle cx="60" cy="80" r="1" fill="%2358a6ff" opacity="0.2"/></svg>');
+      background: linear-gradient(90deg, transparent, rgba(202,154,78,0.3), transparent);
       animation: float 20s ease-in-out infinite;
       pointer-events: none;
     }
@@ -568,6 +568,15 @@
         transform: translateY(0);
       }
     }
+    
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(88, 166, 255, 0.5);
+      }
+    }
 
     @keyframes fadeInScale {
       from {
@@ -723,8 +732,15 @@
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">Home</a> · Analytics
       </nav>
-      <h1 class="title">Analytics Projects</h1>
-      <p class="sub">SQL patterns, Python notebooks, dashboards, and end‑to‑end case studies I'm building and learning from. Explore real-world applications of data science, machine learning, and business intelligence solutions.</p>
+      <h1 class="title">Analytics Projects & Interactive Tools</h1>
+      <p class="sub">SQL patterns, Python notebooks, dashboards, interactive simulations, and end‑to‑end case studies I'm building and learning from. Explore real-world applications of data science, machine learning, and business intelligence solutions.</p>
+      
+      <!-- Featured Interactive Tool Banner -->
+      <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(88, 166, 255, 0.15), rgba(99, 102, 241, 0.15)); border-radius: 12px; border: 2px solid rgba(88, 166, 255, 0.3); animation: pulse 2s ease-in-out infinite;">
+        <p style="margin: 0; font-size: 1.1rem; color: #eaeaea; text-align: center;">
+          <span style="font-size: 1.5rem; vertical-align: middle;">&nbsp;</span><strong style="margin: 0 8px;">&nbsp;</strong> Experience  Supply Chain Intelligence  with animated logistics visualizations! <a href="Simulation.html" style="margin-left: 15px; color: #58a6ff; font-weight: 600; text-decoration: underline;">Launch Interactive Tool →</a>
+        </p>
+      </div>
     </div>
   </header>
 
@@ -769,6 +785,59 @@
         </div>
       </div>
 
+      <!-- Featured Project Spotlight -->
+      <div style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, rgba(21, 21, 23, 0.95), rgba(35, 35, 39, 0.95)); border-radius: 20px; border: 2px solid rgba(88, 166, 255, 0.3); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); animation: fadeInUp 1s ease-out 0.4s both;">
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px; align-items: center;">
+          <div style="text-align: center;">
+            <div style="width: 120px; height: 120px; margin: 0 auto 20px; background: linear-gradient(135deg, #0a1929, #1e3a5f); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); position: relative; overflow: hidden;">
+              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.3) 50%, transparent 70%); animation: shimmer 2s linear infinite;"></div>
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none" style="z-index: 1;">
+                <rect x="10" y="20" width="40" height="25" stroke="#3b82f6" stroke-width="2" fill="rgba(59, 130, 246, 0.1)" rx="3"/>
+                <circle cx="18" cy="45" r="3" fill="#ff8a4c"/>
+                <circle cx="42" cy="45" r="3" fill="#ff8a4c"/>
+                <rect x="15" y="15" width="30" height="15" fill="rgba(255, 138, 76, 0.8)" rx="2"/>
+                <path d="M30 10L35 5L40 10" stroke="#ff8a4c" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <h3 style="color: #58a6ff; font-size: 1.2rem; margin-bottom: 10px; font-weight: 700;">Featured Tool</h3>
+            <div style="display: inline-block; padding: 6px 12px; background: rgba(88, 166, 255, 0.2); border-radius: 20px; color: #58a6ff; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Interactive</div>
+          </div>
+          <div>
+            <h2 style="font-size: 1.8rem; color: #eaeaea; margin-bottom: 15px; font-weight: 700;">Supply Chain Simulation Platform</h2>
+            <p style="color: #9aa0a6; line-height: 1.6; margin-bottom: 20px;">
+              Professional logistics optimization tool featuring stunning animations, real-time Monte Carlo simulations, and a beautiful network-themed interface. Watch shipping containers float across your screen while you optimize inventory decisions with advanced statistical models.
+            </p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+              <span style="padding: 6px 12px; background: rgba(255, 138, 76, 0.2); color: #ff8a4c; border-radius: 6px; font-size: 0.9rem;">Monte Carlo</span>
+              <span style="padding: 6px 12px; background: rgba(59, 130, 246, 0.2); color: #3b82f6; border-radius: 6px; font-size: 0.9rem;">Animated UI</span>
+              <span style="padding: 6px 12px; background: rgba(34, 197, 94, 0.2); color: #22c55e; border-radius: 6px; font-size: 0.9rem;">Real-time</span>
+              <span style="padding: 6px 12px; background: rgba(99, 102, 241, 0.2); color: #6366f1; border-radius: 6px; font-size: 0.9rem;">Logistics</span>
+            </div>
+            <div style="display: flex; gap: 15px;">
+              <a href="supply-chain-simulator-animated.html" style="padding: 12px 24px; background: linear-gradient(135deg, #58a6ff, #6366f1); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(88, 166, 255, 0.4); transition: all 0.3s; border: none;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10 2L8 8H2l5 4-2 6 5-4 5 4-2-6 5-4h-6z"/>
+                </svg>
+                Launch Tool
+              </a>
+              <a href="https://github.com/tanvirbakther/supply-chain-optimizer" target="_blank" style="padding: 12px 24px; background: rgba(21, 21, 23, 0.8); color: #9aa0a6; border: 1px solid rgba(88, 166, 255, 0.3); border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0110 4.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.138 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z"/>
+                </svg>
+                View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(200%); }
+        }
+      </style>
+
       <!-- Loading State -->
       <div class="loading" id="loading">
         <div style="font-size: 2rem; margin-bottom: 1rem;">📊</div>
@@ -795,6 +864,20 @@
   <script>
     // Enhanced Analytics Projects Data
     const projects = [
+  {
+    id: 'supply-chain-optimizer',
+    title: ' Supply Chain Intelligence Platform - Interactive Monte Carlo Simulator',
+    date: '2024-12-20',
+    type: 'Interactive Tool',
+    tags: ['javascript', 'monte-carlo', 'simulation', 'optimization', 'statistics', 'visualization', 'charts', 'animations', 'logistics'],
+    thumb: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1600&auto=format&fit=crop',
+    desc: 'Professional supply chain optimization platform with advanced Monte Carlo simulations. Features animated logistics visualizations, real-time profit calculations, sensitivity analysis, scenario comparison, and beautiful network-themed interface with floating containers and truck animations.',
+    links: {
+      page: '#',
+      live: 'Simulation.html',
+      github: 'https://github.com/tanvirbakther0821/Supply-Chain-Optimizer-using-Monte-Carlo-News-vendor-Simulation'
+    }
+  },
   {
     id: 'dmaic-otd',
     title: 'Supply Chain On-Time Delivery — DMAIC',
