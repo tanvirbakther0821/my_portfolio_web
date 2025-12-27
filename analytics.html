@@ -46,23 +46,19 @@
 
   <style>
     /* CSS Custom Properties for Consistent Branding */
-    :root {
-      --bg: #0a0a0b;
-      --panel: #111113;
-      --card: #151517;
-      --ink: #eaeaea;
-      --muted: #9aa0a6;
-      --brand: #58a6ff;
-      --accent: #6366f1;
-      --line: #232329;
-      --ok: #22c55e;
-      --warn: #f59e0b;
-      --surface: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.12);
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.25);
-      --border-radius: 16px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+     :root {
+      --awb-color1: #c2b49b;
+      --awb-color2: #ca9a4e;
+      --awb-color3: #ad8546;
+      --awb-color4: #230505;
+      --awb-color6: #080403;
+      --awb-color7: #5e4211;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     html {
@@ -70,14 +66,17 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--awb-color6);
+      color: var(--awb-color1);
       line-height: 1.6;
       overflow-x: hidden;
+    
+
       background-image:
        url("https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d8a1d898-62b9-4f05-bd12-85144c93e8e9_rw_1200.jpg?h=d7d3ea18a7d5fb46eea18c1a07604568") center/cover;
     }
+
 
     /* Accessibility Improvements */
     *:focus {
