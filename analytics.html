@@ -108,7 +108,7 @@
       position: relative;
       padding: 120px 24px 60px;
       background:
-        radial-gradient(1000px 700px at 70% -10%, rgba(88, 166, 255, 0.15), transparent 70%),
+        radial-gradient(1000px 700px at 70% -10%, rgba(88, 166, 255, 0.15),
         linear-gradient(180deg, var(--bg) 0%, var(--bg) 60%, var(--panel) 100%);
       overflow: hidden;
     }
@@ -126,19 +126,19 @@
 	filter:brightness(.25) contrast(1.1);
       animation:slowZoom 30s ease-in-out infinite alternate;
     }
+	  	  	  header.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  text-align: center;
+}
 	  .hero-overlay{
       position:absolute;
       inset:0;
       background:linear-gradient(180deg, rgba(8,4,3,.3) 0%, rgba(8,4,3,.8) 60%, rgba(8,4,3,.95) 100%);
     }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) translateX(0px); }
-      33% { transform: translateY(-20px) translateX(10px); }
-      66% { transform: translateY(10px) translateX(-15px); }
-    }
-
-    .hero .title {
+	   .hero .title {
       font-size: clamp(2.5rem, 5vw, 4rem);
       margin: 0 0 20px;
       font-weight: 700;
@@ -146,16 +146,34 @@
       background: linear-gradient(135deg, var(--ink) 0%, var(--brand) 100%);
       -webkit-background-clip: text;
       background-clip: text;
-      -webkit-text-fill-color: transparent;
+     
       animation: fadeInUp 1s ease-out;
     }
 
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      33% { transform: translateY(-20px) translateX(10px); }
+      66% { transform: translateY(10px) translateX(-15px); }
+    }
+
+   
     .hero .sub {
       color: var(--muted);
       max-width: 800px;
       font-size: 1.2rem;
       line-height: 1.7;
       animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+	  header.hero .wrap {
+  position: relative;
+  z-index:0;
+}
+	  .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(8,4,3,.3) 0%, rgba(8,4,3,.8) 60%, rgba(8,4,3,.95) 100%);
     }
 
     .crumbs {
