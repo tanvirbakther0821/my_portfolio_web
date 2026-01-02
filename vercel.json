@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/analytics", "destination": "/analytics.html" },
+    { "source": "/photography", "destination": "/photography.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/calculus", "destination": "/Calculus.html" }
+  ]
+}
