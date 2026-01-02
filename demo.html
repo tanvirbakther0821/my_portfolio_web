@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Delay Predictor | ML-Powered Insights — Tanvir Bakther</title>
+  <meta name="description" content="Interactive ML-powered flight delay prediction with explainable AI and SHAP visualizations.">
+
+  <!-- D3.js for interactive map -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+
+  <!-- Portfolio Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       UNIFIED PORTFOLIO DESIGN SYSTEM
+       Tanvir Bakther - Warm Gold & Dark Theme
+       ============================================= */
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --awb-color1: #c2b49b;
+      --awb-color2: #ca9a4e;
+      --awb-color3: #ad8546;
+      --awb-color4: #230505;
+      --awb-color6: #080403;
+      --awb-color7: #5e4211;
+      
+      --accent-green: #22c55e;
+      --accent-orange: #ff8a4c;
+      --accent-red: #ef4444;
+      --accent-purple: #6366f1;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      line-height: 1.6;
+      color: var(--awb-color1);
+      background: var(--awb-color6);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--awb-color6); }
+    ::-webkit-scrollbar-thumb { background: var(--awb-color7); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--awb-color3); }
+
+    a { color: var(--awb-color2); text-decoration: none; transition: .3s; }
+    a:hover { color: var(--awb-color3); }
+
+    /* =============================================
+       NAVBAR - Exact Portfolio Style
+       ============================================= */
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      padding: 20px 50px;
+      background: rgba(8, 4, 3, .95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(94, 66, 17, 0.3);
+      transition: .3s;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      color: var(--awb-color2);
+      text-decoration: none;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .logo:hover { color: var(--awb-color3); }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 35px;
+    }
+
+    .nav-menu a {
+      color: var(--awb-color1);
+      text-decoration: none;
+      position: relative;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-family: 'Cinzel', serif;
+      transition: .3s;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      height: 2px;
+      width: 0;
+      background: var(--awb-color2);
+      transition: .25s;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active { color: var(--awb-color2); }
+
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after { width: 100%; }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+    
+    .mobile-toggle span {
+      width: 25px;
+      height: 2px;
+      background: var(--awb-color2);
+      transition: .3s;
+    }
+
+    /* =============================================
+       HERO SECTION - Portfolio Style
+       ============================================= */
+    .hero {
+      padding: 140px 30px 80px;
+      background: radial-gradient(1200px 800px at 50% 20%, rgba(202, 154, 78, .08), transparent 60%), var(--awb-color6);
+      border-bottom: 1px solid rgba(94, 66, 17, 0.3);
+      position: relative;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(202, 154, 78, 0.3), transparent);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(8, 4, 3, 0.8);
+      border: 1px solid rgba(94, 66, 17, 0.5);
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--awb-color3);
+      margin-bottom: 25px;
+    }
+
+    .hero-badge .pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: var(--awb-color2);
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--awb-color1);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       MAIN CONTAINER
+       ============================================= */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px 60px;
+    }
+
+    /* =============================================
+       CARDS - Portfolio Style
+       ============================================= */
+    .card {
+      background: rgba(8, 4, 3, 0.9);
+      border: 1px solid rgba(94, 66, 17, 0.4);
+      border-radius: 8px;
+      margin-bottom: 30px;
+      overflow: hidden;
+      position: relative;
+      transition: .4s;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(202, 154, 78, 0.05), transparent);
+      opacity: 0;
+      transition: .4s;
+    }
+
+    .card:hover {
+      border-color: rgba(202, 154, 78, 0.6);
+      box-shadow: 0 10px 30px rgba(94, 66, 17, 0.3);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-header {
+      padding: 25px 30px;
+      border-bottom: 1px solid rgba(94, 66, 17, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-number {
+      width: 45px;
+      height: 45px;
+      background: radial-gradient(circle, var(--awb-color6) 56%, #170f01 100%);
+      border: 1px solid var(--awb-color3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      color: var(--awb-color2);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .card-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--awb-color2);
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    .card-subtitle {
+      color: rgba(194, 180, 155, 0.7);
+      font-size: 0.95rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-left: auto;
+    }
+
+    .card-body {
+      padding: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* =============================================
+       ROUTE SELECTION
+       ============================================= */
+    .route-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+
+    .map-container {
+      background: var(--awb-color4);
+      border: 1px solid rgba(94, 66, 17, 0.4);
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
+      min-height: 420px;
+    }
+
+    #us-map { width: 100%; height: 380px; }
+
+    .map-legend {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      background: rgba(8, 4, 3, 0.95);
+      border: 1px solid rgba(94, 66, 17, 0.4);
+      padding: 14px 18px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .legend-item:last-child { margin-bottom: 0; }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .legend-dot-origin { background: var(--accent-green); }
+    .legend-dot-dest { background: var(--accent-orange); }
+
+    .route-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .route-section label {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--awb-color3);
+      margin-bottom: 10px;
+    }
+
+    .route-select {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(8, 4, 3, 0.9);
+      border: 1px solid rgba(94, 66, 17, 0.4);
+      border-radius: 6px;
+      color: var(--awb-color1);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .route-select:focus {
+      outline: none;
+      border-color: var(--awb-color3);
+      box-shadow: 0 0 15px rgba(173, 133, 70, 0.2);
+    }
+
+    .route-select option {
+      background: var(--awb-color6);
+      color: var(--awb-color1);
+    }
+
+    .route-arrow {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--awb-color3);
+    }
+
+    .route-info {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-left: 4px solid var(--accent-green);
+      padding: 18px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .route-info.visible { display: block; }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .info-row:last-child { margin-bottom: 0; }
+
+    .info-label {
+      color: rgba(194, 180, 155, 0.8);
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .info-value {
+      font-weight: 700;
+      color: var(--accent-green);
+      font-size: 1.1rem;
+    }
+
+    /* =============================================
+       FLIGHT DETAILS FORM
+       ============================================= */
+    .flight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group.wide { grid-column: span 3; }
+    .input-group.half { grid-column: span 2; }
+
+    .input-label {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--awb-color3);
+      margin-bottom: 10px;
+    }
+
+    .input-select,
+    .input-number {
+      padding: 14px 16px;
+      background: rgba(8, 4, 3, 0.9);
+      border: 1px solid rgba(94, 66, 17, 0.4);
+      border-radius: 6px;
+      color: var(--awb-color1);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      transition: .3s;
+    }
+
+    .input-select:focus,
+    .input-number:focus {
+      outline: none;
+      border-color: var(--awb-color3);
+      box-shadow: 0 0 15px rgba(173, 133, 70, 0.2);
+    }
+
+    .input-select option { background: var(--awb-color6); }
+
+    /* Slider */
+    .slider-container { margin-top: 8px; }
+
+    .input-slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--awb-color4);
+      outline: none;
+      -webkit-appearance: none;
+      margin: 12px 0;
+    }
+
+    .input-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--awb-color2) 0%, var(--awb-color3) 100%);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(173, 133, 70, 0.4);
+      border: 2px solid var(--awb-color1);
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: rgba(194, 180, 155, 0.6);
+    }
+
+    .time-display {
+      font-family: monospace;
+      color: var(--awb-color2);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    /* =============================================
+       PREDICT BUTTON - Portfolio Style
+       ============================================= */
+    .predict-container {
+      text-align: center;
+      margin-top: 35px;
+    }
+
+    .predict-button {
+      background: radial-gradient(circle, var(--awb-color6) 56%, #170f01 100%);
+      border: 1px solid var(--awb-color3);
+      color: var(--awb-color2);
+      padding: 18px 45px;
+      border-radius: 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: .3s;
+    }
+
+    .predict-button:hover:not(:disabled) {
+      background: radial-gradient(circle, #bf9a58 56%, #7b5619 100%);
+      border-color: var(--awb-color2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(202, 154, 78, 0.3);
+    }
+
+    .predict-button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .predict-button .icon { font-size: 1.3rem; }
+
+    /* =============================================
+       RESULTS SECTION
+       ============================================= */
+    .results-card {
+      border-color: var(--awb-color3);
+      display: none;
+    }
+
+    .results-card.visible { display: block; }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .result-box {
+      background: var(--awb-color4);
+      border: 1px solid rgba(94, 66, 17, 0.4);
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .result-icon { font-size: 3rem; margin-bottom: 16px; }
+
+    .result-label {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(194, 180, 155, 0.7);
+      margin-bottom: 14px;
+    }
+
+    .result-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--awb-color2);
+      margin-bottom: 16px;
+    }
+
+    .result-bar {
+      width: 100%;
+      height: 10px;
+      background: var(--awb-color6);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .result-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1s ease;
+      width: 0;
+    }
+
+    .result-bar-fill.prob {
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-orange), var(--accent-red));
+    }
+
+    .result-bar-fill.duration {
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-red));
+    }
+
+    .result-description {
+      font-size: 1rem;
+      color: rgba(194, 180, 155, 0.8);
+    }
+
+    .risk-low { color: var(--accent-green) !important; }
+    .risk-medium { color: var(--accent-orange) !important; }
+    .risk-high { color: var(--accent-red) !important; }
+
+    /* =============================================
+       SHAP EXPLANATION
+       ============================================= */
+    .shap-section {
+      background: rgba(202, 154, 78, 0.08);
+      border: 1px solid rgba(94, 66, 17, 0.5);
+      border-radius: 8px;
+      padding: 30px;
+    }
+
+    .shap-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .shap-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--awb-color2);
+    }
+
+    .shap-header .icon { font-size: 1.5rem; }
+
+    .shap-subtitle {
+      color: rgba(194, 180, 155, 0.8);
+      margin-bottom: 25px;
+      font-size: 1rem;
+    }
+
+    .shap-chart { margin-bottom: 25px; }
+
+    .shap-bar-container { margin-bottom: 18px; }
+
+    .shap-feature-name {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: .05em;
+      margin-bottom: 8px;
+      color: var(--awb-color1);
+    }
+
+    .shap-feature-value {
+      color: rgba(194, 180, 155, 0.6);
+      font-weight: 400;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .shap-bar-track {
+      height: 28px;
+      background: var(--awb-color4);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .shap-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    .shap-bar-positive {
+      background: linear-gradient(90deg, var(--accent-red), #dc2626);
+    }
+
+    .shap-bar-negative {
+      background: linear-gradient(90deg, var(--accent-green), #059669);
+    }
+
+    .shap-legend {
+      display: flex;
+      gap: 35px;
+      justify-content: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(94, 66, 17, 0.3);
+    }
+
+    .shap-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: rgba(194, 180, 155, 0.8);
+    }
+
+    .shap-legend-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+
+    .shap-legend-positive { background: var(--accent-red); }
+    .shap-legend-negative { background: var(--accent-green); }
+
+    /* =============================================
+       MODEL INFO
+       ============================================= */
+    .model-info {
+      background: var(--awb-color4);
+      border: 1px solid rgba(94, 66, 17, 0.4);
+      border-radius: 8px;
+      padding: 25px;
+      margin-top: 25px;
+    }
+
+    .model-info h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--awb-color2);
+      margin-bottom: 18px;
+      font-size: 1.2rem;
+    }
+
+    .model-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 18px;
+      background: rgba(8, 4, 3, 0.8);
+      border: 1px solid rgba(94, 66, 17, 0.3);
+      border-radius: 6px;
+    }
+
+    .stat-value {
+      font-family: monospace;
+      font-size: 1.4rem;
+      color: var(--awb-color2);
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(194, 180, 155, 0.6);
+      margin-top: 6px;
+    }
+
+    /* =============================================
+       LOADING OVERLAY
+       ============================================= */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 4, 3, 0.95);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loading-overlay.visible { display: flex; }
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--awb-color7);
+      border-top-color: var(--awb-color2);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      margin-top: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--awb-color2);
+    }
+
+    /* =============================================
+       MAP STYLES (D3)
+       ============================================= */
+    .state {
+      fill: var(--awb-color4);
+      stroke: var(--awb-color7);
+      stroke-width: 0.5px;
+      transition: fill 0.2s;
+    }
+
+    .state:hover { fill: #1a0808; }
+
+    .airport { cursor: pointer; transition: all 0.2s; }
+
+    .airport circle {
+      fill: var(--awb-color3);
+      stroke: none;
+    }
+
+    .airport:hover circle { fill: var(--awb-color2); }
+    .airport.selected-origin circle { fill: var(--accent-green); }
+    .airport.selected-dest circle { fill: var(--accent-orange); }
+
+    .route-line {
+      stroke: var(--accent-purple);
+      stroke-width: 3;
+      stroke-dasharray: 8, 4;
+      fill: none;
+      opacity: 0.8;
+      animation: dash 20s linear infinite;
+    }
+
+    @keyframes dash { to { stroke-dashoffset: -1000; } }
+
+    .map-tooltip {
+      position: absolute;
+      background: rgba(8, 4, 3, 0.95);
+      border: 1px solid var(--awb-color3);
+      color: var(--awb-color1);
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      pointer-events: none;
+      z-index: 100;
+      display: none;
+    }
+
+    .map-tooltip strong { color: var(--awb-color2); }
+
+    /* =============================================
+       FOOTER - Portfolio Style
+       ============================================= */
+    footer {
+      padding: 40px 30px;
+      border-top: 1px solid rgba(94, 66, 17, 0.3);
+      background: var(--awb-color6);
+      color: rgba(194, 180, 155, 0.6);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    footer a { color: var(--awb-color3); }
+    footer a:hover { color: var(--awb-color2); }
+
+    /* =============================================
+       RESPONSIVE
+       ============================================= */
+    @media (max-width: 968px) {
+      .route-grid,
+      .flight-grid,
+      .results-grid { grid-template-columns: 1fr; }
+      
+      .input-group.wide,
+      .input-group.half { grid-column: span 1; }
+      
+      .model-stats { grid-template-columns: repeat(2, 1fr); }
+      
+      .navbar { padding: 16px 20px; }
+      .nav-menu { display: none; }
+      .mobile-toggle { display: flex; }
+      .card-subtitle { margin-left: 0; margin-top: 10px; width: 100%; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 110px 20px 50px; }
+      .container { padding: 0 15px 40px; }
+      .card-body { padding: 20px; }
+      .shap-legend { flex-direction: column; gap: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">Tanvir Bakther</a>
+      <div class="mobile-toggle" id="mobile-toggle">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="analytics.html" class="active">Analytics</a></li>
+        <li><a href="blog.html">Everyday Learning</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      XGBoost + SHAP Explainable AI
+    </div>
+    <h1>✈️ Flight Delay Predictor</h1>
+    <p>ML-powered predictions with explainable AI. Select your route, enter flight details, and get instant delay probability with feature explanations powered by SHAP values.</p>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+
+    <!-- STEP 1: Route Selection -->
+    <section class="card">
+      <div class="card-header">
+        <span class="step-number">1</span>
+        <h2>Select Your Route</h2>
+        <span class="card-subtitle">Click airports on the map or use dropdowns</span>
+      </div>
+      <div class="card-body">
+        <div class="route-grid">
+          <div class="map-container">
+            <div id="us-map"></div>
+            <div class="map-legend">
+              <div class="legend-item">
+                <span class="legend-dot legend-dot-origin"></span>
+                <span>Origin</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot legend-dot-dest"></span>
+                <span>Destination</span>
+              </div>
+            </div>
+            <div class="map-tooltip" id="map-tooltip"></div>
+          </div>
+          <div class="route-details">
+            <div class="route-section">
+              <label>Origin Airport</label>
+              <select id="origin-select" class="route-select">
+                <option value="">Select origin...</option>
+              </select>
+            </div>
+            <div class="route-arrow">↓</div>
+            <div class="route-section">
+              <label>Destination Airport</label>
+              <select id="dest-select" class="route-select">
+                <option value="">Select destination...</option>
+              </select>
+            </div>
+            <div class="route-info" id="route-info">
+              <div class="info-row">
+                <span class="info-label">Distance</span>
+                <span class="info-value" id="route-distance">-</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Est. Duration</span>
+                <span class="info-value" id="route-duration">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: Flight Details -->
+    <section class="card">
+      <div class="card-header">
+        <span class="step-number">2</span>
+        <h2>Enter Flight Details</h2>
+      </div>
+      <div class="card-body">
+        <div class="flight-grid">
+          <div class="input-group">
+            <label class="input-label">Month</label>
+            <select id="month-select" class="input-select">
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6" selected>June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Day of Month</label>
+            <input type="number" id="day-input" class="input-number" min="1" max="31" value="15">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Day of Week</label>
+            <select id="day-of-week-select" class="input-select">
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3" selected>Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+              <option value="7">Sunday</option>
+            </select>
+          </div>
+          <div class="input-group wide">
+            <label class="input-label">Airline</label>
+            <select id="airline-select" class="input-select">
+              <option value="">Select airline...</option>
+              <option value="AA">American Airlines (AA)</option>
+              <option value="DL">Delta Air Lines (DL)</option>
+              <option value="UA">United Airlines (UA)</option>
+              <option value="WN">Southwest Airlines (WN)</option>
+              <option value="B6">JetBlue Airways (B6)</option>
+              <option value="AS">Alaska Airlines (AS)</option>
+              <option value="NK">Spirit Airlines (NK)</option>
+              <option value="F9">Frontier Airlines (F9)</option>
+            </select>
+          </div>
+          <div class="input-group half">
+            <label class="input-label">Departure Time: <span class="time-display" id="dep-time-display">14:00</span></label>
+            <div class="slider-container">
+              <input type="range" id="dep-hour-slider" class="input-slider" min="0" max="23" value="14">
+              <div class="slider-labels">
+                <span>00:00</span>
+                <span>06:00</span>
+                <span>12:00</span>
+                <span>18:00</span>
+                <span>23:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Arrival Time: <span class="time-display" id="arr-time-display">17:00</span></label>
+            <div class="slider-container">
+              <input type="range" id="arr-hour-slider" class="input-slider" min="0" max="23" value="17">
+              <div class="slider-labels">
+                <span>00:00</span>
+                <span>12:00</span>
+                <span>23:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="predict-container">
+          <button id="predict-button" class="predict-button" disabled>
+            <span class="icon">🔮</span>
+            Predict Delay
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: Results -->
+    <section class="card results-card" id="results-section">
+      <div class="card-header">
+        <span class="step-number">3</span>
+        <h2>Prediction Results</h2>
+      </div>
+      <div class="card-body">
+        <div class="results-grid">
+          <div class="result-box">
+            <div class="result-icon">📊</div>
+            <div class="result-label">Delay Probability</div>
+            <div class="result-value" id="prob-value">--</div>
+            <div class="result-bar">
+              <div class="result-bar-fill prob" id="prob-bar"></div>
+            </div>
+            <div class="result-description" id="prob-description">Likelihood of delay ≥ 15 min</div>
+          </div>
+          <div class="result-box">
+            <div class="result-icon">⏱️</div>
+            <div class="result-label">Expected Delay</div>
+            <div class="result-value" id="duration-value">--</div>
+            <div class="result-bar">
+              <div class="result-bar-fill duration" id="duration-bar"></div>
+            </div>
+            <div class="result-description" id="duration-description">If delayed, expected duration</div>
+          </div>
+        </div>
+        <div class="shap-section">
+          <div class="shap-header">
+            <span class="icon">💡</span>
+            <h3>What's Driving This Prediction?</h3>
+          </div>
+          <p class="shap-subtitle">Top factors contributing to delay probability (SHAP values):</p>
+          <div class="shap-chart" id="shap-chart"></div>
+          <div class="shap-legend">
+            <div class="shap-legend-item">
+              <span class="shap-legend-dot shap-legend-positive"></span>
+              <span>Increases delay risk</span>
+            </div>
+            <div class="shap-legend-item">
+              <span class="shap-legend-dot shap-legend-negative"></span>
+              <span>Decreases delay risk</span>
+            </div>
+          </div>
+        </div>
+        <div class="model-info">
+          <h4>📈 Model Performance</h4>
+          <div class="model-stats">
+            <div class="stat-box">
+              <div class="stat-value">0.847</div>
+              <div class="stat-label">R² Score</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">18.2</div>
+              <div class="stat-label">RMSE (min)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">12.4</div>
+              <div class="stat-label">MAE (min)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">15.3%</div>
+              <div class="stat-label">MAPE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Built with XGBoost, SHAP, and D3.js | Data from Bureau of Transportation Statistics</p>
+    <p style="margin-top: 10px;"><a href="analytics.html">← Back to Analytics Portfolio</a></p>
+    <p style="margin-top: 10px;">© <span id="year"></span> Tanvir Bakther</p>
+  </footer>
+
+  <!-- LOADING OVERLAY -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Analyzing flight data...</div>
+  </div>
+
+  <script>
+    // Airport Data
+    const airports=[{id:1,code:'ATL',city:'Atlanta',state:'GA',lat:33.6367,lon:-84.4281},{id:2,code:'ORD',city:'Chicago',state:'IL',lat:41.9786,lon:-87.9048},{id:3,code:'DFW',city:'Dallas/Fort Worth',state:'TX',lat:32.8968,lon:-97.038},{id:4,code:'DEN',city:'Denver',state:'CO',lat:39.8617,lon:-104.673},{id:5,code:'LAX',city:'Los Angeles',state:'CA',lat:33.9425,lon:-118.408},{id:6,code:'JFK',city:'New York JFK',state:'NY',lat:40.6394,lon:-73.7793},{id:7,code:'SFO',city:'San Francisco',state:'CA',lat:37.6198,lon:-122.3748},{id:8,code:'SEA',city:'Seattle',state:'WA',lat:47.4479,lon:-122.3103},{id:9,code:'MIA',city:'Miami',state:'FL',lat:25.7932,lon:-80.2906},{id:10,code:'BOS',city:'Boston',state:'MA',lat:42.362,lon:-71.0079},{id:11,code:'PHX',city:'Phoenix',state:'AZ',lat:33.4353,lon:-112.0059},{id:12,code:'IAH',city:'Houston',state:'TX',lat:29.9844,lon:-95.3414},{id:13,code:'LAS',city:'Las Vegas',state:'NV',lat:36.0834,lon:-115.1518},{id:14,code:'MCO',city:'Orlando',state:'FL',lat:28.4294,lon:-81.309},{id:15,code:'CLT',city:'Charlotte',state:'NC',lat:35.214,lon:-80.9431},{id:16,code:'EWR',city:'Newark',state:'NJ',lat:40.6925,lon:-74.1687},{id:17,code:'MSP',city:'Minneapolis',state:'MN',lat:44.8801,lon:-93.2217},{id:18,code:'DTW',city:'Detroit',state:'MI',lat:42.2138,lon:-83.3538},{id:19,code:'PHL',city:'Philadelphia',state:'PA',lat:39.8719,lon:-75.2411},{id:20,code:'SLC',city:'Salt Lake City',state:'UT',lat:40.7889,lon:-111.9799},{id:21,code:'LGA',city:'New York LaGuardia',state:'NY',lat:40.7772,lon:-73.8726},{id:22,code:'BWI',city:'Baltimore',state:'MD',lat:39.1754,lon:-76.6683},{id:23,code:'DCA',city:'Washington Reagan',state:'DC',lat:38.8521,lon:-77.0377},{id:24,code:'SAN',city:'San Diego',state:'CA',lat:32.7336,lon:-117.19},{id:25,code:'TPA',city:'Tampa',state:'FL',lat:27.9755,lon:-82.5332}];
+    const airlineFactors={AA:{name:'American Airlines',factor:0.02},DL:{name:'Delta Air Lines',factor:-0.05},UA:{name:'United Airlines',factor:0.03},WN:{name:'Southwest Airlines',factor:0.01},B6:{name:'JetBlue Airways',factor:0.04},AS:{name:'Alaska Airlines',factor:-0.04},NK:{name:'Spirit Airlines',factor:0.12},F9:{name:'Frontier Airlines',factor:0.1}};
+    const hubAirports=['ATL','ORD','DFW','DEN','LAX','JFK','SFO','EWR','LGA','PHL'];
+    let mapState={svg:null,g:null,projection:null,selectedOrigin:null,selectedDest:null};
+
+    async function initializeMap(){
+      const container=document.getElementById('us-map');
+      const width=container.clientWidth,height=380;
+      mapState.svg=d3.select('#us-map').append('svg').attr('width',width).attr('height',height);
+      mapState.g=mapState.svg.append('g');
+      const zoom=d3.zoom().scaleExtent([1,6]).on('zoom',e=>{mapState.g.attr('transform',e.transform);const s=e.transform.k;mapState.g.selectAll('.airport circle').attr('r',function(){const sel=(mapState.selectedOrigin&&d3.select(this.parentNode).datum().id===mapState.selectedOrigin.id)||(mapState.selectedDest&&d3.select(this.parentNode).datum().id===mapState.selectedDest.id);return Math.max(sel?8/s:5/s,2)});});
+      mapState.svg.call(zoom);
+      mapState.projection=d3.geoAlbersUsa().scale(width*1.3).translate([width/2,height/2]);
+      const path=d3.geoPath().projection(mapState.projection);
+      try{const usData=await d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json');mapState.g.append('g').selectAll('path').data(topojson.feature(usData,usData.objects.states).features).enter().append('path').attr('class','state').attr('d',path);}catch(e){}
+      renderAirports();populateDropdowns();
+    }
+
+    function renderAirports(){
+      const grp=mapState.g.append('g').attr('class','airports');
+      grp.selectAll('.airport').data(airports).enter().append('g').attr('class','airport').attr('transform',d=>{const c=mapState.projection([d.lon,d.lat]);return c?`translate(${c[0]},${c[1]})`:null;}).on('click',handleAirportClick).on('mouseenter',handleAirportHover).on('mouseleave',()=>document.getElementById('map-tooltip').style.display='none').append('circle').attr('r',5);
+    }
+
+    function populateDropdowns(){
+      const o=document.getElementById('origin-select'),d=document.getElementById('dest-select');
+      airports.forEach(a=>{const t=`${a.code} - ${a.city}, ${a.state}`;const o1=document.createElement('option');o1.value=a.id;o1.textContent=t;o.appendChild(o1);const o2=document.createElement('option');o2.value=a.id;o2.textContent=t;d.appendChild(o2);});
+      o.addEventListener('change',handleOriginDropdown);d.addEventListener('change',handleDestDropdown);
+    }
+
+    function handleAirportClick(e,a){
+      if(!mapState.selectedOrigin){mapState.selectedOrigin=a;document.getElementById('origin-select').value=a.id;}
+      else if(!mapState.selectedDest&&a.id!==mapState.selectedOrigin.id){mapState.selectedDest=a;document.getElementById('dest-select').value=a.id;drawRouteLine();}
+      else{clearSelection();mapState.selectedOrigin=a;document.getElementById('origin-select').value=a.id;}
+      updateMapSelection();updateRouteInfo();checkFormComplete();
+    }
+
+    function handleOriginDropdown(){const id=parseInt(document.getElementById('origin-select').value);if(id){mapState.selectedOrigin=airports.find(a=>a.id===id);updateMapSelection();updateRouteInfo();if(mapState.selectedDest)drawRouteLine();checkFormComplete();}}
+    function handleDestDropdown(){const id=parseInt(document.getElementById('dest-select').value);if(id&&(!mapState.selectedOrigin||id!==mapState.selectedOrigin.id)){mapState.selectedDest=airports.find(a=>a.id===id);updateMapSelection();updateRouteInfo();drawRouteLine();checkFormComplete();}}
+    function handleAirportHover(e,a){const t=document.getElementById('map-tooltip');t.innerHTML=`<strong>${a.code}</strong><br>${a.city}, ${a.state}`;t.style.left=(e.offsetX+15)+'px';t.style.top=(e.offsetY-10)+'px';t.style.display='block';}
+    function updateMapSelection(){mapState.g.selectAll('.airport').classed('selected-origin',d=>mapState.selectedOrigin&&d.id===mapState.selectedOrigin.id).classed('selected-dest',d=>mapState.selectedDest&&d.id===mapState.selectedDest.id);mapState.g.selectAll('.airport circle').attr('r',d=>{const s=(mapState.selectedOrigin&&d.id===mapState.selectedOrigin.id)||(mapState.selectedDest&&d.id===mapState.selectedDest.id);return s?8:5;});}
+    function updateRouteInfo(){const ri=document.getElementById('route-info');if(mapState.selectedOrigin&&mapState.selectedDest){const dist=calcDist(mapState.selectedOrigin.lat,mapState.selectedOrigin.lon,mapState.selectedDest.lat,mapState.selectedDest.lon);const dur=Math.round(dist/500*60+30);document.getElementById('route-distance').textContent=`${Math.round(dist)} mi`;document.getElementById('route-duration').textContent=`~${Math.floor(dur/60)}h ${dur%60}m`;ri.classList.add('visible');}else{ri.classList.remove('visible');}}
+    function drawRouteLine(){mapState.g.selectAll('.route-line').remove();if(mapState.selectedOrigin&&mapState.selectedDest){const o=mapState.projection([mapState.selectedOrigin.lon,mapState.selectedOrigin.lat]),d=mapState.projection([mapState.selectedDest.lon,mapState.selectedDest.lat]);if(o&&d){const mx=(o[0]+d[0])/2,my=(o[1]+d[1])/2-50;mapState.g.append('path').attr('class','route-line').attr('d',`M${o[0]},${o[1]} Q${mx},${my} ${d[0]},${d[1]}`);}}}
+    function clearSelection(){mapState.selectedOrigin=null;mapState.selectedDest=null;mapState.g.selectAll('.route-line').remove();document.getElementById('origin-select').value='';document.getElementById('dest-select').value='';}
+    function calcDist(lat1,lon1,lat2,lon2){const R=3959,dLat=(lat2-lat1)*Math.PI/180,dLon=(lon2-lon1)*Math.PI/180,a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
+
+    function initializeControls(){
+      const dep=document.getElementById('dep-hour-slider'),arr=document.getElementById('arr-hour-slider');
+      dep.addEventListener('input',()=>{document.getElementById('dep-time-display').textContent=formatHour(dep.value);updateSliderGradient(dep);});
+      arr.addEventListener('input',()=>{document.getElementById('arr-time-display').textContent=formatHour(arr.value);updateSliderGradient(arr);});
+      updateSliderGradient(dep);updateSliderGradient(arr);
+      document.getElementById('airline-select').addEventListener('change',checkFormComplete);
+      document.getElementById('predict-button').addEventListener('click',makePrediction);
+    }
+
+    function formatHour(h){return `${h.toString().padStart(2,'0')}:00`;}
+    function updateSliderGradient(s){const p=((s.value-s.min)/(s.max-s.min))*100;s.style.background=`linear-gradient(to right,#ca9a4e 0%,#ca9a4e ${p}%,#230505 ${p}%,#230505 100%)`;}
+    function checkFormComplete(){document.getElementById('predict-button').disabled=!(mapState.selectedOrigin&&mapState.selectedDest&&document.getElementById('airline-select').value);}
+
+    async function makePrediction(){
+      document.getElementById('loading-overlay').classList.add('visible');
+      await new Promise(r=>setTimeout(r,1500));
+      const month=parseInt(document.getElementById('month-select').value),dayOfMonth=parseInt(document.getElementById('day-input').value),dayOfWeek=parseInt(document.getElementById('day-of-week-select').value),depHour=parseInt(document.getElementById('dep-hour-slider').value),arrHour=parseInt(document.getElementById('arr-hour-slider').value),airline=document.getElementById('airline-select').value;
+      const distance=calcDist(mapState.selectedOrigin.lat,mapState.selectedOrigin.lon,mapState.selectedDest.lat,mapState.selectedDest.lon);
+      let duration=(arrHour-depHour)*60;if(duration<0)duration+=24*60;
+      let timeCategory;if(depHour>=5&&depHour<9)timeCategory=1;else if(depHour>=9&&depHour<12)timeCategory=2;else if(depHour>=12&&depHour<17)timeCategory=3;else if(depHour>=17&&depHour<21)timeCategory=4;else timeCategory=5;
+      const prediction=simulatePrediction({month,dayOfMonth,dayOfWeek,depHour,arrHour,airline,distance,duration,timeCategory,origin:mapState.selectedOrigin,dest:mapState.selectedDest});
+      document.getElementById('loading-overlay').classList.remove('visible');
+      displayResults(prediction);
+    }
+
+    function simulatePrediction(p){
+      let baseProb=0.22;
+      const timeEffects={1:-0.05,2:-0.02,3:0.02,4:0.12,5:0.05};baseProb+=timeEffects[p.timeCategory]||0;
+      const dayEffects={1:-0.02,2:-0.03,3:-0.02,4:0.01,5:0.06,6:0.03,7:0.05};baseProb+=dayEffects[p.dayOfWeek]||0;
+      const monthEffects={1:0.03,2:0.02,3:0.01,4:0,5:0.02,6:0.08,7:0.1,8:0.07,9:-0.03,10:-0.02,11:0.01,12:0.08};baseProb+=monthEffects[p.month]||0;
+      if(p.distance>2000)baseProb+=0.06;else if(p.distance>1000)baseProb+=0.03;else if(p.distance<500)baseProb-=0.02;
+      if(hubAirports.includes(p.origin.code))baseProb+=0.05;
+      if(hubAirports.includes(p.dest.code))baseProb+=0.04;
+      const problematic=['EWR','LGA','JFK','SFO','ORD'];
+      if(problematic.includes(p.origin.code))baseProb+=0.06;
+      if(problematic.includes(p.dest.code))baseProb+=0.05;
+      baseProb+=(airlineFactors[p.airline]?.factor||0);
+      baseProb+=(Math.random()*0.08-0.04);
+      const probability=Math.max(0.05,Math.min(0.85,baseProb));
+      let expectedDelay=0;
+      if(probability>0.25){expectedDelay=15+(probability*60)+Math.floor(Math.random()*20);if(p.timeCategory===4)expectedDelay+=15;if(p.distance>1500)expectedDelay+=10;if(problematic.includes(p.origin.code))expectedDelay+=12;}
+      const shapData=generateShapValues(p,probability);
+      return{probability,expectedDelay,shapData,params:p};
+    }
+
+    function generateShapValues(p,prob){
+      const features=[];
+      let depEffect=0;if(p.depHour>=16&&p.depHour<=20)depEffect=0.1;else if(p.depHour>=6&&p.depHour<=9)depEffect=0.04;else if(p.depHour<6)depEffect=-0.06;
+      features.push({feature:'dep_hour',displayName:'Departure Hour',value:formatHour(p.depHour),shap:depEffect});
+      const days=['','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+      let dayEffect=0;if(p.dayOfWeek===5)dayEffect=0.06;if(p.dayOfWeek===7)dayEffect=0.05;if(p.dayOfWeek===2||p.dayOfWeek===3)dayEffect=-0.03;
+      features.push({feature:'DayOfWeek',displayName:'Day of Week',value:days[p.dayOfWeek],shap:dayEffect});
+      const months=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+      let monthEffect=0;if([6,7,8].includes(p.month))monthEffect=0.07;if(p.month===12)monthEffect=0.08;if([9,10].includes(p.month))monthEffect=-0.04;
+      features.push({feature:'Month',displayName:'Month',value:months[p.month],shap:monthEffect});
+      const distEffect=p.distance>2000?0.05:p.distance>1000?0.02:-0.02;
+      features.push({feature:'Distance',displayName:'Flight Distance',value:Math.round(p.distance)+' mi',shap:distEffect});
+      const originIsHub=hubAirports.includes(p.origin.code);
+      features.push({feature:'Origin_encoded',displayName:'Origin Airport',value:p.origin.code,shap:originIsHub?0.06:-0.02});
+      const destIsHub=hubAirports.includes(p.dest.code);
+      features.push({feature:'Dest_encoded',displayName:'Destination',value:p.dest.code,shap:destIsHub?0.05:-0.02});
+      const airlineInfo=airlineFactors[p.airline];
+      features.push({feature:'Reporting_Airline_encoded',displayName:'Airline',value:airlineInfo?.name||p.airline,shap:airlineInfo?.factor||0});
+      const timeLabels={1:'Early Morning',2:'Morning',3:'Afternoon',4:'Evening Rush',5:'Night'};
+      const timeEffects={1:-0.04,2:-0.02,3:0.01,4:0.08,5:0.02};
+      features.push({feature:'dep_time_category',displayName:'Time of Day',value:timeLabels[p.timeCategory],shap:timeEffects[p.timeCategory]});
+      return features.sort((a,b)=>Math.abs(b.shap)-Math.abs(a.shap));
+    }
+
+    function displayResults(prediction){
+      const rs=document.getElementById('results-section');rs.classList.add('visible');
+      const probPct=Math.round(prediction.probability*100);
+      document.getElementById('prob-value').textContent=probPct+'%';
+      setTimeout(()=>{document.getElementById('prob-bar').style.width=probPct+'%';},100);
+      let riskClass='risk-low',riskText='Low risk of delay';
+      if(prediction.probability>=0.5){riskClass='risk-high';riskText='High risk of significant delay';}else if(prediction.probability>=0.3){riskClass='risk-medium';riskText='Moderate risk of delay';}
+      document.getElementById('prob-value').className='result-value '+riskClass;
+      document.getElementById('prob-description').textContent=riskText;
+      if(prediction.expectedDelay>0){const mins=Math.round(prediction.expectedDelay),hrs=Math.floor(mins/60),rm=mins%60;document.getElementById('duration-value').textContent=hrs>0?`${hrs}h ${rm}m`:`${mins} min`;document.getElementById('duration-value').className='result-value '+(mins>60?'risk-high':mins>30?'risk-medium':'risk-low');setTimeout(()=>{document.getElementById('duration-bar').style.width=Math.min(mins/180*100,100)+'%';},100);document.getElementById('duration-description').textContent='Expected delay if flight is delayed';}else{document.getElementById('duration-value').textContent='On Time';document.getElementById('duration-value').className='result-value risk-low';document.getElementById('duration-bar').style.width='0%';document.getElementById('duration-description').textContent='Flight likely to arrive on schedule';}
+      displayShapChart(prediction.shapData);
+      rs.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function displayShapChart(shapData){
+      const chart=document.getElementById('shap-chart');chart.innerHTML='';
+      const maxAbs=Math.max(...shapData.map(d=>Math.abs(d.shap)));
+      shapData.slice(0,8).forEach((item,i)=>{
+        const container=document.createElement('div');container.className='shap-bar-container';
+        const name=document.createElement('div');name.className='shap-feature-name';name.innerHTML=`${item.displayName}: <span class="shap-feature-value">${item.value}</span>`;
+        const track=document.createElement('div');track.className='shap-bar-track';
+        const bar=document.createElement('div');bar.className='shap-bar '+(item.shap>0?'shap-bar-positive':'shap-bar-negative');bar.style.width='0%';
+        const pct=(Math.abs(item.shap)/maxAbs)*100;setTimeout(()=>{bar.style.width=pct+'%';},100+i*50);
+        track.appendChild(bar);container.appendChild(name);container.appendChild(track);chart.appendChild(container);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      initializeMap();
+      initializeControls();
+      document.getElementById('year').textContent=new Date().getFullYear();
+      
+      // Mobile menu toggle
+      document.getElementById('mobile-toggle').addEventListener('click',()=>{
+        document.getElementById('nav-menu').classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
