@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Delay Predictor | ML-Powered Insights — Tanvir Bakther</title>
+  <meta name="description" content="Interactive ML-powered flight delay prediction with XGBoost and SHAP explainable AI.">
+
+  <!-- D3.js for interactive map -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+
+  <!-- Portfolio Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="/">Tanvir Bakther</a>
+      <div class="mobile-toggle" id="mobile-toggle">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/photography">Photography</a></li>
+        <li><a href="/analytics" class="active">Analytics</a></li>
+        <li><a href="/blog">Everyday Learning</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      XGBoost + SHAP Explainable AI
+      {% if model_loaded %}
+      <span class="model-status active">Model Active</span>
+      {% else %}
+      <span class="model-status">Demo Mode</span>
+      {% endif %}
+    </div>
+    <h1>✈️ Flight Delay Predictor</h1>
+    <p>ML-powered predictions with explainable AI. Select your route, enter flight details, and get instant delay probability with feature explanations powered by SHAP values.</p>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+
+    <!-- STEP 1: Route Selection -->
+    <section class="card">
+      <div class="card-header">
+        <span class="step-number">1</span>
+        <h2>Select Your Route</h2>
+        <span class="card-subtitle">Click airports on the map or use dropdowns</span>
+      </div>
+      <div class="card-body">
+        <div class="route-grid">
+          <div class="map-container">
+            <div id="us-map"></div>
+            <div class="map-legend">
+              <div class="legend-item">
+                <span class="legend-dot legend-dot-origin"></span>
+                <span>Origin</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot legend-dot-dest"></span>
+                <span>Destination</span>
+              </div>
+            </div>
+            <div class="map-tooltip" id="map-tooltip"></div>
+          </div>
+          <div class="route-details">
+            <div class="route-section">
+              <label>Origin Airport</label>
+              <select id="origin-select" class="route-select">
+                <option value="">Select origin...</option>
+              </select>
+            </div>
+            <div class="route-arrow">↓</div>
+            <div class="route-section">
+              <label>Destination Airport</label>
+              <select id="dest-select" class="route-select">
+                <option value="">Select destination...</option>
+              </select>
+            </div>
+            <div class="route-info" id="route-info">
+              <div class="info-row">
+                <span class="info-label">Distance</span>
+                <span class="info-value" id="route-distance">-</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Est. Duration</span>
+                <span class="info-value" id="route-duration">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: Flight Details -->
+    <section class="card">
+      <div class="card-header">
+        <span class="step-number">2</span>
+        <h2>Enter Flight Details</h2>
+      </div>
+      <div class="card-body">
+        <div class="flight-grid">
+          <div class="input-group">
+            <label class="input-label">Month</label>
+            <select id="month-select" class="input-select">
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6" selected>June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Day of Month</label>
+            <input type="number" id="day-input" class="input-number" min="1" max="31" value="15">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Day of Week</label>
+            <select id="day-of-week-select" class="input-select">
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3" selected>Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+              <option value="7">Sunday</option>
+            </select>
+          </div>
+          <div class="input-group wide">
+            <label class="input-label">Airline</label>
+            <select id="airline-select" class="input-select">
+              <option value="">Select airline...</option>
+            </select>
+          </div>
+          <div class="input-group half">
+            <label class="input-label">Departure Time: <span class="time-display" id="dep-time-display">14:00</span></label>
+            <div class="slider-container">
+              <input type="range" id="dep-hour-slider" class="input-slider" min="0" max="23" value="14">
+              <div class="slider-labels">
+                <span>00:00</span>
+                <span>06:00</span>
+                <span>12:00</span>
+                <span>18:00</span>
+                <span>23:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Arrival Time: <span class="time-display" id="arr-time-display">17:00</span></label>
+            <div class="slider-container">
+              <input type="range" id="arr-hour-slider" class="input-slider" min="0" max="23" value="17">
+              <div class="slider-labels">
+                <span>00:00</span>
+                <span>12:00</span>
+                <span>23:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="predict-container">
+          <button id="predict-button" class="predict-button" disabled>
+            <span class="icon">🔮</span>
+            Predict Delay
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: Results -->
+    <section class="card results-card" id="results-section">
+      <div class="card-header">
+        <span class="step-number">3</span>
+        <h2>Prediction Results</h2>
+      </div>
+      <div class="card-body">
+        <div class="results-grid">
+          <div class="result-box">
+            <div class="result-icon">📊</div>
+            <div class="result-label">Delay Probability</div>
+            <div class="result-value" id="prob-value">--</div>
+            <div class="result-bar">
+              <div class="result-bar-fill prob" id="prob-bar"></div>
+            </div>
+            <div class="result-description" id="prob-description">Likelihood of delay ≥ 15 min</div>
+          </div>
+          <div class="result-box">
+            <div class="result-icon">⏱️</div>
+            <div class="result-label">Expected Delay</div>
+            <div class="result-value" id="duration-value">--</div>
+            <div class="result-bar">
+              <div class="result-bar-fill duration" id="duration-bar"></div>
+            </div>
+            <div class="result-description" id="duration-description">If delayed, expected duration</div>
+          </div>
+        </div>
+        <div class="shap-section">
+          <div class="shap-header">
+            <span class="icon">💡</span>
+            <h3>What's Driving This Prediction?</h3>
+          </div>
+          <p class="shap-subtitle">Top factors contributing to delay probability (SHAP values):</p>
+          <div class="shap-chart" id="shap-chart"></div>
+          <div class="shap-legend">
+            <div class="shap-legend-item">
+              <span class="shap-legend-dot shap-legend-positive"></span>
+              <span>Increases delay risk</span>
+            </div>
+            <div class="shap-legend-item">
+              <span class="shap-legend-dot shap-legend-negative"></span>
+              <span>Decreases delay risk</span>
+            </div>
+          </div>
+        </div>
+        <div class="model-info">
+          <h4>📈 Model Performance</h4>
+          <div class="model-stats">
+            <div class="stat-box">
+              <div class="stat-value" id="metric-r2">0.847</div>
+              <div class="stat-label">R² Score</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="metric-rmse">18.2</div>
+              <div class="stat-label">RMSE (min)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="metric-mae">12.4</div>
+              <div class="stat-label">MAE (min)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="metric-mape">15.3%</div>
+              <div class="stat-label">MAPE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Built with XGBoost, SHAP, Flask, and D3.js | Data from Bureau of Transportation Statistics</p>
+    <p style="margin-top: 10px;"><a href="/analytics">← Back to Analytics Portfolio</a></p>
+    <p style="margin-top: 10px;">© <span id="year"></span> Tanvir Bakther | Team 220 - Georgia Tech MS Analytics</p>
+  </footer>
+
+  <!-- LOADING OVERLAY -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Analyzing flight data...</div>
+  </div>
+
+  <!-- Main JavaScript -->
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
