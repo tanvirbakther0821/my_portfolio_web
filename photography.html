@@ -8,20 +8,17 @@
   <meta name="description" content="Explore Tanvir Bakther's photography portfolio featuring travel photography from Istanbul, Bangladesh, Florida, wildlife photography, nature shots, and architectural captures." />
   <meta name="keywords" content="Tanvir Bakther, Photography, Travel Photography, Wildlife Photography, Nature Photography, Istanbul, Bangladesh, Florida" />
   <meta name="author" content="Tanvir Bakther" />
+<meta property="og:url" content="https://bakthertanvir.com/photography" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+	<link rel="canonical" href="https://bakthertanvir.com/photography" />
   
   <style>
-    /* ========================================
-       UNIFIED DESIGN SYSTEM - Tanvir Bakther
-       ======================================== */
-    
     *{margin:0;padding:0;box-sizing:border-box}
     
     :root {
-      /* Primary Palette - Warm Gold */
       --gold-100: #f5e6c8;
       --gold-200: #e6d5a8;
       --gold-300: #c2b49b;
@@ -30,19 +27,12 @@
       --gold-600: #8a6b38;
       --gold-700: #5e4211;
       
-      /* Dark Palette */
       --dark-100: #1a1512;
       --dark-200: #110a08;
       --dark-300: #0d0806;
       --dark-400: #080403;
       --dark-500: #050302;
       
-      /* Accent Colors */
-      --accent-blue: #58a6ff;
-      --accent-purple: #6366f1;
-      --accent-green: #22c55e;
-      
-      /* Semantic Colors */
       --text-primary: var(--gold-300);
       --text-secondary: rgba(194,180,155,0.8);
       --text-muted: rgba(194,180,155,0.6);
@@ -51,25 +41,20 @@
       --border-color: rgba(94,66,17,0.4);
       --border-hover: rgba(202,154,78,0.6);
       
-      /* Effects */
       --shadow-sm: 0 4px 12px rgba(0,0,0,0.2);
       --shadow-md: 0 8px 24px rgba(94,66,17,0.2);
       --shadow-lg: 0 12px 40px rgba(94,66,17,0.3);
       --glass: rgba(8,4,3,0.85);
       --glass-border: rgba(94,66,17,0.3);
       
-      /* Spacing */
       --radius-sm: 6px;
       --radius-md: 12px;
       --radius-lg: 20px;
       
-      /* Transitions */
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
     
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -80,42 +65,19 @@
       padding-top: 80px;
     }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--dark-400); }
     ::-webkit-scrollbar-thumb { background: var(--gold-600); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--gold-500); }
 
-    /* Accessibility */
-    *:focus-visible {
-      outline: 2px solid var(--gold-400);
-      outline-offset: 2px;
-    }
+    *:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; }
     
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      border: 0;
-    }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
-    a {
-      color: var(--gold-400);
-      text-decoration: none;
-      transition: var(--transition);
-    }
+    a { color: var(--gold-400); text-decoration: none; transition: var(--transition); }
+    a:hover { color: var(--gold-300); }
 
-    a:hover {
-      color: var(--gold-300);
-    }
-
-    /* ========================================
-       NAVBAR
-       ======================================== */
+    /* NAVBAR */
     .navbar {
       position: fixed;
       inset: 0 0 auto 0;
@@ -127,35 +89,9 @@
       transition: var(--transition);
     }
     
-    .navbar::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(202,154,78,0.4), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
+    .navbar.scrolled { background: rgba(8,4,3,0.98); padding: 14px 50px; box-shadow: var(--shadow-md); }
     
-    .navbar:hover::after {
-      opacity: 1;
-    }
-    
-    .navbar.scrolled {
-      background: rgba(8,4,3,0.98);
-      padding: 14px 50px;
-      box-shadow: var(--shadow-md);
-    }
-    
-    .nav-container {
-      max-width: 1400px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    .nav-container { max-width: 1400px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
     
     .logo {
       font-family: 'Cinzel', serif;
@@ -168,16 +104,9 @@
       transition: var(--transition);
     }
     
-    .logo:hover {
-      color: var(--gold-300);
-      transform: scale(1.02);
-    }
+    .logo:hover { color: var(--gold-300); transform: scale(1.02); }
     
-    .nav-menu {
-      display: flex;
-      list-style: none;
-      gap: 35px;
-    }
+    .nav-menu { display: flex; list-style: none; gap: 35px; }
     
     .nav-menu a {
       color: var(--text-primary);
@@ -201,58 +130,21 @@
       transition: width 0.3s ease;
     }
     
-    .nav-menu a:hover,
-    .nav-menu a.active {
-      color: var(--gold-400);
-    }
-    
-    .nav-menu a:hover::after,
-    .nav-menu a.active::after {
-      width: 100%;
-    }
+    .nav-menu a:hover, .nav-menu a.active { color: var(--gold-400); }
+    .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
 
-    /* Mobile Menu Toggle */
-    .mobile-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px;
-    }
+    .mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .mobile-toggle span { width: 25px; height: 2px; background: var(--gold-400); transition: 0.3s; }
+    .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
 
-    .mobile-toggle span {
-      width: 25px;
-      height: 2px;
-      background: var(--gold-400);
-      transition: 0.3s;
-    }
+    /* LAYOUT */
+    .wrap { max-width: 1400px; margin: auto; padding: 20px 24px; }
 
-    .mobile-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    /* ========================================
-       LAYOUT
-       ======================================== */
-    .wrap {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px 24px;
-    }
-
-    /* ========================================
-       HERO SECTION
-       ======================================== */
+    /* HERO */
     .hero-section {
-      padding: 60px 0 40px;
+      padding: 80px 40px;
       text-align: center;
       background: linear-gradient(180deg, var(--bg-primary) 0%, var(--dark-300) 100%);
       border-radius: var(--radius-lg);
@@ -271,7 +163,7 @@
 
     .hero-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: 600;
       margin-bottom: 20px;
       color: var(--gold-400);
@@ -281,21 +173,13 @@
     .hero-subtitle {
       font-size: 1.1rem;
       color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 30px;
+      max-width: 700px;
+      margin: 0 auto 40px;
       animation: fadeInUp 1s ease 0.2s both;
     }
 
-    /* ========================================
-       STATISTICS
-       ======================================== */
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin: 40px 0;
-      flex-wrap: wrap;
-    }
+    /* Stats */
+    .stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
 
     .stat {
       text-align: center;
@@ -306,451 +190,67 @@
       transition: var(--transition);
     }
 
-    .stat:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-hover);
-    }
+    .stat:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--border-hover); }
 
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--gold-400);
-      display: block;
-      margin-bottom: 8px;
-    }
+    .stat-number { font-size: 2rem; font-weight: 700; color: var(--gold-400); display: block; margin-bottom: 8px; }
+    .stat-label { color: var(--text-muted); font-weight: 500; font-size: 0.9rem; }
 
-    .stat-label {
-      color: var(--text-muted);
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-
-    /* ========================================
-       TOOLBAR
-       ======================================== */
-    .toolbar {
+    /* SECTION NAVIGATION */
+    .section-nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-      justify-content: space-between;
-      margin: 24px 0;
-      padding: 20px;
-      background: var(--glass);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .search {
-      flex: 1;
-      min-width: 280px;
-      position: relative;
-    }
-
-    .search::before {
-      content: '🔍';
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .search input {
-      width: 100%;
-      padding: 14px 16px 14px 48px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-      background: rgba(8,4,3,0.6);
-      color: var(--text-primary);
-      font-size: 14px;
-      transition: var(--transition);
-    }
-
-    .search input:focus {
-      outline: none;
-      border-color: var(--gold-500);
-      box-shadow: 0 0 20px rgba(173,133,70,0.2);
-    }
-
-    .search input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .view-controls {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .view-btn {
-      padding: 10px 12px;
-      background: var(--glass);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 16px;
-    }
-
-    .view-btn.active,
-    .view-btn:hover {
-      background: var(--gold-500);
-      color: var(--gold-100);
-      border-color: var(--gold-500);
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-    }
-
-    /* ========================================
-       BUTTONS
-       ======================================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--glass);
-      border: 1px solid var(--gold-500);
-      padding: 12px 20px;
-      border-radius: var(--radius-md);
-      color: var(--gold-400);
-      font-weight: 500;
-      cursor: pointer;
-      transition: var(--transition);
-      text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-    }
-
-    .btn:hover {
-      background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
-      color: var(--gold-100);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    /* ========================================
-       FILTER CHIPS
-       ======================================== */
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 20px 0;
       justify-content: center;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 50px;
-      background: var(--glass);
-      border: 1px solid var(--border-color);
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: var(--transition);
-      font-weight: 500;
-      font-size: 13px;
-    }
-
-    .chip:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold-400);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .chip.active {
-      background: var(--gold-500);
-      color: var(--gold-100);
-      border-color: var(--gold-400);
-      box-shadow: 0 0 20px rgba(202,154,78,0.3);
-    }
-
-    /* ========================================
-       GRID
-       ======================================== */
-    .grid {
-      display: grid;
-      gap: 24px;
-      margin: 32px 0;
-      transition: var(--transition);
-    }
-
-    .grid.masonry {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      grid-auto-rows: 10px;
-    }
-
-    .grid.list {
-      grid-template-columns: 1fr;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* ========================================
-       CARDS
-       ======================================== */
-    .card {
+      gap: 12px;
+      margin: 40px 0;
+      padding: 20px;
       background: var(--glass);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      overflow: hidden;
-      transition: var(--transition);
-      position: relative;
-      cursor: pointer;
-      animation: fadeInScale 0.6s ease;
-      animation-fill-mode: both;
-      align-self: start;
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--border-hover);
-    }
-
-    .grid.list .card {
-      display: flex;
-      align-items: center;
-      max-height: 300px;
-    }
-
-    .grid.list .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .thumb {
-      position: relative;
-      overflow: hidden;
-      display: block;
-    }
-
-    .grid.masonry .thumb {
-      aspect-ratio: auto;
-    }
-
-    .grid.list .thumb {
-      width: 40%;
-      aspect-ratio: 16/9;
-    }
-
-    .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: 0.5s ease;
-    }
-
-    .card:hover .thumb img {
-      transform: scale(1.08);
-    }
-
-    .photo-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(8,4,3,0.9) 100%);
-      display: flex;
-      align-items: flex-end;
-      padding: 20px;
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .card:hover .photo-overlay {
-      opacity: 1;
-    }
-
-    .photo-info {
-      color: var(--gold-100);
-    }
-
-    .photo-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .photo-tags {
-      font-size: 0.85rem;
-      color: var(--gold-300);
-    }
-
-    .body {
-      padding: 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .grid.list .body {
-      width: 60%;
-      padding: 25px;
-    }
-
-    .title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      margin: 0 0 10px;
-      font-size: 1.1rem;
-      line-height: 1.4;
-      color: var(--gold-500);
-    }
-
-    .meta {
+    .section-nav a {
+      padding: 12px 24px;
+      border-radius: 50px;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-weight: 500;
       font-size: 13px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .location-tag {
-      color: var(--gold-400);
-    }
-
-    /* ========================================
-       LIGHTBOX
-       ======================================== */
-    #lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      background: rgba(5,3,2,0.95);
-      backdrop-filter: blur(20px);
-      border: none;
-      padding: 0;
-      max-width: 100vw;
-      max-height: 100vh;
-      width: 100%;
-      height: 100%;
-    }
-
-    #lightbox::backdrop {
-      background: rgba(5,3,2,0.9);
-    }
-
-    .lightbox-content {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      padding: 20px;
-    }
-
-    .lightbox-img {
-      flex: 1;
-      max-width: 100%;
-      max-height: calc(100vh - 120px);
-      object-fit: contain;
-      margin: 0 auto;
-      display: block;
-      border-radius: var(--radius-md);
-    }
-
-    .lightbox-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      margin-top: 20px;
-      background: var(--glass);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-    }
-
-    .lightbox-info {
-      flex: 1;
-    }
-
-    .lightbox-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--gold-400);
-      margin-bottom: 5px;
-    }
-
-    .lightbox-meta {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .lightbox-controls {
-      display: flex;
-      gap: 10px;
-    }
-
-    .lightbox-nav {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--glass);
-      border: 1px solid var(--border-color);
-      color: var(--gold-400);
-      font-size: 20px;
-      cursor: pointer;
+      letter-spacing: 0.05em;
       transition: var(--transition);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .lightbox-nav:hover:not(:disabled) {
+    .section-nav a:hover, .section-nav a.active {
       background: var(--gold-500);
       color: var(--gold-100);
       border-color: var(--gold-400);
+      transform: translateY(-2px);
     }
 
-    .lightbox-nav:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
+    /* CATEGORY SECTIONS */
+    .category-section { margin: 80px 0; scroll-margin-top: 100px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    .lightbox-close {
-      padding: 12px 20px;
-      background: var(--gold-500);
-      border: none;
-      color: var(--gold-100);
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .lightbox-close:hover {
-      background: var(--gold-400);
-    }
-
-    /* ========================================
-       SECTIONS
-       ======================================== */
-    section {
-      margin: 60px 0;
-    }
-
-    section h2 {
+    .section-header h2 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.8rem, 4vw, 2.5rem);
-      margin: 0 0 16px 0;
       font-weight: 600;
       color: var(--gold-400);
       position: relative;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
-    section h2::after {
+    .section-header h2::after {
       content: '';
       position: absolute;
       bottom: -8px;
@@ -761,34 +261,263 @@
       border-radius: 2px;
     }
 
-    section p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      line-height: 1.7;
-    }
+    .section-icon { font-size: 1.5em; }
+    .section-desc { color: var(--text-secondary); font-size: 1rem; max-width: 600px; }
 
-    /* No Results State */
-    .no-results {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-muted);
-      display: none;
-    }
-
-    .no-results.active {
-      display: block;
-    }
-
-    .no-results h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+    .album-count {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 50px;
       color: var(--gold-400);
+      font-weight: 500;
+      font-size: 0.9rem;
     }
 
-    /* ========================================
-       FOOTER
-       ======================================== */
+    /* ALBUM GRID */
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .album-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+    }
+
+    .album-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--gold-400);
+    }
+
+    .album-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .album-card:hover img { transform: scale(1.1); }
+
+    .album-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(8,4,3,0.95) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 25px;
+      transition: var(--transition);
+    }
+
+    .album-card:hover .album-overlay { background: linear-gradient(180deg, transparent 20%, rgba(8,4,3,0.98) 100%); }
+
+    .album-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold-100);
+      margin-bottom: 8px;
+    }
+
+    .album-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 0.85rem;
+      color: var(--gold-300);
+    }
+
+    .album-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .album-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--gold-500);
+      color: var(--gold-100);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .view-album-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: var(--gold-500);
+      color: var(--gold-100);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .album-card:hover .view-album-btn { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+
+    /* ALBUM MODAL */
+    .album-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(5,3,2,0.98);
+      backdrop-filter: blur(20px);
+      display: none;
+      overflow-y: auto;
+    }
+
+    .album-modal.active { display: block; }
+
+    .album-modal-content { max-width: 1400px; margin: 0 auto; padding: 20px; min-height: 100vh; }
+
+    .album-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .album-header-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--gold-400);
+      margin-bottom: 8px;
+    }
+
+    .album-header-meta { display: flex; gap: 20px; color: var(--text-muted); font-size: 0.9rem; }
+
+    .close-album {
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      color: var(--gold-400);
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .close-album:hover { background: var(--gold-500); color: var(--gold-100); border-color: var(--gold-400); }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover { transform: scale(1.02); border-color: var(--gold-400); box-shadow: var(--shadow-md); }
+
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .gallery-item:hover img { transform: scale(1.08); }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(8,4,3,0.9) 100%);
+      opacity: 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: flex-end;
+      padding: 15px;
+    }
+
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    .gallery-item-title { color: var(--gold-100); font-weight: 500; font-size: 0.9rem; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      background: rgba(5,3,2,0.98);
+      backdrop-filter: blur(20px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox-content { max-width: 95vw; max-height: 90vh; position: relative; }
+
+    .lightbox-img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: var(--radius-md); }
+
+    .lightbox-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      color: var(--gold-400);
+      padding: 10px 20px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .lightbox-close:hover { background: var(--gold-500); color: var(--gold-100); }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--glass);
+      border: 1px solid var(--border-color);
+      color: var(--gold-400);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-nav:hover { background: var(--gold-500); color: var(--gold-100); }
+
+    .lightbox-prev { left: -70px; }
+    .lightbox-next { right: -70px; }
+
+    .lightbox-info { position: absolute; bottom: -50px; left: 0; right: 0; text-align: center; color: var(--text-secondary); }
+    .lightbox-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold-400); }
+
+    /* FOOTER */
     footer {
       margin: 80px 0 40px;
       border-top: 1px solid var(--glass-border);
@@ -820,74 +549,30 @@
       transition: var(--transition);
     }
 
-    .pill:hover {
-      background: var(--gold-500);
-      color: var(--gold-100);
-      transform: translateY(-2px);
-    }
+    .pill:hover { background: var(--gold-500); color: var(--gold-100); transform: translateY(-2px); }
 
-    .muted {
-      color: var(--text-muted);
-    }
+    .muted { color: var(--text-muted); }
 
-    /* ========================================
-       ANIMATIONS
-       ======================================== */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ANIMATIONS */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
-    @keyframes fadeInScale {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
+    .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+    .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
+    .album-card { animation: fadeInScale 0.6s ease both; }
+    .album-card:nth-child(1) { animation-delay: 0.1s; }
+    .album-card:nth-child(2) { animation-delay: 0.15s; }
+    .album-card:nth-child(3) { animation-delay: 0.2s; }
+    .album-card:nth-child(4) { animation-delay: 0.25s; }
+    .album-card:nth-child(5) { animation-delay: 0.3s; }
+    .album-card:nth-child(6) { animation-delay: 0.35s; }
 
-    .floating {
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .scroll-reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .scroll-reveal.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Card Animation Delays */
-    .card:nth-child(1) { animation-delay: 0.1s; }
-    .card:nth-child(2) { animation-delay: 0.15s; }
-    .card:nth-child(3) { animation-delay: 0.2s; }
-    .card:nth-child(4) { animation-delay: 0.25s; }
-    .card:nth-child(5) { animation-delay: 0.3s; }
-    .card:nth-child(6) { animation-delay: 0.35s; }
-    .card:nth-child(7) { animation-delay: 0.4s; }
-    .card:nth-child(8) { animation-delay: 0.45s; }
-
-    /* ========================================
-       RESPONSIVE DESIGN
-       ======================================== */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      body {
-        padding-top: 70px;
-      }
-
-      .navbar {
-        padding: 16px 20px;
-      }
-
-      .mobile-toggle {
-        display: flex;
-      }
+      body { padding-top: 70px; }
+      .navbar { padding: 16px 20px; }
+      .mobile-toggle { display: flex; }
 
       .nav-menu {
         position: fixed;
@@ -905,86 +590,25 @@
         z-index: 999;
       }
 
-      .nav-menu.active {
-        right: 0;
-      }
+      .nav-menu.active { right: 0; }
+      .nav-menu a { font-size: 13px; padding: 12px 0; }
 
-      .nav-menu a {
-        font-size: 13px;
-        padding: 12px 0;
-      }
-
-      .toolbar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-      }
-
-      .search {
-        min-width: auto;
-      }
-
-      .grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px;
-      }
-
-      .grid.list .card {
-        flex-direction: column;
-        max-height: none;
-      }
-
-      .grid.list .card .thumb,
-      .grid.list .card .body {
-        width: 100%;
-      }
-
-      .wrap {
-        padding: 16px 20px;
-      }
-
-      .stats {
-        gap: 20px;
-      }
-
-      .cta-row {
-        justify-content: center;
-        width: 100%;
-      }
-
-      .lightbox-bar {
-        flex-direction: column;
-        gap: 16px;
-        align-items: stretch;
-      }
-
-      .lightbox-controls {
-        justify-content: center;
-      }
+      .wrap { padding: 16px 20px; }
+      .album-grid { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; align-items: flex-start; }
+      .lightbox-nav { display: none; }
+      .lightbox-content { padding: 20px; }
+      .album-header { flex-direction: column; align-items: flex-start; }
     }
 
     @media (max-width: 480px) {
-      .filters {
-        justify-content: center;
-      }
-
-      .chip {
-        font-size: 12px;
-        padding: 8px 14px;
-      }
-
-      .hero-title {
-        font-size: 2rem;
-      }
-
-      .stats {
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-      }
+      .hero-title { font-size: 2rem; }
+      .stats { flex-direction: column; align-items: center; gap: 16px; }
+      .section-nav { gap: 8px; }
+      .section-nav a { padding: 10px 16px; font-size: 12px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     }
 
-    /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -999,7 +623,7 @@
   <a href="#main-content" class="sr-only">Skip to main content</a>
 
   <!-- NAVBAR -->
-<nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a class="logo" href="index.html">Tanvir Bakther</a>
       <div class="mobile-toggle" id="mobile-toggle">
@@ -1010,25 +634,31 @@
       <ul class="nav-menu" id="nav-menu">
         <li><a class="nav-link" href="index.html">Home</a></li>
         <li><a class="nav-link active" href="photography.html">Photography</a></li>
+        <li><a class="nav-link" href="travel.html">Travel</a></li>
         <li><a class="nav-link" href="analytics.html">Analytics</a></li>
-        <li><a class="nav-link" href="blog.html">Everyday Learning</a></li>
         <li><a class="nav-link" href="index.html#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
   <main id="main-content" class="wrap">
+    <!-- HERO -->
     <section class="hero-section scroll-reveal">
-      <h1 class="hero-title">Capturing Moments</h1>
+      <h1 class="hero-title">Photography Portfolio</h1>
       <p class="hero-subtitle">
-        Capturing life's beautiful moments through travel, wildlife, nature, and street photography.
-        From the beaches of Bangladesh to the bustling streets of Istanbul, explore the world through my lens.
+        As a passionate nature enthusiast and lifelong learner, I find great joy in capturing moments and preserving memories through the art of photography. My lens becomes a window to the breathtaking beauty of our world, allowing me to immortalize its wonders in images that evoke a sense of awe and appreciation.
+
+
       </p>
 
       <div class="stats">
         <div class="stat">
+          <span class="stat-number" id="total-albums">0</span>
+          <div class="stat-label">Albums</div>
+        </div>
+        <div class="stat">
           <span class="stat-number" id="total-photos">0</span>
-          <div class="stat-label">Total Photos</div>
+          <div class="stat-label">Photos</div>
         </div>
         <div class="stat">
           <span class="stat-number" id="locations-count">0</span>
@@ -1038,476 +668,1015 @@
           <span class="stat-number" id="categories-count">0</span>
           <div class="stat-label">Categories</div>
         </div>
-        <div class="stat">
-          <span class="stat-number" id="current-showing">0</span>
-          <div class="stat-label">Showing</div>
+      </div>
+    </section>
+
+    <!-- SECTION NAVIGATION -->
+    <nav class="section-nav scroll-reveal">
+      <a href="#wildlife" class="active">🦁 Wildlife</a>
+      <a href="#birds">🦜 Birds</a>
+      <a href="#macro">🔬 Macro</a>
+	  <a href="#landscapes">🌅 Landscapes</a>
+      <a href="#travel-bangladesh">🇧🇩 Bangladesh</a>
+      <a href="#travel-turkey">🇹🇷 Turkey</a>
+      <a href="#travel-uk">🇬🇧 United Kingdom</a>
+      <a href="#travel-usa">🇺🇸 USA</a>
+	 <a href="#travel-thailand">🇹🇭 Thailand</a>
+      
+    </nav>
+
+    <!-- WILDLIFE SECTION -->
+    <section id="wildlife" class="category-section scroll-reveal">
+      <div class="section-header">
+        <div>
+          <h2><span class="section-icon">🦁</span> Wildlife</h2>
+          <p class="section-desc">Majestic creatures captured in their natural habitats and wildlife sanctuaries.</p>
         </div>
+        <span class="album-count" id="wildlife-count">0 Albums</span>
       </div>
+      <div class="album-grid" id="wildlife-grid"></div>
     </section>
 
-    <section class="toolbar scroll-reveal" aria-label="Search and filter tools">
-      <div class="search">
-        <label for="q" class="sr-only">Search photography portfolio</label>
-        <input
-          id="q"
-          type="search"
-          placeholder="Search photos by location, subject, or style…"
-          aria-label="Search photography portfolio"
-        />
+    <!-- BIRDS SECTION -->
+    <section id="birds" class="category-section scroll-reveal">
+      <div class="section-header">
+        <div>
+          <h2><span class="section-icon">🦜</span> Birds</h2>
+          <p class="section-desc">Colorful avian species from around the world.</p>
+        </div>
+        <span class="album-count" id="birds-count">0 Albums</span>
       </div>
-      <div class="view-controls">
-        <button class="view-btn active" data-view="masonry" title="Grid view" aria-label="Grid view">⊞</button>
-        <button class="view-btn" data-view="list" title="List view" aria-label="List view">☰</button>
-      </div>
-      <div class="cta-row">
-        <a class="btn floating" href="analytics.html">📊 Analytics</a>
-        <a class="btn floating" href="#travel">🌍 Travel Stories</a>
-      </div>
+      <div class="album-grid" id="birds-grid"></div>
     </section>
 
-    <section id="photography" class="scroll-reveal">
-      <h2>Featured Photography</h2>
-      <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
-
-      <div class="no-results" id="no-results">
-        <h3>No photos found</h3>
-        <p>Try adjusting your search terms or filters to discover more amazing photography.</p>
+    <!-- MACRO SECTION -->
+    <section id="macro" class="category-section scroll-reveal">
+      <div class="section-header">
+        <div>
+          <h2><span class="section-icon">🔬</span> Macro & Nature</h2>
+          <p class="section-desc">The intricate beauty of small creatures and nature's details.</p>
+        </div>
+        <span class="album-count" id="macro-count">0 Albums</span>
       </div>
+      <div class="album-grid" id="macro-grid"></div>
+    </section>
 
-      <div class="grid masonry" id="grid"></div>
-   
+    <!-- BANGLADESH SECTION -->
+    <section id="travel-bangladesh" class="category-section scroll-reveal">
+      <div class="section-header">
+        <div>
+          <h2><span class="section-icon">🇧🇩</span> Bangladesh</h2>
+          <p class="section-desc">Beautiful landscapes and cultural moments from my homeland.</p>
+        </div>
+        <span class="album-count" id="bangladesh-count">0 Albums</span>
+      </div>
+      <div class="album-grid" id="bangladesh-grid"></div>
+    </section>
+
+    <!-- TURKEY SECTION -->
+    <section id="travel-turkey" class="category-section scroll-reveal">
+      <div class="section-header">
+        <div>
+          <h2><span class="section-icon">🇹🇷</span> Turkey</h2>
+          <p class="section-desc">Where East meets West - Istanbul and beyond.</p>
+        </div>
+        <span class="album-count" id="turkey-count">0 Albums</span>
+      </div>
+      <div class="album-grid" id="turkey-grid"></div>
+    </section>
+
+    <!-- UK SECTION -->
+    <section id="travel-uk" class="category-section scroll-reveal">
+      <div class="section-header">
+        <div>
+          <h2><span class="section-icon">🇬🇧</span> United Kingdom</h2>
+          <p class="section-desc">Historic landmarks and charming streets of Britain.</p>
+        </div>
+        <span class="album-count" id="uk-count">0 Albums</span>
+      </div>
+      <div class="album-grid" id="uk-grid"></div>
+    </section>
+
+    <!-- USA SECTION -->
+    <section id="travel-usa" class="category-section scroll-reveal">
+      <div class="section-header">
+        <div>
+          <h2><span class="section-icon">🇺🇸</span> United States</h2>
+          <p class="section-desc">From Florida beaches to Georgia mountains.</p>
+        </div>
+        <span class="album-count" id="usa-count">0 Albums</span>
+      </div>
+      <div class="album-grid" id="usa-grid"></div>
+    </section>
+	  <!-- THAILAND SECTION -->
+<section id="travel-thailand" class="category-section scroll-reveal">
+  <div class="section-header">
+    <div>
+      <h2><span class="section-icon">🇹🇭</span> Thailand</h2>
+      <p class="section-desc">Vibrant temples, bustling markets, and tropical beauty.</p>
+    </div>
+    <span class="album-count" id="thailand-count">0 Albums</span>
+  </div>
+  <div class="album-grid" id="thailand-grid"></div>
+</section>
+
+    <!-- LANDSCAPES SECTION -->
+    <section id="landscapes" class="category-section scroll-reveal">
+      <div class="section-header">
+        <div>
+          <h2><span class="section-icon">🌅</span> Landscapes & Nature</h2>
+          <p class="section-desc">Breathtaking scenery and natural wonders.</p>
+        </div>
+        <span class="album-count" id="landscapes-count">0 Albums</span>
+      </div>
+      <div class="album-grid" id="landscapes-grid"></div>
+    </section>
 
     <footer class="scroll-reveal">
-      <p class="muted">© <span id="y"></span> Tanvir Bakther <span class="pill floating">Lifelong learner</span></p>
+      <p class="muted">© <span id="y"></span> Tanvir Bakther <span class="pill">Lifelong learner</span></p>
     </footer>
   </main>
 
-  <dialog id="lightbox" aria-label="Photo preview">
+  <!-- ALBUM MODAL -->
+  <div class="album-modal" id="album-modal">
+    <div class="album-modal-content">
+      <div class="album-header">
+        <div class="album-header-info">
+          <h2 id="modal-album-title">Album Title</h2>
+          <div class="album-header-meta">
+            <span id="modal-album-location">📍 Location</span>
+            <span id="modal-album-year">📅 Year</span>
+            <span id="modal-album-count">📸 0 Photos</span>
+          </div>
+        </div>
+        <button class="close-album" onclick="closeAlbumModal()">
+          <span>✕</span> Close Album
+        </button>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
     <div class="lightbox-content">
-      <img id="lb-img" class="lightbox-img" alt="Preview"/>
-      <div class="lightbox-bar">
-        <div class="lightbox-info">
-          <div class="lightbox-title" id="lb-title"></div>
-          <div class="lightbox-meta" id="lb-meta"></div>
-        </div>
-        <div class="lightbox-controls">
-          <button class="lightbox-nav" id="lb-prev" aria-label="Previous photo">‹</button>
-          <button class="lightbox-nav" id="lb-next" aria-label="Next photo">›</button>
-          <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close lightbox">Close</button>
-        </div>
+      <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+      <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
+      <img class="lightbox-img" id="lightbox-img", src="" alt="">,
+      <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
+      <div class="lightbox-info">
+        <div class="lightbox-title" id="lightbox-title"></div>
       </div>
     </div>
-  </dialog>
+  </div>
 
   <script>
-    // Photography Data
-    const items = [
-      {
-        title: "Cox's Bazar, Bangladesh",
-        year: 2025,
-        tags: ["beach", "Bangladesh", "travel", "landscape"],
-        location: "Bangladesh",
-        category: "Travel",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1e02822a-d410-43b7-b1dd-3791309ff49f_rw_1920.jpg?h=25bc70e64cf71013e06f1ce5f64c36b6"
-      },
-      {
-        title: "Bosphorus Strait, Istanbul",
-        year: 2025,
-        tags: ["Istanbul", "water", "bridge", "travel", "architecture"],
-        location: "Turkey",
-        category: "Travel",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/479add1a-32a1-4a03-aca7-9cac5f58d18a_rw_1920.jpg?h=8efad2c6e1cf469dee81b97c8078975f"
-      },
-      {
-        title: "City of Istanbul, Turkey",
-        year: 2025,
-        tags: ["Istanbul", "city", "travel", "urban"],
-        location: "Turkey",
-        category: "Urban",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/a8200412-67eb-40ce-b0e0-7d95585abd5e_rw_1920.jpg?h=a5783aec77e82c0e1e2006ad72176100"
-      },
-      {
-        title: "Hagia Sophia & Blue Mosque",
-        year: 2025,
-        tags: ["Istanbul", "architecture", "travel", "heritage"],
-        location: "Turkey",
-        category: "Architecture",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/35fce0f9-231e-4a06-9f09-a725ea881f86_rw_1920.jpg?h=b1e68a3aa0ab7e43fa356881a5a58922"
-      },
-      {
-        title: "Big Talbot Island, Florida",
-        year: 2024,
-        tags: ["Florida", "beach", "USA", "travel", "nature"],
-        location: "USA",
-        category: "Nature",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e5ab94fa-0f24-4afa-b6d0-90f80e7069a4_rw_1920.jpg?h=b97ee49a46634766a30c9aaa871b1bce"
-      },
-      {
-        title: "Crescent Beach, Florida",
-        year: 2024,
-        tags: ["Florida", "beach", "USA", "sunset"],
-        location: "USA",
-        category: "Landscape",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/c8e6c1d9-5bbc-4f46-8896-1a06fccf2005_rw_1920.jpg?h=f8b2b9091c38c26956b7ec38965a9cb4"
-      },
-      {
-        title: "A Snowy Day in Atlanta",
-        year: 2024,
-        tags: ["Atlanta", "weather", "USA", "winter"],
-        location: "USA",
-        category: "Weather",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b025a2b7-7ea3-4382-af2b-371084920a5d_rw_3840.JPG?h=13259a471dcad2b2bcf3e4990e8602bc",
-      },
-      {
-        title: "Western Lowland Gorilla",
-        year: 2024,
-        tags: ["animals", "gorilla", "zoo", "wildlife"],
-        location: "Zoo",
-        category: "Wildlife",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ec2845f1-2b30-47eb-bc1f-1b62595eb6a7_rw_1920.jpg?h=2410794d7f7b4c38b0b3c6adf0c9a60d"
-      },
-      {
-        title: "Meerkat",
-        year: 2024,
-        tags: ["animals", "meerkat", "wildlife"],
-        location: "Zoo",
-        category: "Wildlife",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/099bcd1d-0e2b-48c1-aee5-480aea5ed774_rw_1920.jpg?h=aeab83aaf8480131523a9a08e3ac0395"
-      },
-      {
-        title: "Piranha",
-        year: 2024,
-        tags: ["fish", "macro", "aquatic"],
-        location: "Aquarium",
-        category: "Macro",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/da784ccb-bee0-467b-bcb2-fdb2a6e51bdf_rw_1920.jpg?h=9218c6f2073b9638932fba7555408f6e"
-      },
-      {
-        title: "Dragonfly",
-        year: 2024,
-        tags: ["macro", "nature", "insects"],
-        location: "Garden",
-        category: "Macro",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/08848f02-5588-4438-9ddb-0d6f74321a0d_rw_1920.jpg?h=f2285060a32610ce7d44af4898f9f035"
-      },
-      {
-        title: "Tybee Island Sunrise",
-        year: 2024,
-        tags: ["sunrise", "beach", "Georgia", "golden-hour"],
-        location: "USA",
-        category: "Landscape",
-        href: "#",
-        img: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/72b36ed5-bcef-49ca-841f-1a0f5b97a1bc_rw_1920.jpg?h=cfad32b1efef02afd90e3f07677d5b36"
-      },
-		{
-    title:"Sumatran Tiger",
-    year: 2024,
-    tags: [],
-	location:"USA",
-    href:"/sumatran-tiger",
-    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/fbc4f90c-1ae3-4ebe-bc34-a0a9fb253f60_rw_1920.jpg?h=27d4b6385265410db1cc33dd8dd3024c"
-  },
-  {
-    title:"Hyacinith Macaw",
-    year: 2024,
-    tags: ["macaw"],
-	 location:"USA", 
-    href:"/hyacinith-macaw",
-    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/2bdfc624-9c79-4c75-b104-018c8ced7adb_rw_1920.jpg?h=a7d2e9f154ba54022dfbcced7694c2f5"
-  },
-  
-  {
-    title:"Mr Grasshopper",
-    year: 2024,
-    tags: [],
-	  location:"USA",
-    href:"/mr-grasshopper",
-    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/4511bbfd-cb45-4802-a70a-6ad197b8ca73_rw_1920.jpg?h=495b6da004f564ef558d82d044c0e50d"
-  },
-
-  {
-    title:"Sandy Paws And Wagging Tails In Crescent Beach",
-    year: null,
-    tags: ["beach", "Florida"],
-	  location: "Florida",
-    href:"/sandy-paws-and-wagging-tails-in-crescent-beach",
-    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e6806fd0-ba02-42ca-b6cb-ae5734b9eafe_rw_1920.jpg?h=5231a97762f274cd8f31c327c38d6692"
-  },
-		{
-    title:"Glass Frog",
-    year: 2024,
-			location:"USA",
-    tags: [],
-    href:"/glass-frog",
-    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/3e907b02-1576-41ad-a004-91d5b91ea899_rw_1920.jpg?h=1068a2c51869c0e4659d39fb4843fbc0"
-  },
-		{
-    title:"Panda",
-    year: 2024,
-			location: "USA",
-    tags: [],
-    href:"/panda",
-    img:"https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/acda05b1-7665-40a6-80be-ea2b18ff60df_rw_1920.jpg?h=7edc77c7cdf3ea631b31519fb43cbc28"
-		}
+    // ==========================================
+    // ALBUM DATA - ADD  PHOTOS HERE
+    // ==========================================
+    // Each album: { id, title, location, year, cover, badge (optional), photos: [{src, title}] }
+    // To add photos: Add objects to the photos array: { src: 'image-url', title: 'Photo Title' }
     
-    ];
+    const albums = {
+      // ==========================================
+      // 🦁 WILDLIFE - Add photos to each album
+      // ==========================================
+      wildlife: [
+        {
+          id: 'lion',
+          title: 'Lion, The King of the Jungle',
+          location: 'Zoo Atlanta',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/62bd21c5-eac8-443d-bc55-d232fafd3276_rw_1920.jpg?h=f44f4dc1093f658d93eec401ed1a3543',
+          photos: [
+           {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e40b8bc0-4f23-4866-a00c-6119eda58267_rwc_349x508x1130x637x32.jpg?h=dd099d5f55e69e5e0b30655e4ef2733e',
+    title: 'lion 1'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e40b8bc0-4f23-4866-a00c-6119eda58267_rwc_349x508x1130x637x640.jpg?h=72d60ac3486c406a2a541501a74d93eb',
+    title: 'lion 2'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e40b8bc0-4f23-4866-a00c-6119eda58267_rwc_349x508x1130x637x1280.jpg?h=4a472585a3da5caf2afd5d2d6a9e11b1',
+    title: 'lion 3'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e40b8bc0-4f23-4866-a00c-6119eda58267_rwc_349x508x1130x637x1366.jpg?h=8180f08dd81e829989cea57204760274',
+    title: 'lion 4'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e40b8bc0-4f23-4866-a00c-6119eda58267_rwc_349x508x1130x637x1130.jpg?h=509bb024b98c9628cb6fc7d7b43fd3cc',
+    title: 'lion 5'
+  }
+            // ADD MORE PHOTOS: { src: 'url', title: 'title' }
+          ]
+        },
+        {
+          id: 'royal-bengal-tiger',
+          title: 'Royal Bengal Tiger',
+          location: 'Sufari World, Bangkok',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/bf4da3ae-02c2-4cca-b419-26010dff7035_rw_1920.jpg?h=b1b5950e3fef7f45c0fc33479b167aa4',
+          photos: [
+			  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f64f6d7f-b474-4f3e-a195-f40e8911f715.jpg', title: 'Photo 1' },
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/163f9b0c-f061-42fe-9449-764ff2b51234.jpg', title: 'Photo 2' },
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/bf4da3ae-02c2-4cca-b419-26010dff7035_rw_1920.jpg?h=b1b5950e3fef7f45c0fc33479b167aa4', title: 'Photo 3' }
+			  
+            
+          ]
+        },
+        {
+          id: 'sumatran-tiger',
+          title: 'Sumatran Tiger',
+          location: 'Nashville Zoo',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f935b0c6-b608-4b76-97f9-96064cbc6226_rw_1920.jpg?h=06a57a5dbce5daffad4df282c7795a4b',
+          photos: [
+           {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f935b0c6-b608-4b76-97f9-96064cbc6226_rw_1920.jpg?h=06a57a5dbce5daffad4df282c7795a4b',
+    title: 'sumtran tiger 1'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/56cf1096-996c-4970-9af0-b7d55011046f_rw_1920.jpg?h=15254b373de952471c31add69e849cd2',
+    title: 'sumtran tiger 2'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/4cf6e380-88ab-429b-92cd-498c382600f0_rw_1920.jpg?h=125cf1ae0542ed66ded67ac39104283d',
+    title: 'sumtran tiger 3'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/721fac73-2a10-4456-96e2-9fa99da19695_rw_1920.jpg?h=e9fdeae165c0f77a7806e398632daf63',
+    title: 'sumtran tiger 4'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e616f6c3-38f4-4689-8f01-f82a504460e5_rw_1920.jpg?h=e8d854056b64831e374569eac8223b7e',
+    title: 'sumtran tiger 5'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/8884e127-f70b-44ce-94ad-370ee37912b3_rw_1920.jpg?h=f0fece0548bd724059bdf12815463c31',
+    title: 'sumtran tiger 6'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f9472acd-77b3-4843-b896-44db93826e82_rw_1920.jpg?h=5645c0f6a945ffc73f9fa52ad998f074',
+    title: 'sumtran tiger 7'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ebf49a5f-889b-42d5-9a8f-5ba6c37d2990_rw_1920.jpg?h=1a3ea96c1b3c979c97fbc2c519922e2d',
+    title: 'sumtran tiger 8'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1289738a-bef8-4410-96fa-6aa2a21569e9_rw_1920.jpg?h=b62688f56a215fd673ae6f03f4d444f5',
+    title: 'sumtran tiger 9'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/5fd03ea8-e684-4a3d-80f1-07c90b805fce_rw_1920.jpg?h=7c4458cc2b03794a809e4260af808ff0',
+    title: 'sumtran tiger 10'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/bb087818-e9f4-4e11-8d71-3bfe27724ad7_rw_1920.jpg?h=b8eda34aedc608c09f96ca5eeedcdf3b',
+    title: 'sumtran tiger 11'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/02243e8b-9aa4-42e6-81b1-fec13e4ed739_rw_1920.jpg?h=165deceb8f102e7a2ce4386a2a93cfb7',
+    title: 'sumtran tiger 12'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/722148e8-79bb-4d78-ab34-16004336554f_rw_1920.jpg?h=900d4a1f368af69a931016de7cd0e65b',
+    title: 'sumtran tiger 13'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/def8a926-9eea-478b-8e5f-97793daacc6e_rw_1920.jpg?h=a1d062bd87b95584d5829b79870cabf4',
+    title: 'sumtran tiger 14'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/fb895c62-e79f-4f00-97bc-5ab6d8142342_rw_1920.jpg?h=7511121edaa60acfde8665e63b61c92a',
+    title: 'sumtran tiger 15'
+  }
+]
 
-    // State
-    const state = {
-      items: items,
-      filteredItems: items,
-      activeFilters: new Set(),
-      searchTerm: '',
-      currentView: 'masonry',
-      currentLightboxIndex: 0
+        },
+        {
+          id: 'leopard',
+          title: 'Leopard',
+          location: 'Bangkok Sufari',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/033762c6-18a1-4b42-9aea-0100635c0703_rw_3840.jpg?h=ab405797650d4a35765af41603e1a369',
+          photos: [
+           {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/033762c6-18a1-4b42-9aea-0100635c0703_rw_3840.jpg?h=ab405797650d4a35765af41603e1a369',
+    title: 'photo 1'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/8371c378-be77-458d-816f-b5abb95b7165_rw_3840.jpg?h=6dfee61fda0e1c52547aa839d7578294',
+    title: 'photo 2'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/02473d8b-881a-4fcd-b398-fe2ac13e50c2_rw_3840.jpg?h=f45725a7b6957edc095c6ffbabd3f34c',
+    title: 'photo 3'
+  }
+          ]
+        },
+        {
+          id: 'panda',
+          title: 'Giant Panda',
+          location: 'Zoo Atlanta',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/acda05b1-7665-40a6-80be-ea2b18ff60df_rw_1920.jpg?h=7edc77c7cdf3ea631b31519fb43cbc28',
+          photos: [
+            {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b430f96f-5f10-4a32-a947-272370442967_rw_1920.jpg?h=1d9d95ed7dcbd4f59d107e24a6cc9aa6',
+    title: 'photo 1'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e60a3a47-8a75-4cae-9340-fdbd9470e882_rw_1920.jpg?h=0839d50b2eda41f59689779bbdfafe59',
+    title: 'photo 2'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/8c09882d-e99d-4d96-bd19-e7a7fbac7303_rw_1920.jpg?h=10e479aeec5a609f76268cc81ee0587a',
+    title: 'photo 3'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/acda05b1-7665-40a6-80be-ea2b18ff60df_rw_1920.jpg?h=7edc77c7cdf3ea631b31519fb43cbc28',
+    title: 'photo 4'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/638567ef-af62-40d9-8714-992e9985ee4c_rw_1920.jpg?h=931fda4b55f806793bf996a958856605',
+    title: 'photo 5'
+  }
+          ]
+        },
+        {
+          id: 'Western Lowland Gorilla',
+          title: 'Western Lowland Gorilla',
+          location: 'Nashville Zoo',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/036d13f1-424a-46e8-b689-09f0b4b26132_rw_1920.jpg?h=aef4e02bcd0702fccced3f9919deddde',
+          photos: [
+           {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/036d13f1-424a-46e8-b689-09f0b4b26132_rw_1920.jpg?h=aef4e02bcd0702fccced3f9919deddde',
+    title: 'photo 1'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d003fce5-5478-414a-a88f-18c7d3bad9fa_rw_1920.jpg?h=b052c09ef461035fff6b59a7f15d7a67',
+    title: 'photo 2'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ec2845f1-2b30-47eb-bc1f-1b62595eb6a7_rw_1920.jpg?h=2410794d7f7b4c38b0b3c6adf0c9a60d',
+    title: 'photo 3'
+  }
+          ]
+        },
+        {
+          id: 'Meerkat',
+          title: 'Meerkat',
+          location: 'Nashville Zoo',
+          year: 2024,
+          cover:'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ec8e5b1a-2a36-45e6-b156-aa867e30677e_rw_1920.jpg?h=730c494fe08667a081034d5638ba581e' ,
+          photos: [
+            {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/3b2aac44-35e4-4d1b-8aeb-48d0cfa81916_rw_1920.jpg?h=378c31c303c6a894926fe89041240515',
+    title: 'photo 1'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ec8e5b1a-2a36-45e6-b156-aa867e30677e_rw_1920.jpg?h=730c494fe08667a081034d5638ba581e',
+    title: 'photo 2'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/5a52579c-3067-493e-809b-7a99b838e424_rw_1920.jpg?h=7786e4511e11c5611e78c42805c04292',
+    title: 'photo 3'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/3ece8b9e-edd9-4f22-ad18-f442b290903d_rw_1920.jpg?h=bb6beb0875b677106b02e8995daa9e19',
+    title: 'photo 4'
+  }
+          ]
+        },
+        {
+          id: 'de-brazza-monkey',
+          title: "De Brazza's Monkey",
+          location: 'Nashville Zoo',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/a6cd0925-6255-4b27-adc8-34b741e70429_rw_1920.jpg?h=99397a985f7743a2e5ccfc57a1f292c8',
+          photos: [
+           {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/89694371-6263-4d03-ab2a-849ab5b44c2e_rw_1920.jpg?h=95aa2af8d6c7b0f3fe17eabf0381407b',
+    title: 'photo 1'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/a6cd0925-6255-4b27-adc8-34b741e70429_rw_1920.jpg?h=99397a985f7743a2e5ccfc57a1f292c8',
+    title: 'photo 2'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1bf33e95-7d3e-4a4f-8bb4-36aa702ee013_rw_1920.jpg?h=1287a06157008566c12442936e238c09',
+    title: 'photo 3'
+  },
+  {
+    src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/0ec49a50-07b6-48d3-94b1-b932f775542b_rw_1920.jpg?h=170fbd8d0818fae77cc6abe2be096e9d',
+    title: 'photo 4'
+  }
+          ]
+        }
+      ],
+
+      // ==========================================
+      // 🦜 BIRDS - Add photos to each album
+      // ==========================================
+      birds: [
+        {
+          id: 'macaws',
+          title: 'Macaws',
+          location: 'Zoo Atlanta',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/095da95a-7bb7-44a1-a3c9-7206b2c35910_rw_1920.jpg?h=1fb1ad74c381d23feb0ef79ef86b2b6e',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f39fc558-298d-42ce-82fa-8754f9ea679a_rw_3840.jpg?h=91906dfe62e643439365541fd1dc7e01', title: 'Photo 1' },
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/095da95a-7bb7-44a1-a3c9-7206b2c35910_rw_1920.jpg?h=1fb1ad74c381d23feb0ef79ef86b2b6e', title: 'Photo 2' },
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/7a0b197d-e1f6-4a03-b227-8d19cbcc4c11_rw_1920.jpg?h=7f44d1f6f8d42969f50f7f7ed1a34081', title: 'Photo 3' },
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/bf51740d-ade4-4231-a1f4-90211afbbce3_rw_3840.jpg?h=5b58be62f61b7aaf80a1b746164d0439', title: 'Photo 4' },
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/7e47704e-99b9-488a-bdc4-f8041af791ad_rw_3840.jpg?h=43b34f5c5218aabc5bf8fbc1cd4a5ba3', title: 'Photo 5' },
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/8bc3af83-127e-455c-a030-02c714bba80f_rw_1920.jpg?h=2ad0c823f6ade09364b2e9b9f66c04a9', title: 'Photo 6' },
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/abe39067-3649-4d90-9191-f0906f9afaad_rw_3840.jpg?h=cc13dd57c026a5ef54ed28d7a6ba6bcb', title: 'Photo 7' }
+          ]
+        },
+        {
+          id: 'hyacinth-macaw',
+          title: 'Hyacinth Macaw',
+          location: 'Nashville Zoo',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/59e9c03a-3555-4266-8149-147e34278bb4_rw_1920.jpg?h=d2c01c483fe18c81ad50e8de75a0ebc6',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/2bdfc624-9c79-4c75-b104-018c8ced7adb_rw_1920.jpg?h=a7d2e9f154ba54022dfbcced7694c2f5', title: 'Hyacinth Macaw' }
+          ]
+        },
+        {
+          id: 'white-cockatoo',
+          title: 'White Cockatoo',
+          location: 'Zoo Atlanta',
+          year: 2025,
+          cover:'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/9a214a9a-e0cb-4681-970c-e15c6696b43f.jpg?h=cbbb0e9bdf3913e59445af86f219672f',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/9a214a9a-e0cb-4681-970c-e15c6696b43f.jpg?h=cbbb0e9bdf3913e59445af86f219672f', title: 'White Cockatoo' }
+          ]
+        },
+        {
+          id: 'eagle-owl',
+          title: 'Eurasian Eagle-Owl',
+          location: 'Zoo Atlanta',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d8df82a3-306b-41a9-a054-07948342d3ba_rw_3840.jpg?h=33c68846f2ff55bb1435b3228ed68076',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d8df82a3-306b-41a9-a054-07948342d3ba_rw_3840.jpg?h=33c68846f2ff55bb1435b3228ed68076', title: 'Eurasian Eagle-Owl' }
+          ]
+        },
+        {
+          id: 'painted-stork',
+          title: 'Painted Stork',
+          location: 'Bangladesh',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f1fb9ba8-5258-43e6-87fa-59082ef5e4a4_rw_1920.jpg?h=d817ac7523347be4d09a5b93ea6327a9',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f1fb9ba8-5258-43e6-87fa-59082ef5e4a4_rw_1920.jpg?h=d817ac7523347be4d09a5b93ea6327a9', title: 'Painted Stork' }
+          ]
+        },
+        {
+          id: 'Red and Purple parrot',
+          title: 'Red and Purple parrot',
+          location: 'Safuri World',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d5f776ab-daf9-4f41-80d5-2c23320b56c5_rw_1920.jpg?h=a736b054a2cfcdc5659be8005748ce31',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d5f776ab-daf9-4f41-80d5-2c23320b56c5_rw_1920.jpg?h=a736b054a2cfcdc5659be8005748ce31', title: 'Mute Swan' }
+          ]
+        },
+        {
+          id: 'rainbow-lorikeet',
+          title: 'Rainbow Lorikeet',
+          location: 'Zoo Atlanta',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ca2c9c2f-37f1-4465-a938-00f0df8a53fb_rw_1920.jpg?h=dbfa0f89ba2be02b36e4f7befbd3f0ff',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/60f51860-646a-4629-94ad-af6c344da888_rw_1920.jpg?h=30ce5764fc9f85796d34def6828a60a8', title: 'Rainbow Lorikeet' }
+          ]
+        },
+        {
+          id: 'ibis',
+          title: 'Ibis on the Rock',
+          location: 'Zoo Atlanta',
+          year: 2025,
+          cover:'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ad15723c-fd69-4d89-8ae6-72ccfbbad7bd_rw_3840.jpg?h=b0f1c1afe7c7e7bf4a62f3be846562e4',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/da3cb46b-1217-4470-8104-320821e8f85f_rw_1920.jpg?h=e210e19bcb3d6aee47dd4952e5bfbbcd', title: 'Ibis on the Rock' }
+          ]
+        }
+      ],
+
+      // ==========================================
+      // 🔬 MACRO - Add photos to each album
+      // ==========================================
+      macro: [
+        {
+          id: 'dragonfly',
+          title: 'Dragonfly',
+          location: 'Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/08848f02-5588-4438-9ddb-0d6f74321a0d_rw_1920.jpg?h=f2285060a32610ce7d44af4898f9f035',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/08848f02-5588-4438-9ddb-0d6f74321a0d_rw_1920.jpg?h=f2285060a32610ce7d44af4898f9f035', title: 'Dragonfly' }
+          ]
+        },
+        {
+          id: 'grasshopper',
+          title: 'Mr. Grasshopper',
+          location: 'Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/4511bbfd-cb45-4802-a70a-6ad197b8ca73_rw_1920.jpg?h=495b6da004f564ef558d82d044c0e50d',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/5f2736c9-2872-46ec-aba2-c2e70fdf577e_rw_1920.jpg?h=f9dcc8fa3afd2ee6c48236b8793c9a7e', title: 'Mr. Grasshopper' }
+          ]
+        },
+        {
+          id: 'glass-frog',
+          title: 'Glass Frog',
+          location: 'Aquarium',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/3e907b02-1576-41ad-a004-91d5b91ea899_rw_1920.jpg?h=1068a2c51869c0e4659d39fb4843fbc0',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/5b5010c8-6555-46a3-b48e-6c19cfc99cfa_rw_1920.jpg?h=07beff8db62a79d022122d3a322edd6f', title: 'Glass Frog' }
+          ]
+        },
+        {
+          id: 'green-anole',
+          title: 'Green Anole',
+          location: 'Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/5c1856ba-38bf-4437-883c-2131b4c75995_rw_1920.jpg?h=63818fead7121c541a1286ceed61abdd',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/5c1856ba-38bf-4437-883c-2131b4c75995_rw_1920.jpg?h=63818fead7121c541a1286ceed61abdd', title: 'Green Anole' }
+          ]
+        },
+        {
+          id: 'yellow-frog',
+          title: 'Yellow Frog',
+          location: 'Aquarium',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/3ead25cd-c9b2-4be6-aa9e-4bcc57c27de5.jpg?h=c2b573671390b03fdb9a3f066c9809d8',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/6d06d259-9aa8-45af-84fa-ec3d19a3f05e.jpg?h=38fe0072150cc56740220ee2ab5ca04b', title: 'Yellow Frog' }
+          ]
+        },
+        {
+          id: 'blue-spotted-frog',
+          title: 'Blue Spotted Frog',
+          location: 'Aquarium',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d0a61048-2f85-4d5e-9c11-dd878f3c535c_rw_1200.jpg?h=9ac6d9d27b3b539b74848635f78b5fe4',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b29e0c37-2543-4a7e-bf1e-b1111e757df6_rw_1920.jpg?h=09eebe7096e75149138488e0d967ea61', title: 'Blue Spotted Frog' }
+          ]
+        },
+        {
+          id: 'piranha',
+          title: 'Piranha',
+          location: 'Georgia Aquarium',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/da784ccb-bee0-467b-bcb2-fdb2a6e51bdf_rw_1920.jpg?h=9218c6f2073b9638932fba7555408f6e',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/da784ccb-bee0-467b-bcb2-fdb2a6e51bdf_rw_1920.jpg?h=9218c6f2073b9638932fba7555408f6e', title: 'Piranha' }
+          ]
+        }
+      ],
+
+      // ==========================================
+      // 🇧🇩 BANGLADESH - Add photos to each album
+      // ==========================================
+      bangladesh: [
+        {
+          id: 'coxs-bazar',
+          title: "Cox's Bazar Beach",
+          location: "Cox's Bazar, Bangladesh",
+          year: 2023,
+          
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1e02822a-d410-43b7-b1dd-3791309ff49f_rw_3840.jpg?h=a8b198073f7988bbc5732b01d059cdb9',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1e02822a-d410-43b7-b1dd-3791309ff49f_rw_3840.jpg?h=a8b198073f7988bbc5732b01d059cdb9', title: "Cox's Bazar Beach" },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/ac3d3796-15a4-4a2f-bc46-dca10817e158_rw_3840.jpg?h=1594272ca30a80e6274c17c672bf7cc2', title: "Cox's Bazar Beach" },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/35aa4af4-0912-456a-b959-92de9772caf4_rw_3840.jpg?h=c7b5948396763024da111aa04b3545e3', title: "Cox's Bazar Beach" },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/73071a2c-9944-49a6-9d68-d8a48e25e1f7_rw_3840.jpg?h=731695d5cdfc2cfa4161927298779d7b', title: "Cox's Bazar Beach" }
+            // ADD MORE: Copy photo URLs from your portfolio network tab
+          ]
+        },
+        {
+          id: 'sylhet-river',
+          title: ' River in Sylhet',
+          location: 'Sylhet, Bangladesh',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f1031f7f-1791-4be6-a4b4-5880cb946503_rw_3840.jpg?h=e4d131c65bab7eeaaaf9b17479a9854a',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/dfdb876c-6edc-4a9e-9db6-b694546621e8_rw_3840.jpg?h=6959db2cdb56f627543b2a06af6021b5', title: 'Life Beside the River' },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1a979565-9a2d-4389-9c61-d0b30143c375_rw_3840.jpg?h=5a7b2d3e675246343070f47124e4d651', title: 'Life Beside the River' },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1c88e3fd-83b5-4e0c-a5b4-f343617532ef_rw_3840.jpg?h=76b0790828abc6e5141b7c7293a97ccf', title: 'Life Beside the River' },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/1eae8d0f-5066-4fd3-88e1-fe5012b6cd3d_rw_3840.jpg?h=e70bd8eb73e0dd75d3bd1c3d385103aa', title: 'Life Beside the River' }
+          ]
+        
+       
+        },
+        {
+          id: 'life-bangladesh',
+          title: 'Life in Bangladesh',
+          location: 'Bangladesh',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b0392026-4a1d-4a23-886f-af69617736c5_rw_3840.JPG?h=d7f700b815680ee5332096a24e16f25e',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/9c5cc364-1196-4f9c-8e3c-477a140e6ae0_rw_3840.JPG?h=20601f31cd5bdd6835e66776611443c4' },
+			  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/22d1c244-9481-4234-80c2-41df4583eb1c_rw_3840.JPG?h=a860149192d74a4d02bbc2e2b4649dbc' },
+			  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/9e70760a-c828-4bc6-8602-a5396fc440d3_rw_3840.JPG?h=54a7b28b32e9130a57900f3f62c5bd5a' },
+			 
+          ]
+        }
+      ],
+
+      // ==========================================
+      // 🇹🇷 TURKEY - Add photos to each album
+      // ==========================================
+      turkey: [
+        {
+          id: 'bosphorus',
+          title: 'Bosphorus Strait',
+          location: 'Istanbul, Turkey',
+          year: 2025,
+          badge: '30 Photos',
+          cover: "https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/479add1a-32a1-4a03-aca7-9cac5f58d18a_rw_1920.jpg?h=8efad2c6e1cf469dee81b97c8078975f",
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/bfd9dc99-3fb8-4b28-91dc-bf2f1b6bfab3_rw_1920.jpg?h=59de34c1ea8851077aca7b649b1c69e3', title: 'Bosphorus Strait' },
+			 { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/2abc16cf-d5d7-4d71-a63c-50670a4a6d1f_rw_1920.jpg?h=73e5ef817b315433681d02396f3af378', title: 'Bosphorus Strait' },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/943950b0-b522-4be2-9205-6c6d7fb52c45_rw_1920.jpg?h=95134e301f288a4e4fd576ddc23c5452', title: 'Bosphorus Strait' },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/d4350b75-05e3-4f7a-87fc-3d0f1fe8191e_rw_1920.jpg?h=932a5e3911fcddc21d7e9d5330a4d4c7', title: 'Bosphorus Strait' }
+			  
+            
+          ]
+        },
+        {
+          id: 'istanbul-city',
+          title: 'City of Istanbul',
+          location: 'Istanbul, Turkey',
+          year: 2025,
+         
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/a12e9741-0d5f-4a0a-b04c-6a80bb90b197_rw_3840.jpg?h=429927a44dc1376556717480828e2a0b',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/567198fe-b2ff-4ccf-85df-ed78d03445b7_rw_1920.jpg?h=41ffd5269aea0e9e63e64c9bb1070932', title: 'City of Istanbul' },
+			  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/a12e9741-0d5f-4a0a-b04c-6a80bb90b197_rw_3840.jpg?h=429927a44dc1376556717480828e2a0b', title: 'City of Istanbul' },
+			  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/6f7ca6c5-abbc-45a3-9f10-f2f0b364d061_rw_1920.jpg?h=a64f28a8fe65b59d2308135c97dff602', title: 'City of Istanbul' },
+			  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/dd3cbea6-bdd7-40e7-a28d-2d905e309c50_rw_1920.jpg?h=66f08c993c342f920e4e021a33f696f6', title: 'City of Istanbul' }, 
+			  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/597a8e34-79c2-430d-9102-d66b0948e32d_rw_1920.jpg?h=23006860fc729c6fb588617df7024203', title: 'City of Istanbul' },
+			   { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/99ca585a-ee18-4e1c-990a-ab0d06661329_rw_1920.jpg?h=9f6322c49b5eca276b09da4bb34a44a9', title: 'City of Istanbul' }
+          ]
+        },
+        {
+          id: 'hagia-sophia',
+          title: 'Hagia Sophia & Blue Mosque',
+          location: 'Istanbul, Turkey',
+          year: 2025,
+          badge: '25 Photos',
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/35fce0f9-231e-4a06-9f09-a725ea881f86_rw_1920.jpg?h=b1e68a3aa0ab7e43fa356881a5a58922',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/6ea9da8a-2338-4f88-8cfd-e741b4906cd4_rw_1920.jpg?h=db5efd14f4b1cdf93778b5db2c83b3d0', title: 'Hagia Sophia inside' }
+          ]
+        }
+      ],
+
+      // ==========================================
+      // 🇬🇧 UK - Add photos to each album
+      // ==========================================
+      uk: [
+        {
+          id: 'london',
+          title: 'London Through My Lens',
+          location: 'London, UK',
+          year: 2023,
+          
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/25e4bab9-9f6b-4042-a1d0-9d1ea07365d2_rw_3840.jpg?h=bdbfb783a8a78b6e474977696af4ce64',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/25e4bab9-9f6b-4042-a1d0-9d1ea07365d2_rw_3840.jpg?h=bdbfb783a8a78b6e474977696af4ce64', title: 'London' }
+          ]
+       
+        
+        },
+        {
+          id: 'birmingham',
+          title: 'Birmingham',
+          location: 'Birmingham, UK',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/8301be38-3f73-442d-9c0e-2c9608ed54a0_rw_1920.jpg?h=7365a20dd11ec0e36e23d67062067fca',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/f501f348-89d6-463b-b7a1-5262bf1fc41c_rw_1920.jpg?h=5ec8f0ccb6f1948526754cba6604e4c4', title: 'Birmingham' }
+          ]
+        }
+      ],
+
+      // ==========================================
+      // 🇺🇸 USA - Add photos to each album
+      // ==========================================
+      usa: [
+        {
+          id: 'big-talbot',
+          title: 'Big Talbot Island',
+          location: 'Jacksonville, Florida',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e70f2d54-bd2a-4374-8309-d4fcf48b209b_rw_1920.jpg?h=3196743cece7d625b5c074661e30d7ce',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/e3df5dd6-0be4-47e2-a419-148d60ad71f6_rw_1920.jpg?h=599a3e6fb0a63bf581aac9910c6671bc', title: 'Big Talbot Island' }
+          ]
+        },
+        {
+          id: 'crescent-beach',
+          title: 'Crescent Beach',
+          location: 'Florida',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/c8e6c1d9-5bbc-4f46-8896-1a06fccf2005_rw_1920.jpg?h=f8b2b9091c38c26956b7ec38965a9cb4',
+          photos: [
+  { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/9a6d746a-b3a2-4bb3-bcee-b1f53711c33c_rw_3840.jpg?h=84d9dd525aaf34f26f97a14513032688', title: 'Photo 1' },
+  
+           
+          ]
+        },
+        {
+          id: 'st-augustine',
+          title: 'Saint Augustine Beach',
+          location: 'Florida',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/758c3c6a-bd5b-4d22-872d-2e89f2a3b927_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/758c3c6a-bd5b-4d22-872d-2e89f2a3b927_rw_1920.jpg', title: 'Saint Augustine Beach' }
+          ]
+        },
+        {
+          id: 'snowy-atlanta',
+          title: 'A Snowy Day in Atlanta',
+          location: 'Atlanta, Georgia',
+          year: 2025,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/33ec188d-208f-46ba-ad25-f35128306b72_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/33ec188d-208f-46ba-ad25-f35128306b72_rw_1920.jpg', title: 'Snowy Atlanta' }
+          ]
+        },
+        {
+          id: 'tybee-island',
+          title: 'Tybee Island Sunrise',
+          location: 'Tybee Island, Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/72b36ed5-bcef-49ca-841f-1a0f5b97a1bc_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/72b36ed5-bcef-49ca-841f-1a0f5b97a1bc_rw_1920.jpg', title: 'Tybee Island Sunrise' }
+          ]
+        },
+        {
+          id: 'savannah',
+          title: 'Savannah Serenity',
+          location: 'Savannah, Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/6b62e343-8e4f-4345-8ed8-4deb09333af8_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/6b62e343-8e4f-4345-8ed8-4deb09333af8_rw_1920.jpg', title: 'Savannah Serenity' }
+          ]
+        },
+        {
+          id: 'helen-ga',
+          title: 'Helen, Georgia',
+          location: 'Helen, Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/fb065f05-05ac-4b24-9611-1cf44ac2e707_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/fb065f05-05ac-4b24-9611-1cf44ac2e707_rw_1920.jpg', title: 'Helen, Georgia' }
+          ]
+        },
+        {
+          id: 'blue-ridge',
+          title: 'Blue Ridge, Georgia',
+          location: 'Blue Ridge, Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/7c616444-aa61-415c-878b-c22718f38320_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/7c616444-aa61-415c-878b-c22718f38320_rw_1920.jpg', title: 'Blue Ridge' }
+          ]
+        }
+      ],
+
+      // ==========================================
+      // 🌅 LANDSCAPES - Add photos to each album
+      // ==========================================
+      landscapes: [
+        {
+          id: 'arabia-mountain',
+          title: 'Arabia Mountain',
+          location: 'Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/4e3e6fc4-5d81-4bfb-bceb-edd6002a8c08_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/4e3e6fc4-5d81-4bfb-bceb-edd6002a8c08_rw_1920.jpg', title: 'Arabia Mountain' }
+          ]
+        },
+        {
+          id: 'raindrops',
+          title: 'The Elegance of Raindrops',
+          location: 'Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/8072482b-3e5e-41b2-8579-1563163c9d18_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/8072482b-3e5e-41b2-8579-1563163c9d18_rw_1920.jpg', title: 'Raindrops' }
+          ]
+        },
+        {
+          id: 'dolphins',
+          title: 'Spotting Dolphins in a Stormy Day',
+          location: 'Florida',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/da63b326-7af2-440d-ae58-9899fdadbb72_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/da63b326-7af2-440d-ae58-9899fdadbb72_rw_1920.jpg', title: 'Spotting Dolphins' }
+          ]
+        },
+        {
+          id: 'birds-in-flight',
+          title: 'Capturing Birds in Flight',
+          location: 'Georgia',
+          year: 2024,
+          cover: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b059b412-780b-4420-8431-1fa36ee86039_rw_1920.jpg',
+          photos: [
+            { src: 'https://cdn.myportfolio.com/0230b03c-f2f9-485b-bf25-bb3e5a4070f8/b059b412-780b-4420-8431-1fa36ee86039_rw_1920.jpg', title: 'Birds in Flight' }
+          ]
+        }
+      ]
     };
 
-    // DOM Elements
-    const elements = {
-      filters: document.getElementById('filters'),
-      grid: document.getElementById('grid'),
-      search: document.getElementById('q'),
-      noResults: document.getElementById('no-results'),
-      totalPhotos: document.getElementById('total-photos'),
-      locationsCount: document.getElementById('locations-count'),
-      categoriesCount: document.getElementById('categories-count'),
-      currentShowing: document.getElementById('current-showing'),
-      lightbox: document.getElementById('lightbox'),
-      lightboxImg: document.getElementById('lb-img'),
-      lightboxTitle: document.getElementById('lb-title'),
-      lightboxMeta: document.getElementById('lb-meta'),
-      lightboxPrev: document.getElementById('lb-prev'),
-      lightboxNext: document.getElementById('lb-next')
-    };
+    // ==========================================
+    // STATE & FUNCTIONS
+    // ==========================================
+    let currentAlbum = null;
+    let currentPhotoIndex = 0;
 
-    // Utilities
-    function debounce(func, wait) {
-      let timeout;
-      return function(...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), wait);
-      };
-    }
-
-    function updateStats() {
-      const uniqueLocations = new Set(state.items.map(item => item.location)).size;
-      const uniqueCategories = new Set(state.items.map(item => item.category)).size;
-      elements.totalPhotos.textContent = state.items.length;
-      elements.locationsCount.textContent = uniqueLocations;
-      elements.categoriesCount.textContent = uniqueCategories;
-      elements.currentShowing.textContent = state.filteredItems.length;
-    }
-
-    function createChip(label) {
-      const el = document.createElement('button');
-      el.className = 'chip';
-      el.textContent = label;
-      el.setAttribute('aria-pressed', 'false');
-      el.addEventListener('click', () => {
-        state.activeFilters.has(label) ? state.activeFilters.delete(label) : state.activeFilters.add(label);
-        render();
-      });
-      return el;
-    }
-
-    function createCard(item, index) {
-      const el = document.createElement('article');
-      el.className = 'card';
-      el.innerHTML = `
-        <a href="${item.href}" class="thumb" data-index="${index}">
-          <img loading="lazy" src="${item.img}" alt="${item.title}" onerror="this.style.display='none'">
-          <div class="photo-overlay">
-            <div class="photo-info">
-              <div class="photo-title">${item.title}</div>
-              <div class="photo-tags">${item.tags.slice(0, 3).join(' • ')}</div>
+    function createAlbumCard(album) {
+      return `
+        <div class="album-card" onclick="openAlbum('${album.id}', '${album.category}')">
+          <img src="${album.cover}" alt="${album.title}" loading="lazy">
+          ${album.badge ? `<div class="album-badge">${album.badge}</div>` : ''}
+          <div class="album-overlay">
+            <h3 class="album-title">${album.title}</h3>
+            <div class="album-meta">
+              <span>📍 ${album.location}</span>
+              <span>📅 ${album.year}</span>
+              <span>📸 ${album.photos.length}</span>
             </div>
           </div>
-        </a>
-        <div class="body">
-          <h3 class="title">${item.title}</h3>
-          <div class="meta">
-            <span>${item.year || 'Recent'}</span>
-            <span class="location-tag">📍 ${item.location || 'Location'}</span>
-          </div>
-        </div>`;
+          <div class="view-album-btn">View Album →</div>
+        </div>
+      `;
+    }
 
-      el.querySelector('.thumb').addEventListener('click', (e) => {
-        if (!e.metaKey && !e.ctrlKey) {
-          e.preventDefault();
-          openLightbox(index);
-        }
+    function renderAlbums() {
+      const categories = [
+        { key: 'wildlife', gridId: 'wildlife-grid', countId: 'wildlife-count' },
+        { key: 'birds', gridId: 'birds-grid', countId: 'birds-count' },
+        { key: 'macro', gridId: 'macro-grid', countId: 'macro-count' },
+        { key: 'bangladesh', gridId: 'bangladesh-grid', countId: 'bangladesh-count' },
+        { key: 'turkey', gridId: 'turkey-grid', countId: 'turkey-count' },
+        { key: 'uk', gridId: 'uk-grid', countId: 'uk-count' },
+        { key: 'usa', gridId: 'usa-grid', countId: 'usa-count' },
+        { key: 'landscapes', gridId: 'landscapes-grid', countId: 'landscapes-count' }
+      ];
+
+      let totalAlbums = 0, totalPhotos = 0;
+      const locations = new Set();
+
+      categories.forEach(cat => {
+        const categoryAlbums = albums[cat.key] || [];
+        categoryAlbums.forEach(a => a.category = cat.key);
+        
+        const grid = document.getElementById(cat.gridId);
+        if (grid) grid.innerHTML = categoryAlbums.map(createAlbumCard).join('');
+
+        const countEl = document.getElementById(cat.countId);
+        if (countEl) countEl.textContent = `${categoryAlbums.length} Albums`;
+
+        totalAlbums += categoryAlbums.length;
+        categoryAlbums.forEach(album => {
+          totalPhotos += album.photos.length;
+          locations.add(album.location);
+        });
       });
-      return el;
+
+      document.getElementById('total-albums').textContent = totalAlbums;
+      document.getElementById('total-photos').textContent = totalPhotos;
+      document.getElementById('locations-count').textContent = locations.size;
+      document.getElementById('categories-count').textContent = Object.keys(albums).length;
+    }
+
+    function openAlbum(albumId, category) {
+      const categoryAlbums = albums[category] || [];
+      const album = categoryAlbums.find(a => a.id === albumId);
+      if (!album) return;
+
+      currentAlbum = album;
+      currentPhotoIndex = 0;
+
+      document.getElementById('modal-album-title').textContent = album.title;
+      document.getElementById('modal-album-location').textContent = `📍 ${album.location}`;
+      document.getElementById('modal-album-year').textContent = `📅 ${album.year}`;
+      document.getElementById('modal-album-count').textContent = `📸 ${album.photos.length} Photos`;
+
+      const galleryGrid = document.getElementById('gallery-grid');
+      galleryGrid.innerHTML = album.photos.map((photo, index) => `
+        <div class="gallery-item" onclick="openLightbox(${index})">
+          <img src="${photo.src}" alt="${photo.title || album.title}" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-item-title">${photo.title || `Photo ${index + 1}`}</div>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('album-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAlbumModal() {
+      document.getElementById('album-modal').classList.remove('active');
+      document.body.style.overflow = '';
+      currentAlbum = null;
     }
 
     function openLightbox(index) {
-      state.currentLightboxIndex = index;
-      const item = state.filteredItems[index];
-      elements.lightboxImg.src = item.img;
-      elements.lightboxImg.alt = item.title;
-      elements.lightboxTitle.textContent = item.title;
-      elements.lightboxMeta.textContent = `${item.year || 'Recent'} • ${item.location} • ${item.category}`;
-      elements.lightboxPrev.disabled = index === 0;
-      elements.lightboxNext.disabled = index === state.filteredItems.length - 1;
-      elements.lightbox.showModal();
+      if (!currentAlbum) return;
+      currentPhotoIndex = index;
+      const photo = currentAlbum.photos[index];
+      
+      document.getElementById('lightbox-img').src = photo.src;
+      document.getElementById('lightbox-title').textContent = photo.title || `Photo ${index + 1} of ${currentAlbum.photos.length}`;
+      document.getElementById('lightbox').classList.add('active');
     }
 
     function closeLightbox() {
-      elements.lightbox.close();
+      document.getElementById('lightbox').classList.remove('active');
     }
 
     function navigateLightbox(direction) {
-      const newIndex = state.currentLightboxIndex + direction;
-      if (newIndex >= 0 && newIndex < state.filteredItems.length) {
-        openLightbox(newIndex);
+      if (!currentAlbum) return;
+      currentPhotoIndex += direction;
+      if (currentPhotoIndex < 0) currentPhotoIndex = currentAlbum.photos.length - 1;
+      if (currentPhotoIndex >= currentAlbum.photos.length) currentPhotoIndex = 0;
+      openLightbox(currentPhotoIndex);
+    }
+
+    // Event Listeners
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('lightbox').classList.contains('active')) {
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+        if (e.key === 'Escape') closeLightbox();
+      } else if (document.getElementById('album-modal').classList.contains('active')) {
+        if (e.key === 'Escape') closeAlbumModal();
       }
-    }
-
-    function applyMasonryLayout() {
-      if (state.currentView !== 'masonry' || !elements.grid) return;
-      const cards = elements.grid.querySelectorAll('.card');
-      cards.forEach(card => {
-        const img = card.querySelector('img');
-        const resizeCard = () => {
-          const rowHeight = 10;
-          const rowGap = 24;
-          card.style.gridRowEnd = 'auto';
-          const cardHeight = card.offsetHeight;
-          const span = Math.ceil((cardHeight + rowGap) / (rowHeight + rowGap));
-          card.style.gridRowEnd = `span ${span}`;
-        };
-        if (img.complete) {
-          resizeCard();
-        } else {
-          img.addEventListener('load', resizeCard, { once: true });
-        }
-      });
-    }
-
-    function filterItems() {
-      const term = state.searchTerm.toLowerCase().trim();
-      state.filteredItems = state.items.filter(item => {
-        const matchesFilter = state.activeFilters.size === 0 ||
-          [...state.activeFilters].every(tag => item.tags.includes(tag));
-        const matchesSearch = !term ||
-          item.title.toLowerCase().includes(term) ||
-          item.tags.join(' ').toLowerCase().includes(term) ||
-          item.location.toLowerCase().includes(term) ||
-          item.category.toLowerCase().includes(term);
-        return matchesFilter && matchesSearch;
-      });
-    }
-
-    function render() {
-      filterItems();
-
-      [...elements.filters.children].forEach(chip => {
-        const isActive = state.activeFilters.has(chip.textContent);
-        chip.classList.toggle('active', isActive);
-        chip.setAttribute('aria-pressed', isActive.toString());
-      });
-
-      elements.grid.innerHTML = '';
-      elements.noResults.classList.toggle('active', state.filteredItems.length === 0);
-
-      if (state.filteredItems.length > 0) {
-        state.filteredItems.forEach((item, index) => {
-          const card = createCard(item, index);
-          card.style.animationDelay = `${index * 0.05}s`;
-          elements.grid.appendChild(card);
-        });
-        setTimeout(applyMasonryLayout, 100);
-      }
-
-      updateStats();
-    }
-
-    function init() {
-      const uniqueTags = [...new Set(items.flatMap(x => x.tags))].sort();
-      const popularTags = ['travel', 'wildlife', 'nature', 'beach', 'architecture', 'macro'];
-      const orderedTags = popularTags.concat(uniqueTags.filter(t => !popularTags.includes(t)));
-      orderedTags.forEach(tag => elements.filters.appendChild(createChip(tag)));
-
-      document.querySelectorAll('.view-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          state.currentView = btn.getAttribute('data-view');
-          elements.grid.className = `grid ${state.currentView}`;
-          render();
-        });
-      });
-
-      elements.search.addEventListener('input', debounce(() => {
-        state.searchTerm = elements.search.value;
-        render();
-      }, 300));
-
-      elements.lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
-      elements.lightboxNext.addEventListener('click', () => navigateLightbox(1));
-      elements.lightbox.addEventListener('click', e => e.target === elements.lightbox && closeLightbox());
-
-      document.addEventListener('keydown', e => {
-        if (elements.lightbox.open) {
-          if (e.key === 'ArrowLeft') navigateLightbox(-1);
-          if (e.key === 'ArrowRight') navigateLightbox(1);
-          if (e.key === 'Escape') closeLightbox();
-        }
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-          e.preventDefault();
-          elements.search.focus();
-        }
-      });
-
-      window.addEventListener('resize', debounce(applyMasonryLayout, 200));
-
-      render();
-      document.getElementById('y').textContent = new Date().getFullYear();
-    }
-
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 80);
     });
 
-    // Mobile menu toggle
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    
-    mobileToggle.addEventListener('click', () => {
-      mobileToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target.id === 'lightbox') closeLightbox();
+    });
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    document.getElementById('mobile-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-toggle').classList.toggle('active');
+      document.getElementById('nav-menu').classList.toggle('active');
     });
 
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
-        mobileToggle.classList.remove('active');
-        navMenu.classList.remove('active');
+        document.getElementById('mobile-toggle').classList.remove('active');
+        document.getElementById('nav-menu').classList.remove('active');
+      });
+    });
+
+    document.querySelectorAll('.section-nav a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.section-nav a').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
       });
     });
 
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
-      init();
+      renderAlbums();
+      document.getElementById('y').textContent = new Date().getFullYear();
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('revealed');
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      
       document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
     });
   </script>
 </body>
-</html><strong></strong>
+</html>
